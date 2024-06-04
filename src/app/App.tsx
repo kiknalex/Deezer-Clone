@@ -1,5 +1,4 @@
-import './App.css'
-
+import Player from '../features/music-player/Player'
 function App() {
   
 
@@ -7,6 +6,7 @@ function App() {
   return (
     <>
       <div>test</div>
+      <Player />
     </>
   )
 }

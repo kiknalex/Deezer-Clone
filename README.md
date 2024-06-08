@@ -1,1 +1,1 @@
-# YT Music clone project utilizing React, Typescript, vanilla-extract.
+# Spotify clone project utilizing React, Typescript, vanilla-extract.

@@ -18,7 +18,7 @@ interface AlbumData {
 const App = () => {
   const [data, setData] = useState<AlbumData | null>(null);
   useEffect(() => {
-    fetch(proxy + "https://api.deezer.com/album/302127")
+    fetch(proxy + "https://api.deezer.com/playlist/1362503935")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

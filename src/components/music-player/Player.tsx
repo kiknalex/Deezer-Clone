@@ -5,6 +5,7 @@ import { baseButton, playButton } from "../Buttons/Button.css";
 import { playerLayout, playerPosition } from "./Player.css";
 import useSubscribeAudioEvents from "../../hooks/useSubscribeAudioEvents";
 import PlaybackInfo from "./PlaybackInfo/PlaybackInfo";
+import TrackControls from "./TrackControls/TrackControls";
 import { Track } from "../../types/deezerApiTypes";
 
 const Player = ({ tracks }: { tracks: Track[] }) => {
@@ -68,7 +69,7 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
             <div className={`${playerLayout} ${playerPosition}`}>
               <TrackInfo track={tracks[currentTrackId]} />
               <div>
-                <div>
+                {/* <div>
                   <Button
                     onClick={handlePreviousClick}
                     className={`${baseButton}`}
@@ -84,14 +85,11 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
                   <Button onClick={handleNextClick} className={`${baseButton}`}>
                     Next
                   </Button>
-                </div>
-                {audioRef.current && (
-                  <div>
-                    <PlaybackInfo audioRef={audioRef} />
-                  </div>
-                )}
+                </div> */}
+                <TrackControls handlePreviousClick={handlePreviousClick} togglePlay={togglePlay} handleNextClick={handleNextClick} isPlaying={isPlaying}  />
+                {audioRef.current && <PlaybackInfo audioRef={audioRef} />}
               </div>
-              <div></div>
+              <div>controls</div>
             </div>
           )}
         </>

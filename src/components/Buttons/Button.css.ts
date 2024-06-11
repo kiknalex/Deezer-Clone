@@ -1,8 +1,6 @@
-// button.css.ts
 import { style } from "@vanilla-extract/css";
 import { vars } from "../../app/theme.css";
 
-// Base button style
 export const baseButton = style({
   width: "32px",
   height: "32px",

@@ -1,6 +1,6 @@
 import { RefObject, useState } from "react";
 import useSubscribeAudioEvents from "../../../hooks/useSubscribeAudioEvents";
-
+import { PlaybackLayout } from "./PlaybackInfo.css";
 const PlaybackInfo = ({ audioRef }: { audioRef: RefObject<HTMLAudioElement> }) => {
   const [playedTime, setPlayedTime] = useState(0);
   console.log(playedTime);
@@ -20,7 +20,7 @@ const PlaybackInfo = ({ audioRef }: { audioRef: RefObject<HTMLAudioElement> }) =
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
   return (
-    <>
+    <div className={`${PlaybackLayout}`}>
       <p>{formatTime(playedTime)}</p>
       <input
         type="range"
@@ -34,7 +34,7 @@ const PlaybackInfo = ({ audioRef }: { audioRef: RefObject<HTMLAudioElement> }) =
         }}
       />
       <p>{formatTime(Math.round(audioRef.current?.duration || 0))}</p>
-    </>
+    </div>
   );
 };
 

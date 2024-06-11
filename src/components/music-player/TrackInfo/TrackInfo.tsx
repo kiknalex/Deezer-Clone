@@ -1,4 +1,5 @@
-export const TrackInfo = ({ track }) => {
+import { Track } from "../../../types/deezerApiTypes";
+export const TrackInfo = ({ track }: { track: Track }) => {
   return (
     <div>
       <div>

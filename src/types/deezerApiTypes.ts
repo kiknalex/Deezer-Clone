@@ -33,11 +33,11 @@ export interface MusicData {
   }
   
   export interface Tracks {
-    data: Daum[]
+    data: Track[]
     checksum: string
   }
   
-  export interface Daum {
+  export interface Track {
     id: number
     readable: boolean
     title: string

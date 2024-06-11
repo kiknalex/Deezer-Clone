@@ -1,12 +1,13 @@
-import { useState, useRef, RefObject } from "react";
+import { useState, useRef } from "react";
 import Button from "../Buttons/Button";
 import { TrackInfo } from "./TrackInfo/TrackInfo";
 import { baseButton, playButton } from "../Buttons/Button.css";
 import { playerLayout, playerPosition } from "./Player.css";
 import useSubscribeAudioEvents from "../../hooks/useSubscribeAudioEvents";
 import PlaybackInfo from "./PlaybackInfo/PlaybackInfo";
+import { Track } from "../../types/deezerApiTypes";
 
-const Player = ({ tracks }) => {
+const Player = ({ tracks }: { tracks: Track[] }) => {
   const [currentTrackId, setCurrentTrackId] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -84,11 +85,11 @@ const Player = ({ tracks }) => {
                     Next
                   </Button>
                 </div>
-                { audioRef.current && 
-                <div>
-                  <PlaybackInfo audioRef={audioRef} />
-                </div>
-                }
+                {audioRef.current && (
+                  <div>
+                    <PlaybackInfo audioRef={audioRef} />
+                  </div>
+                )}
               </div>
               <div></div>
             </div>

@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
-import Button from "../Buttons/Button";
 import { TrackInfo } from "./TrackInfo/TrackInfo";
-import { baseButton, playButton } from "../Buttons/Button.css";
 import { playerLayout, playerPosition } from "./Player.css";
+import { sprinkles } from "../../styles/sprinkles.css";
 import useSubscribeAudioEvents from "../../hooks/useSubscribeAudioEvents";
-import PlaybackInfo from "./PlaybackInfo/PlaybackInfo";
-import TrackControls from "./TrackControls/TrackControls";
 import { Track } from "../../types/deezerApiTypes";
-
+import TrackPlaybackControls from "./TrackPlaybackControls/TrackPlaybackControls";
+import AudioControls from "./AudioControls/AudioControls";
+import { vars } from "../../app/theme.css";
 const Player = ({ tracks }: { tracks: Track[] }) => {
   const [currentTrackId, setCurrentTrackId] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -66,30 +65,20 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
           <audio ref={audioRef} src={tracks[currentTrackId].preview}></audio>
 
           {audioRef.current && (
-            <div className={`${playerLayout} ${playerPosition}`}>
+            <div
+              className={`${sprinkles({
+                paddingX: "size-3",
+              })} ${playerLayout} ${playerPosition}`}
+            >
               <TrackInfo track={tracks[currentTrackId]} />
-              <div>
-                {/* <div>
-                  <Button
-                    onClick={handlePreviousClick}
-                    className={`${baseButton}`}
-                  >
-                    Previous
-                  </Button>
-                  <Button
-                    onClick={togglePlay}
-                    className={`${baseButton} ${playButton} `}
-                  >
-                    {isPlaying ? "Pause" : "Play"}
-                  </Button>
-                  <Button onClick={handleNextClick} className={`${baseButton}`}>
-                    Next
-                  </Button>
-                </div> */}
-                <TrackControls handlePreviousClick={handlePreviousClick} togglePlay={togglePlay} handleNextClick={handleNextClick} isPlaying={isPlaying}  />
-                {audioRef.current && <PlaybackInfo audioRef={audioRef} />}
-              </div>
-              <div>controls</div>
+              <TrackPlaybackControls
+                handlePreviousClick={handlePreviousClick}
+                togglePlay={togglePlay}
+                handleNextClick={handleNextClick}
+                isPlaying={isPlaying}
+                audioRef={audioRef}
+              />
+              <AudioControls />
             </div>
           )}
         </>

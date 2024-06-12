@@ -1,9 +1,8 @@
 import { RefObject, useState } from "react";
-import useSubscribeAudioEvents from "../../../hooks/useSubscribeAudioEvents";
+import useSubscribeAudioEvents from "../../../../hooks/useSubscribeAudioEvents";
 import { PlaybackLayout } from "./PlaybackInfo.css";
 const PlaybackInfo = ({ audioRef }: { audioRef: RefObject<HTMLAudioElement> }) => {
   const [playedTime, setPlayedTime] = useState(0);
-  console.log(playedTime);
   useSubscribeAudioEvents(
     audioRef, 
     () => {

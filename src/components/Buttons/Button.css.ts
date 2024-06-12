@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "../../app/theme.css";
+import { colors } from "../../styles/colors.css";
 
 export const baseButton = style({
   width: "32px",
@@ -9,19 +9,24 @@ export const baseButton = style({
   alignItems: "center",
   justifyContent: "center",
   cursor: "pointer",
-  transition: "background-color 0.3s",
-  ':hover': {
-    backgroundColor: vars.colorPrimary.black, 
-  },
-  ':focus': {
-    outline: `2px solid ${vars.colorPrimary.purple}`,
-  },
+  transition: "opacity 0.3s, background-color 0.3s",
 });
+
+export const commonButton = style([
+  baseButton,
+  {
+    ":hover": {
+      backgroundColor: colors.backgroundHover,
+    },
+  },
+]);
 
 export const playButton = style([
   baseButton,
   {
-    backgroundColor: vars.colorPrimary.purple,
+    backgroundColor: colors.purple,
+    ":hover": {
+    opacity: "0.8",
+  },
   },
 ]);
-

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { container } from "./App.css";
-import { darkTheme, lightTheme } from "./theme.css";
+import { app, container } from "./App.css";
+import { darkTheme, lightTheme, vars } from "./theme.css";
 import Player from "../components/music-player/Player";
 import Sidebar from "../components/sidebar/Sidebar";
 import { MusicData, Track } from "../types/deezerApiTypes"; // Assuming Track type is defined
@@ -13,7 +13,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   console.log(playlist);
   useEffect(() => {
-    fetch(proxy + "https://api.deezer.com/album/302127")
+    fetch(proxy + "https://api.deezer.com/playlist/2389444482")
       .then((response) => response.json())
       .then((data: MusicData) => {
         console.log(data);
@@ -27,9 +27,81 @@ const App = () => {
   }, []);
 
   return (
-    <div className={`${container} ${darkMode ? darkTheme : lightTheme}`}>
+    <div className={`${container} ${app} ${darkMode ? darkTheme : lightTheme}`}>
       <button onClick={() => setDarkMode(!darkMode)}>dark mode</button>
       <Sidebar />
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
+      <p>AAAAAAAAAAAAAAAAAAAA</p>
       <div>{tracks.length > 0 && <Player tracks={tracks} />}</div>
     </div>
   );

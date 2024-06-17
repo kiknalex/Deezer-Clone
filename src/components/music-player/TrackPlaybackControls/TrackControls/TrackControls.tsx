@@ -1,5 +1,11 @@
-import {Button, ButtonHoverable} from "../../../util-components/Buttons/Button";
-import { playButton, commonButton } from "../../../util-components/Buttons/Button.css"
+import {
+  Button,
+  ButtonHoverableWithTooltip,
+} from "../../../util-components/Buttons/Button";
+import {
+  playButton,
+  commonButton,
+} from "../../../util-components/Buttons/Button.css";
 import { sprinkles } from "../../../../styles/sprinkles.css";
 
 interface TrackControlsProps {
@@ -49,16 +55,15 @@ const TrackControls = ({
           </span>
         )}
       </Button>
-      <ButtonHoverable onClick={handleNextClick} tooltipInteractive={true} tooltipText={<div>Turn on shuffle</div>}>
+      <ButtonHoverableWithTooltip
+
+        onClick={handleNextClick}
+        tooltipContent={<div>Turn on shuffle</div>}
+      >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>
         </span>
-      </ButtonHoverable>
-      <ButtonHoverable onClick={handleNextClick} tooltipInteractive={false} tooltipText={<div>Turn on shuffle</div>}>
-        <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
-          <i className="fa-solid fa-forward-step"></i>
-        </span>
-      </ButtonHoverable>
+      </ButtonHoverableWithTooltip>
     </div>
   );
 };

@@ -11,8 +11,8 @@ interface ButtonProps {
 }
 
 interface ButtonHoverProps extends ButtonProps {
-  tooltipText: ReactNode;
-  tooltipInteractive: boolean;
+  tooltipContent: ReactNode;
+  tooltipInteractive?: boolean;
 }
 
 export const Button = ({ onClick, children, ...rest }: ButtonProps) => {
@@ -23,10 +23,10 @@ export const Button = ({ onClick, children, ...rest }: ButtonProps) => {
   );
 };
 
-export const ButtonHoverable = ({
+export const ButtonHoverableWithTooltip = ({
   onClick,
-  tooltipText,
-  tooltipInteractive,
+  tooltipContent,
+  tooltipInteractive = false,
   children,
 }: ButtonHoverProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -41,7 +41,6 @@ export const ButtonHoverable = ({
     };
   }, []);
 
-
   const handlePointerEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -52,28 +51,29 @@ export const ButtonHoverable = ({
   };
 
   const handlePointerLeave = () => {
-    if (!timeoutRef.current) return null;
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     timeoutRef.current = setTimeout(() => {
       setIsHovered(false);
     }, 300);
   };
 
   const handleTooltipPointerEnter = () => {
-    if (!timeoutRef.current) return null;
+    if (!timeoutRef.current || !tooltipInteractive) return;
+
     if (tooltipInteractive) {
       clearTimeout(timeoutRef.current);
       setIsHovered(true);
     }
   };
   const handleTooltipPointerLeave = () => {
-    if (!timeoutRef.current) return null;
-    if (tooltipInteractive) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => {
-        setIsHovered(false);
-      });
-    }
+    if (!timeoutRef.current || !tooltipInteractive) return;
+
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    });
   };
 
   return (
@@ -84,7 +84,7 @@ export const ButtonHoverable = ({
         buttonRef={buttonRef}
         className={isHovered ? tooltipVisible : ""}
       >
-        {tooltipText}
+        {tooltipContent}
       </HoverTooltip>
       <button
         onPointerEnter={handlePointerEnter}

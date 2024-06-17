@@ -28,8 +28,12 @@ const responsiveProperties = defineProperties({
     marginLeft: size,
     marginRight: size,
     height: position,
-    width: position
-    
+    width: position,
+    position: ["relative", "absolute", "fixed", "sticky", "static"],
+    top: position,
+    right: position,
+    bottom: position,
+    left: position,
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],

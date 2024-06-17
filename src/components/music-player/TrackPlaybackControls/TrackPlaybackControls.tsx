@@ -1,30 +1,16 @@
-import PlaybackInfo from "./PlaybackInfo/PlaybackInfo";
-import TrackControls from "./TrackControls/TrackControls";
-import { RefObject } from "react";
-interface TrackPlaybackControlsProps {
-  handlePreviousClick: () => void;
-  togglePlay: () => void;
-  handleNextClick: () => void;
-  isPlaying: boolean;
-  audioRef: RefObject<HTMLAudioElement>;
-}
+import { sprinkles } from "../../../styles/sprinkles.css";
 
-const TrackPlaybackControls = ({
-  handlePreviousClick,
-  togglePlay,
-  handleNextClick,
-  isPlaying,
-  audioRef,
-}: TrackPlaybackControlsProps) => {
+const TrackPlaybackControls = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <TrackControls
-        handlePreviousClick={handlePreviousClick}
-        togglePlay={togglePlay}
-        handleNextClick={handleNextClick}
-        isPlaying={isPlaying}
-      />
-      <PlaybackInfo audioRef={audioRef} />
+    <div
+      className={`${sprinkles({
+        display: "flex",
+        flexDirection: "column",
+        width: "33",
+        alignItems: "center",
+      })}`}
+    >
+      {children}
     </div>
   );
 };

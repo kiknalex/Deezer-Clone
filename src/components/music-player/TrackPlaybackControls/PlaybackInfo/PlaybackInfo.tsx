@@ -1,38 +1,136 @@
-import { RefObject, useState } from "react";
-import useSubscribeAudioEvents from "../../../../hooks/useSubscribeAudioEvents";
-import { PlaybackLayout } from "./PlaybackInfo.css";
-const PlaybackInfo = ({ audioRef }: { audioRef: RefObject<HTMLAudioElement> }) => {
+import { RefObject, useCallback, useState } from "react";
+import {
+  activeTrack,
+  sliderTrack,
+  timePassedInput,
+  hoverTimeDiv,
+} from "./PlaybackInfo.css";
+import { sprinkles } from "../../../../styles/sprinkles.css";
+import useSubscribeAudioEvent from "../../../../hooks/useSubscribeAudioEvent";
+
+const PlaybackInfo = ({
+  audioRef,
+  handleNextClick,
+}: {
+  audioRef: RefObject<HTMLAudioElement>;
+  handleNextClick: () => void;
+}) => {
   const [playedTime, setPlayedTime] = useState(0);
-  useSubscribeAudioEvents(
-    audioRef, 
-    () => {
-      const currentTime = Math.round(audioRef.current?.currentTime || 0);
-      if (currentTime !== playedTime) {
-        setPlayedTime(currentTime);
-      }
-    },
-    "timeupdate"
-  );
+  const [hoverTime, setHoverTime] = useState<{
+    time: number | null;
+    positionX: number;
+  }>({ time: null, positionX: 0 });
+  const audioElement = audioRef.current!;
+  const handleTimeUpdate = useCallback(() => {
+    // useCallback to save function reference to dynamically remove and add EventListeners.
+    setPlayedTime(audioElement.currentTime);
+  }, [audioElement]);
+  useSubscribeAudioEvent(audioRef, handleTimeUpdate, "timeupdate");
+
   const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    //format: 00:00
+    if (isNaN(time)) {
+      return "00:00";
+    }
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+  const handlePointerMove = (e: React.PointerEvent<HTMLInputElement>) => {
+    // calculate current time hover box position
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percent = x / rect.width;
+    let time = percent * audioElement.duration;
+    if (time > audioElement.duration) time = audioElement.duration;
+    else if (time < 1) time = 0;
+
+    if (Math.round(time) === hoverTime.time) {
+      return;
+    }
+
+    setHoverTime({ time: Math.round(time), positionX: x });
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLInputElement>) => {
+    audioElement.addEventListener("timeupdate", handleTimeUpdate);
+    audioElement.currentTime = Number(playedTime);
+    if (Number(e.currentTarget.value) >= audioElement.duration) {
+      handleNextClick();
+    }
+  };
+  const handlePointerDown = () => {
+    audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+  };
+
+  const handlePointerLeave = () => {
+    setHoverTime({ time: null, positionX: 0 });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPlayedTime(Number(e.target.value));
   };
   return (
-    <div className={`${PlaybackLayout}`}>
-      <p>{formatTime(playedTime)}</p>
-      <input
-        type="range"
-        min="0"
-        max={Math.round(audioRef.current?.duration || 0)}
-        value={playedTime}
-        onChange={(e) => {
-            audioRef.current!.currentTime = Number(e.target.value);
-            setPlayedTime(Number(e.target.value));
-          
-        }}
-      />
-      <p>{formatTime(Math.round(audioRef.current?.duration || 0))}</p>
+    <div
+      className={`${sprinkles({
+        display: "flex",
+        placeItems: "center",
+        position: "relative",
+        width: "100",
+      })}`}
+    >
+      <p
+        className={`${sprinkles({
+          paddingRight: "size-2",
+          fontSize: "font-size-2",
+        })}`}
+      >
+        {formatTime(playedTime)}
+      </p>
+      <div className={`${sliderTrack} ${sprinkles({ width: "100" })}`}>
+        <div
+          style={{
+            width: `${(playedTime / audioElement.duration || 0) * 100}%`,
+          }}
+          className={`${sliderTrack} ${activeTrack}`}
+        ></div>
+
+        <input
+          className={`${timePassedInput} ${sprinkles({ width: "100" })}`}
+          type="range"
+          min="0"
+          max={Math.round(audioElement.duration || 0)}
+          value={playedTime}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+          onPointerUp={handlePointerUp}
+          onPointerDown={handlePointerDown}
+          onChange={handleInputChange}
+        />
+        {hoverTime.time !== null ? (
+          <div
+            style={{ left: `${hoverTime.positionX}px` }}
+            className={`${hoverTimeDiv}`}
+          >
+            <p className={sprinkles({ fontSize: "font-size-2" })}>
+              {formatTime(hoverTime.time)}
+            </p>
+          </div>
+        ) : null}
+      </div>
+
+      <p
+        className={`${sprinkles({
+          paddingLeft: "size-2",
+          fontSize: "font-size-2",
+        })}`}
+      >
+        {formatTime(Math.round(audioElement.duration || 0))}
+      </p>
     </div>
   );
 };

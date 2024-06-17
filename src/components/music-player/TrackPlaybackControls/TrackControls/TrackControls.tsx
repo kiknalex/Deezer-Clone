@@ -1,6 +1,5 @@
-import Button from "../../../Buttons/Button";
-import { playButton, commonButton } from "../../../Buttons/Button.css";
-import { ControlsLayout } from "./TrackControls.css";
+import {Button, ButtonHoverable} from "../../../util-components/Buttons/Button";
+import { playButton, commonButton } from "../../../util-components/Buttons/Button.css"
 import { sprinkles } from "../../../../styles/sprinkles.css";
 
 interface TrackControlsProps {
@@ -20,11 +19,12 @@ const TrackControls = ({
     <div
       className={`${sprinkles({
         display: "flex",
-        paddingRight: "size-5",
-      })} ${ControlsLayout}`}
+        gap: "size-2",
+        placeItems: "center",
+      })}`}
     >
       <Button onClick={handlePreviousClick} className={`${commonButton}`}>
-        <span className={`${sprinkles({fontSize: "font-size-5"})}`}>
+        <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-backward-step"></i>
         </span>
       </Button>
@@ -49,11 +49,16 @@ const TrackControls = ({
           </span>
         )}
       </Button>
-      <Button onClick={handleNextClick} className={`${commonButton}`}>
-        <span className={`${sprinkles({fontSize: "font-size-5"})}`}>
+      <ButtonHoverable onClick={handleNextClick} tooltipInteractive={true} tooltipText={<div>Turn on shuffle</div>}>
+        <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>
         </span>
-      </Button>
+      </ButtonHoverable>
+      <ButtonHoverable onClick={handleNextClick} tooltipInteractive={false} tooltipText={<div>Turn on shuffle</div>}>
+        <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
+          <i className="fa-solid fa-forward-step"></i>
+        </span>
+      </ButtonHoverable>
     </div>
   );
 };

@@ -1,1 +1,1 @@
-# Spotify clone project utilizing React, Typescript, vanilla-extract.
+# Deezer clone project utilizing React, Typescript, vanilla-extract CSS.

@@ -1,6 +1,6 @@
 import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
 import { tooltip, arrowPosition } from "./HoverTooltip.css";
-import { debounce } from "../../../utils/helpers";
+import { debounce } from "@/utils/helpers";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 interface HoverTooltipProps {
   onPointerEnter: () => void;

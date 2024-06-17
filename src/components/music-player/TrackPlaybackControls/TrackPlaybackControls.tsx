@@ -1,4 +1,4 @@
-import { sprinkles } from "../../../styles/sprinkles.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 const TrackPlaybackControls = ({ children }: { children: React.ReactNode }) => {
   return (

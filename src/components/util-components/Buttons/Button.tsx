@@ -1,8 +1,8 @@
 import { ReactNode, useState, useRef, useEffect } from "react";
 import { commonButton } from "./Button.css";
-import { sprinkles } from "../../../styles/sprinkles.css";
-import HoverTooltip from "../HoverTooltip/HoverTooltip";
-import { tooltipVisible } from "../HoverTooltip/HoverTooltip.css";
+import { sprinkles } from "@/styles/sprinkles.css";
+import HoverTooltip from "@/components/util-components/HoverTooltip/HoverTooltip";
+import { tooltipVisible } from "@/components/util-components/HoverTooltip/HoverTooltip.css";
 
 interface ButtonProps {
   onClick: () => void;

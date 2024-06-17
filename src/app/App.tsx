@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { app, container } from "./App.css";
-import { darkTheme, lightTheme, vars } from "./theme.css";
-import Player from "../components/music-player/Player";
-import Sidebar from "../components/sidebar/Sidebar";
-import { MusicData, Track } from "../types/deezerApiTypes"; // Assuming Track type is defined
+import { darkTheme, lightTheme } from "./theme.css";
+import Player from "@/components/music-player/Player";
+import Sidebar from "@/components/sidebar/Sidebar";
+import { MusicData, Track } from "@/types/deezerApiTypes"; // Assuming Track type is defined
 
 const proxy = "https://corsproxy.io/?";
 
@@ -18,9 +18,11 @@ const App = () => {
       .then((data: MusicData) => {
         console.log(data);
         setPlaylist(data);
-        // Filter tracks with preview 
+        // Filter tracks with preview
         if (data.tracks && data.tracks.data) {
-          setTracks(data.tracks.data.filter((track: Track) => track.preview !== ""));
+          setTracks(
+            data.tracks.data.filter((track: Track) => track.preview !== "")
+          );
         }
       })
       .catch((error) => console.error(error));

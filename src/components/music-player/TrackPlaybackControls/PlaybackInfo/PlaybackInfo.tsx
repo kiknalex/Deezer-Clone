@@ -5,8 +5,8 @@ import {
   timePassedInput,
   hoverTimeDiv,
 } from "./PlaybackInfo.css";
-import { sprinkles } from "../../../../styles/sprinkles.css";
-import useSubscribeAudioEvent from "../../../../hooks/useSubscribeAudioEvent";
+import { sprinkles } from "@/styles/sprinkles.css";
+import useSubscribeAudioEvent from "@/hooks/useSubscribeAudioEvent";
 
 const PlaybackInfo = ({
   audioRef,
@@ -26,18 +26,7 @@ const PlaybackInfo = ({
     setPlayedTime(audioElement.currentTime);
   }, [audioElement]);
   useSubscribeAudioEvent(audioRef, handleTimeUpdate, "timeupdate");
-  function get_average_rgb(img) {
-    var context = document.createElement('canvas').getContext('2d');
-    if (typeof img == 'string') {
-        var src = img;
-        img = new Image;
-        img.setAttribute('crossOrigin', ''); 
-        img.src = src;
-    }
-    context.imageSmoothingEnabled = true;
-    context.drawImage(img, 0, 0, 1, 1);
-    return context
-  }
+  
   const formatTime = (time: number) => {
     //format: 00:00
     if (isNaN(time)) {

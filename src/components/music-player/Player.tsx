@@ -1,13 +1,16 @@
 import { useState, useRef, useCallback } from "react";
-import TrackInfo from "./TrackInfo/TrackInfo";
+import useSubscribeAudioEvent from "@/hooks/useSubscribeAudioEvent";
+
 import { playerLayout, playerPosition } from "./Player.css";
-import { sprinkles } from "../../styles/sprinkles.css";
-import useSubscribeAudioEvent from "../../hooks/useSubscribeAudioEvent";
-import { Track } from "../../types/deezerApiTypes";
+import { sprinkles } from "@/styles/sprinkles.css";
+
 import TrackPlaybackControls from "./TrackPlaybackControls/TrackPlaybackControls";
 import AudioControls from "./AudioControls/AudioControls";
 import PlaybackInfo from "./TrackPlaybackControls/PlaybackInfo/PlaybackInfo";
 import TrackControls from "./TrackPlaybackControls/TrackControls/TrackControls";
+import TrackInfo from "./TrackInfo/TrackInfo";
+import { Track } from "@/types/deezerApiTypes";
+
 const Player = ({ tracks }: { tracks: Track[] }) => {
   const [currentTrackId, setCurrentTrackId] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -16,6 +19,7 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
   useSubscribeAudioEvent(
     audioRef,
     useCallback(() => {
+      if (audioRef.current?.readyState === undefined) return; // TO FIX
       if (audioRef.current?.readyState > 2) {
         audioRef.current?.play();
       }

@@ -1,6 +1,6 @@
-import { Track } from "../../../types/deezerApiTypes";
+import { Track } from "@/types/deezerApiTypes";
 import { imageSize, linkHover } from "./TrackInfo.css";
-import { sprinkles } from "../../../styles/sprinkles.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 const TrackInfo = ({ track }: { track: Track }) => {
   return (

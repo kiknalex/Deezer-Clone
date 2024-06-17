@@ -1,12 +1,12 @@
 import {
   Button,
   ButtonHoverableWithTooltip,
-} from "../../../util-components/Buttons/Button";
+} from "@/components/util-components/Buttons/Button";
 import {
   playButton,
   commonButton,
-} from "../../../util-components/Buttons/Button.css";
-import { sprinkles } from "../../../../styles/sprinkles.css";
+} from "@/components/util-components/Buttons/Button.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 interface TrackControlsProps {
   handlePreviousClick: () => void;
@@ -56,7 +56,6 @@ const TrackControls = ({
         )}
       </Button>
       <ButtonHoverableWithTooltip
-
         onClick={handleNextClick}
         tooltipContent={<div>Turn on shuffle</div>}
       >

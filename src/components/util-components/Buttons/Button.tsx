@@ -79,7 +79,7 @@ export const ButtonHoverableWithTooltip = ({
   return (
     <div className={sprinkles({ position: "relative" })}>
       <HoverTooltip
-      tooltipInteractive={tooltipInteractive}
+        tooltipInteractive={tooltipInteractive}
         onPointerEnter={handleTooltipPointerEnter}
         onPointerLeave={handleTooltipPointerLeave}
         buttonRef={buttonRef}

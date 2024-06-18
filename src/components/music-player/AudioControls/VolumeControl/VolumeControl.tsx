@@ -1,7 +1,7 @@
 import { vars } from "@/app/theme.css";
 import { ButtonHoverableWithTooltip } from "@/components/util-components/Buttons/Button";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RefObject } from "react";
 import {
   activeVolumeTrack,
@@ -15,20 +15,35 @@ const VolumeControl = ({
 }: {
   audioRef: RefObject<HTMLAudioElement>;
 }) => {
-  const [volume, setVolume] = useState(100);
-
-  const handleVolumeChange = (e) => {
-    if (!audioRef.current) return;
-    setVolume(e.target.value);
-    audioRef.current.volume = e.target.value / 100;
-    console.log(e.target.value / 100);
+  const [volume, setVolume] = useState<number>(100);
+  const [lastVolume, setLastVolume] = useState<number>(0);
+  const audioElement = audioRef.current!;
+  const toggleMute = () => {
+    if (volume > 0) {
+      setLastVolume(volume);
+      setVolume(0);
+      audioElement.volume = lastVolume / 100;
+    } else if (volume === 0 && lastVolume === 0) {
+      setVolume(50);
+      audioElement.volume = 0.5;
+    } else {
+      console.log("else, volume:", volume);
+      console.log("else, lastVolume:", lastVolume);
+      setVolume(lastVolume);
+      setLastVolume(volume);
+      audioElement.volume = lastVolume / 100;
+    }
   };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!audioElement) return;
+    const newVolume = parseInt(e.target.value, 10);
+    setVolume(newVolume);
+    audioElement.volume = newVolume / 100;
+  };
+
   const inputElement = (
-    <div
-      className={`${volumeInputWrapper} ${volumeTrack} ${sprinkles({
-        width: "100",
-      })}`}
-    >
+    <div className={`${volumeInputWrapper} ${volumeTrack}`}>
       <div
         style={{
           width: `${volume}%`,
@@ -48,6 +63,7 @@ const VolumeControl = ({
     <ButtonHoverableWithTooltip
       tooltipInteractive={true}
       tooltipContent={inputElement}
+      onClick={toggleMute}
     >
       <span
         style={{

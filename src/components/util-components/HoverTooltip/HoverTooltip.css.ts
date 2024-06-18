@@ -12,7 +12,7 @@ export const tooltip = style({
   alignItems: "center",
   backgroundColor: vars.colorsVars.backgroundSecondary,
   borderRadius: "6px",
-  boxShadow: "1px 3px 4px -2px rgba(0,0,0,0.47)",
+  boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 25px 10px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;",
   left: "50%",
   transform: "translate(-50%)",
   zIndex: "-1",
@@ -39,3 +39,7 @@ export const tooltipVisible = style({
   transform: "translate(-50%, 0)",
   scale: "1",
 });
+
+export const backgroundStyle = style({
+  backgroundColor: vars.colorsVars.backgroundSecondary
+})

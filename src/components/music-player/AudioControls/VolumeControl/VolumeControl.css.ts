@@ -1,5 +1,5 @@
 import { vars } from "@/app/theme.css";
-import { colors } from "@/styles/colors.css";
+
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
@@ -17,6 +17,7 @@ export const volumeTrack = style({
 });
 export const volumeInput = style({
   WebkitAppearance: "none",
+  MozAppearance: "none",
   appearance: "none",
   backgroundColor: "transparent",
   height: "12px",
@@ -25,26 +26,27 @@ export const volumeInput = style({
   background: "transparent",
   position: "absolute",
   left: "-6px",
-  top: "-4px",
+  top: "-5px",
 
   "::-webkit-slider-thumb": {
     WebkitAppearance: "none",
     backgroundColor: "white",
     border: "1px solid gray",
-    width: "15px",
-    height: "15px",
+    width: "16px",
+    height: "16px",
     borderRadius: "50%",
   },
   "::-moz-range-thumb": {
-    border: "none",
-    background: "transparent",
-    width: "15px",
-    height: "15px",
+    backgroundColor: "white",
+    border: "1px solid gray",
+    width: "14px",
+    height: "14px",
     borderRadius: "50%",
+    
   },
 });
 
 export const activeVolumeTrack = style({
-  height: "100%",
+  height: "2px",
   backgroundColor: vars.colorsVars.buttonImportant,
 });

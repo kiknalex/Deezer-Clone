@@ -1,5 +1,5 @@
 import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
-import { tooltip, arrowPosition } from "./HoverTooltip.css";
+import { tooltip, arrowPosition, backgroundStyle } from "./HoverTooltip.css";
 import { debounce } from "@/utils/helpers";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { sprinkles } from "@/styles/sprinkles.css";
@@ -80,7 +80,7 @@ const HoverTooltip = ({
       }}
       className={`${tooltip} ${sprinkles({
         padding: tooltipInteractive ? "size-5" : "size-1",
-      })} ${className && className}`}
+      })} ${className && className} ${tooltipInteractive ? backgroundStyle : ""}`}
     >
       {children}
     </div>

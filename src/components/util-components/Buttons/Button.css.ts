@@ -1,6 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { colors } from "../../../styles/colors.css";
-import { vars } from "../../../app/theme.css";
+import { vars } from "@/app/theme.css";
 export const baseButton = style({
   width: "32px",
   height: "32px",
@@ -24,7 +23,7 @@ export const commonButton = style([
 export const playButton = style([
   baseButton,
   {
-    backgroundColor: colors.purple,
+    backgroundColor: vars.colorsVars.buttonImportant,
     ":hover": {
     opacity: "0.8",
   },

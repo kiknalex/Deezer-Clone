@@ -4,6 +4,7 @@ import { colors } from "./colors.css";
 import { fontFamily, fontWeight, lineHeight, fontSize } from "./typography.css";
 import { position, size, sizePx } from "./sizes.css";
 import { borderSize, borderRadius } from "./border.css";
+import { vars } from "@/app/theme.css";
 
 const responsiveProperties = defineProperties({
   properties: {

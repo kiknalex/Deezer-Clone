@@ -2,7 +2,9 @@ import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
 import { tooltip, arrowPosition } from "./HoverTooltip.css";
 import { debounce } from "@/utils/helpers";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { sprinkles } from "@/styles/sprinkles.css";
 interface HoverTooltipProps {
+  tooltipInteractive: boolean;
   onPointerEnter: () => void;
   onPointerLeave: () => void;
   buttonRef: RefObject<HTMLButtonElement>;
@@ -11,6 +13,7 @@ interface HoverTooltipProps {
 }
 
 const HoverTooltip = ({
+  tooltipInteractive,
   onPointerEnter,
   onPointerLeave,
   buttonRef,
@@ -35,12 +38,14 @@ const HoverTooltip = ({
       const tooltipLeft =
         buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
 
-      if (tooltipLeft + tooltipRect.width + scrollbarWidth > viewportWidth) { // if tooltips position overflows adjust accordingly
+      if (tooltipLeft + tooltipRect.width + scrollbarWidth > viewportWidth) {
+        // if tooltips position overflows adjust accordingly
         const valueToSubtract =
           tooltipLeft + tooltipRect.width + scrollbarWidth - viewportWidth;
         setOffset(valueToSubtract);
 
-        if (valueToSubtract + 10 < tooltipRect.width / 2) { // calculate arrow offset based on tooltip offset and width
+        if (valueToSubtract + 10 < tooltipRect.width / 2) {
+          // calculate arrow offset based on tooltip offset and width
           setArrowOffset(valueToSubtract);
         } else {
           setArrowOffset(tooltipRect.width / 2 - 10); // Adjust to a sensible default
@@ -73,7 +78,9 @@ const HoverTooltip = ({
         transform: `translateX(calc(-50% - ${offset}px))`,
         ...assignInlineVars({ [arrowPosition]: `${arrowOffset}px` }),
       }}
-      className={`${tooltip} ${className && className}`}
+      className={`${tooltip} ${sprinkles({
+        padding: tooltipInteractive ? "size-5" : "size-1",
+      })} ${className && className}`}
     >
       {children}
     </div>

@@ -5,7 +5,7 @@ import HoverTooltip from "@/components/util-components/HoverTooltip/HoverTooltip
 import { tooltipVisible } from "@/components/util-components/HoverTooltip/HoverTooltip.css";
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
   className?: string;
 }
@@ -47,7 +47,7 @@ export const ButtonHoverableWithTooltip = ({
     }
     timeoutRef.current = setTimeout(() => {
       setIsHovered(true);
-    }, 500);
+    }, 200);
   };
 
   const handlePointerLeave = () => {
@@ -79,6 +79,7 @@ export const ButtonHoverableWithTooltip = ({
   return (
     <div className={sprinkles({ position: "relative" })}>
       <HoverTooltip
+      tooltipInteractive={tooltipInteractive}
         onPointerEnter={handleTooltipPointerEnter}
         onPointerLeave={handleTooltipPointerLeave}
         buttonRef={buttonRef}

@@ -101,7 +101,7 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
                   handleNextClick={handleNextClick}
                 />
               </TrackPlaybackControls>
-              <AudioControls />
+              <AudioControls audioRef={audioRef} />
             </div>
           ) : null}
         </>

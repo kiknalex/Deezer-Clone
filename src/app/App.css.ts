@@ -15,7 +15,9 @@ globalStyle("a", {
   color: "unset",
   
 });
-
+globalStyle("input[type='range']", {
+  margin: "0",
+});
 globalStyle("p", {
   margin: 0
 })

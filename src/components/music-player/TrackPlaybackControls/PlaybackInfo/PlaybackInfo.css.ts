@@ -11,7 +11,7 @@ export const timePassedInput = style({
   cursor: "pointer",
   position: "absolute",
   left: "-6px",
-  top: "-6px",
+  top: "-4px",
 
   "::-webkit-slider-thumb": {
     WebkitAppearance: "none",

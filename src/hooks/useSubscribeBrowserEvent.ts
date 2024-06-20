@@ -1,7 +1,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 
 const useSubscribeBrowserEvent = (
-  ref: React.RefObject<HTMLAudioElement>,
+  ref: React.RefObject<HTMLElement>,
   callback: () => void,
   eventName: keyof HTMLElementEventMap
 ) => {

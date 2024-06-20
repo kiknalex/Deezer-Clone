@@ -6,7 +6,7 @@ import {
   hoverTimeDiv,
 } from "./PlaybackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import useSubscribeAudioEvent from "@/hooks/useSubscribeAudioEvent";
+import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
 
 const PlaybackInfo = ({
   audioRef,
@@ -25,8 +25,8 @@ const PlaybackInfo = ({
     // useCallback to save function reference to dynamically remove and add EventListeners.
     setPlayedTime(audioElement.currentTime);
   }, [audioElement]);
-  useSubscribeAudioEvent(audioRef, handleTimeUpdate, "timeupdate");
-  
+  useSubscribeBrowserEvent(audioRef, handleTimeUpdate, "timeupdate");
+
   const formatTime = (time: number) => {
     //format: 00:00
     if (isNaN(time)) {

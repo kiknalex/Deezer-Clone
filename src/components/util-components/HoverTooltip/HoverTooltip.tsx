@@ -79,7 +79,7 @@ const HoverTooltip = ({
         ...assignInlineVars({ [arrowPosition]: `${arrowOffset}px` }),
       }}
       className={`${tooltip} ${sprinkles({
-        padding: tooltipInteractive ? "size-5" : "size-1",
+        padding: "size-1",
       })} ${className && className} ${tooltipInteractive ? backgroundStyle : ""}`}
     >
       {children}

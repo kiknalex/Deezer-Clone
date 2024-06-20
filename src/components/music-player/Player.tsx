@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import useSubscribeAudioEvent from "@/hooks/useSubscribeAudioEvent";
+import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
 
 import { playerLayout, playerPosition } from "./Player.css";
 import { sprinkles } from "@/styles/sprinkles.css";
@@ -16,25 +16,17 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useSubscribeAudioEvent(
-    audioRef,
-    useCallback(() => {
-      if (audioRef.current?.readyState === undefined) return; // TO FIX
-      if (audioRef.current?.readyState > 2) {
-        audioRef.current?.play();
-      }
-    }, [audioRef]),
-    "loadeddata"
-  );
-  useSubscribeAudioEvent(
-    audioRef,
-    useCallback(() => {
-      if (currentTrackId < tracks.length - 1) {
-        setCurrentTrackId((cti) => cti + 1);
-      }
-    }, [currentTrackId, tracks]),
-    "ended"
-  );
+  const handleLoadedData = () => {
+    if (audioRef.current?.readyState > 2) {
+      audioRef.current?.play();
+    }
+  }
+  const handleEnded = () => {
+    if (currentTrackId < tracks.length - 1) {
+      setCurrentTrackId((cti) => cti + 1);
+    }
+  };
+
   const stopPlay = () => {
     const audioElement = audioRef.current;
     if (audioElement) {
@@ -79,7 +71,12 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
     <>
       {tracks && tracks.length > 0 && (
         <>
-          <audio ref={audioRef} src={tracks[currentTrackId].preview}></audio>
+          <audio
+            onLoadedData={handleLoadedData}
+            onEnded={handleEnded}
+            ref={audioRef}
+            src={tracks[currentTrackId].preview}
+          ></audio>
 
           {audioRef.current !== null ? (
             <div
@@ -95,6 +92,8 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
                   togglePlay={togglePlay}
                   handleNextClick={handleNextClick}
                   isPlaying={isPlaying}
+                  tracks={tracks}
+                  currentTrackId={currentTrackId}
                 />
                 <PlaybackInfo
                   audioRef={audioRef}

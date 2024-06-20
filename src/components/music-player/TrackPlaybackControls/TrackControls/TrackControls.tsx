@@ -7,12 +7,16 @@ import {
   commonButton,
 } from "@/components/util-components/Buttons/Button.css";
 import { sprinkles } from "@/styles/sprinkles.css";
+import { Track } from "@/types/deezerApiTypes";
+import TrackPreview from "./TrackPreview/TrackPreview";
 
 interface TrackControlsProps {
   handlePreviousClick: () => void;
   togglePlay: () => void;
   handleNextClick: () => void;
   isPlaying: boolean;
+  tracks: Track[];
+  currentTrackId: number;
 }
 
 const TrackControls = ({
@@ -20,7 +24,11 @@ const TrackControls = ({
   togglePlay,
   handleNextClick,
   isPlaying,
+  tracks,
+  currentTrackId,
 }: TrackControlsProps) => {
+  console.log(tracks.length);
+  console.log(currentTrackId);
   return (
     <div
       className={`${sprinkles({
@@ -29,11 +37,16 @@ const TrackControls = ({
         placeItems: "center",
       })}`}
     >
-      <Button onClick={handlePreviousClick} className={`${commonButton}`}>
+      <ButtonHoverableWithTooltip
+        onClick={handlePreviousClick}
+        tooltipInteractive={true}
+        tooltipContent={<TrackPreview track={tracks[currentTrackId - 1]} />}
+        className={`${commonButton}`}
+      >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-backward-step"></i>
         </span>
-      </Button>
+      </ButtonHoverableWithTooltip>
       <Button onClick={togglePlay} className={`${playButton} `}>
         {isPlaying ? (
           <span
@@ -57,7 +70,8 @@ const TrackControls = ({
       </Button>
       <ButtonHoverableWithTooltip
         onClick={handleNextClick}
-        tooltipContent={<div>Turn on shuffle</div>}
+        tooltipInteractive={true}
+        tooltipContent={<TrackPreview track={tracks[currentTrackId + 1]} />}
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>

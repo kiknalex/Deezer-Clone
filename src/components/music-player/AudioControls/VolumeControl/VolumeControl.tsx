@@ -27,8 +27,6 @@ const VolumeControl = ({
       setVolume(50);
       audioElement.volume = 0.5;
     } else {
-      console.log("else, volume:", volume);
-      console.log("else, lastVolume:", lastVolume);
       setVolume(lastVolume);
       setLastVolume(volume);
       audioElement.volume = lastVolume / 100;
@@ -36,27 +34,28 @@ const VolumeControl = ({
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!audioElement) return;
     const newVolume = parseInt(e.target.value, 10);
     setVolume(newVolume);
     audioElement.volume = newVolume / 100;
   };
 
   const inputElement = (
-    <div className={`${volumeInputWrapper} ${volumeTrack}`}>
-      <div
-        style={{
-          width: `${volume}%`,
-        }}
-        className={`${volumeTrack} ${activeVolumeTrack}`}
-      ></div>
+    <div className={sprinkles({ padding: "size-5" })}>
+      <div className={`${volumeInputWrapper} ${volumeTrack}`}>
+        <div
+          style={{
+            width: `${volume}%`,
+          }}
+          className={`${volumeTrack} ${activeVolumeTrack}`}
+        ></div>
 
-      <input
-        className={`${volumeInput} ${sprinkles({ width: "100" })}`}
-        type="range"
-        value={volume}
-        onChange={handleVolumeChange}
-      />
+        <input
+          className={`${volumeInput} ${sprinkles({ width: "100" })}`}
+          type="range"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </div>
     </div>
   );
   return (

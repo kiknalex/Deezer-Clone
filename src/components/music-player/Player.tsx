@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 
 import { playerLayout, playerPosition } from "./Player.css";
 import { sprinkles } from "@/styles/sprinkles.css";

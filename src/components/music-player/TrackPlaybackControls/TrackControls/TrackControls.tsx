@@ -1,11 +1,8 @@
-import {
-  Button,
-  ButtonHoverableWithTooltip,
-} from "@/components/util-components/Buttons/ButtonHoverableWithTooltip";
+import { ButtonHoverableWithTooltip } from "@/components/util-components/Buttons/ButtonHoverableWithTooltip";
 import {
   playButton,
   commonButton,
-} from "@/components/util-components/Buttons/Button.css";
+} from "@/components/util-components/Buttons/ButtonHoverableWithTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { Track } from "@/types/deezerApiTypes";
 import TrackPreview from "./TrackPreview/TrackPreview";

@@ -105,7 +105,7 @@ const Sidebar = () => {
             </h2>
           </NavLink>
         </nav>
-        <SubscribeCard href="">
+        <SubscribeCard>
           This project is for educational purposes only.
         </SubscribeCard>
       </div>

@@ -1,5 +1,5 @@
 import { ReactNode, useState, useRef, useEffect } from "react";
-import { commonButton } from "./Button.css";
+import { commonButton } from "./ButtonHoverableWithTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import HoverTooltip from "@/components/util-components/HoverTooltip/HoverTooltip";
 import { tooltipVisible } from "@/components/util-components/HoverTooltip/HoverTooltip.css";
@@ -15,14 +15,6 @@ interface ButtonHoverableWithTooltip extends ButtonProps {
   tooltipInteractive?: boolean;
   popoutDelay?: number;
 }
-
-export const Button = ({ onClick, children, ...rest }: ButtonProps) => {
-  return (
-    <button onClick={onClick} {...rest}>
-      {children}
-    </button>
-  );
-};
 
 export const ButtonHoverableWithTooltip = ({
   onClick,

@@ -1,7 +1,7 @@
 import {
   Button,
   ButtonHoverableWithTooltip,
-} from "@/components/util-components/Buttons/Button";
+} from "@/components/util-components/Buttons/ButtonHoverableWithTooltip";
 import {
   playButton,
   commonButton,
@@ -27,8 +27,6 @@ const TrackControls = ({
   tracks,
   currentTrackId,
 }: TrackControlsProps) => {
-  console.log(tracks.length);
-  console.log(currentTrackId);
   return (
     <div
       className={`${sprinkles({
@@ -47,7 +45,7 @@ const TrackControls = ({
           <i className="fa-solid fa-backward-step"></i>
         </span>
       </ButtonHoverableWithTooltip>
-      <Button onClick={togglePlay} className={`${playButton} `}>
+      <button onClick={togglePlay} className={`${playButton} `}>
         {isPlaying ? (
           <span
             className={`${sprinkles({
@@ -67,7 +65,7 @@ const TrackControls = ({
             <i className={"fa-solid fa-play"}></i>
           </span>
         )}
-      </Button>
+      </button>
       <ButtonHoverableWithTooltip
         onClick={handleNextClick}
         tooltipInteractive={true}

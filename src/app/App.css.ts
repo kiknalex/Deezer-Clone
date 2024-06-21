@@ -7,36 +7,34 @@ export const container = style({
 
 export const app = style({
   color: vars.colorsVars.textPrimary,
-  background: vars.colorsVars.background
-})
+  background: vars.colorsVars.background,
+});
 
+globalStyle("h1, h2, h3, h4, h5, h6", {
+  margin: "0",
+})
 globalStyle("a", {
   textDecoration: "none",
   color: "unset",
-  
 });
 globalStyle("input[type='range']", {
   margin: "0",
 });
 globalStyle("p", {
-  margin: 0
-})
+  margin: 0,
+});
 
 globalStyle("*, :after, :before", {
   boxSizing: "border-box",
 });
 
-
-
 globalStyle("body", {
   margin: 0,
-  minHeight: "100vh",
   fontFamily: ["system-ui", "roboto"],
-
 });
 globalStyle("#root", {
-  
-})
+  minHeight: "100vh",
+});
 globalStyle("button", {
   all: "unset",
 });

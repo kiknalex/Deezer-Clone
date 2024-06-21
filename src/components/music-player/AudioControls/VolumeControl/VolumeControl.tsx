@@ -1,5 +1,5 @@
 import { vars } from "@/app/theme.css";
-import { ButtonHoverableWithTooltip } from "@/components/util-components/Buttons/Button";
+import { ButtonHoverableWithTooltip } from "@/components/util-components/Buttons/ButtonHoverableWithTooltip";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { useState } from "react";
 import { RefObject } from "react";

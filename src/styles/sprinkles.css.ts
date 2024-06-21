@@ -1,10 +1,8 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 import { colors } from "./colors.css";
-import { fontFamily, fontWeight, lineHeight, fontSize } from "./typography.css";
+import { fontFamily, fontSize } from "./typography.css";
 import { position, size, sizePx } from "./sizes.css";
-import { borderSize, borderRadius } from "./border.css";
-import { vars } from "@/app/theme.css";
 
 const responsiveProperties = defineProperties({
   properties: {
@@ -35,7 +33,8 @@ const responsiveProperties = defineProperties({
     right: position,
     bottom: position,
     left: position,
-    overflow: ["visible", "hidden", "clip", "scroll", "auto"]
+    overflow: ["visible", "hidden", "clip", "scroll", "auto"],
+    borderRadius: ["3px", "4px", "5px", "6px", "7px", "8px", "9px", "12px", "50%"],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],

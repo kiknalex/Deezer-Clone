@@ -11,8 +11,10 @@ const colorsVars = createThemeContract({
   backgroundSecondary: null,
   borderColor: null,
   borderColorSecondary: null,
-  sliderTrack: null
-})
+  sliderTrack: null,
+  linkHover: null,
+  linkActive: null,
+});
 
 export const lightTheme = createTheme(colorsVars, {
   textPrimary: "#0f0d13",
@@ -25,13 +27,14 @@ export const lightTheme = createTheme(colorsVars, {
   borderColor: "#C2C0C4",
   borderColorSecondary: "#E1DDE4",
   sliderTrack: "#EBE7EE",
-})
-
+  linkHover: "#ebe7ee",
+  linkActive: "#e1dde4",
+});
 
 export const darkTheme = createTheme(colorsVars, {
   textPrimary: "#FDFCFE",
   textSecondary: "#A9A6AA",
-  buttonImportant: "#B560FF",
+  buttonImportant: "#A238FF",
   buttonCommon: "#FDFCFE",
   buttonCommonHover: "#3A393D",
   background: "#0F0D13",
@@ -39,6 +42,8 @@ export const darkTheme = createTheme(colorsVars, {
   borderColor: "#555257",
   borderColorSecondary: "#3A393D",
   sliderTrack: "#29282D",
-})
+  linkHover: "#29282d",
+  linkActive: "#3a393d",
+});
 
 export const vars = { colorsVars };

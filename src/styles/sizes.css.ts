@@ -63,7 +63,7 @@ export const mediaSize = {
   "size-xs": "360px",
   "size-sm": "480px",
   "size-md": "768px",
-  "size-lg": "1024px",
+  "size-lg": "1160px",
   "size-xl": "1440px",
   "size-xxl": "1920px",
 };

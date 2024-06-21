@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback } from "react";
-import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
 
 import { playerLayout, playerPosition } from "./Player.css";
 import { sprinkles } from "@/styles/sprinkles.css";
@@ -16,8 +15,7 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
   const [audioReady, setAudioReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
- 
-  console.log(audioRef.current);
+
   const handleLoadedData = () => {
     if (audioRef.current && audioRef.current.readyState > 2) {
       setAudioReady(true);

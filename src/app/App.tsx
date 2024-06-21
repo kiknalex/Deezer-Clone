@@ -11,12 +11,12 @@ import { useLoaderData } from "react-router-dom";
 const proxy = "https://corsproxy.io/?";
 
 const App = () => {
-  const loaderData: MusicData = useLoaderData() as MusicData;
+  const loaderData = useLoaderData() as MusicData;
   const [playlist, setPlaylist] = useState<MusicData | null>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
-    if(loaderData.tracks.data) {
+    if (loaderData.tracks.data) {
       setTracks(loaderData.tracks.data);
     }
   }, [loaderData]);
@@ -25,7 +25,7 @@ const App = () => {
     <div className={`${container} ${app} ${darkMode ? darkTheme : lightTheme}`}>
       <button onClick={() => setDarkMode(!darkMode)}>dark mode</button>
       <Sidebar />
-      
+
       <div>{tracks.length > 0 && <Player tracks={tracks} />}</div>
     </div>
   );

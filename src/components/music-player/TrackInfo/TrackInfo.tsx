@@ -3,6 +3,7 @@ import { imageSize } from "./TrackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { linkHover } from "../TrackPlaybackControls/TrackControls/TrackPreview/TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
+
 const TrackInfo = ({ track }: { track: Track }) => {
   return (
     <div

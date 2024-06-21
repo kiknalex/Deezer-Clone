@@ -6,12 +6,12 @@ export const playerPosition = style({
     left: "0",
     right: "0"
 })
-
+export const playerHeight = "80px";
 export const playerLayout = style({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: vars.colorsVars.backgroundSecondary,
     borderTop: `1px solid ${vars.colorsVars.borderColor}`,
-    height: 80
+    height: playerHeight,
 })

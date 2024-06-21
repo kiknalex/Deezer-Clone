@@ -6,8 +6,8 @@ import {
   navLink,
   navLogoSpan,
   sidebar,
-  smallScreenHide,
 } from "./Sidebar.css";
+import { smallScreenHide } from "@/app/App.css";
 import { vars } from "@/app/theme.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import SubscribeCard from "./SubscribeCard/SubscribeCard";
@@ -105,7 +105,7 @@ const Sidebar = () => {
             </h2>
           </NavLink>
         </nav>
-        <SubscribeCard>
+        <SubscribeCard href="https://github.com/kiknalex/Deezer-Clone">
           This project is for educational purposes only.
         </SubscribeCard>
       </div>

@@ -5,13 +5,7 @@ import { createVar, style } from "@vanilla-extract/css";
 
 export const sidebarWidth = createVar();
 
-export const smallScreenHide = style({
-  "@media": {
-    "screen and (max-width: 1160px)": {
-      display: "none",
-    },
-  },
-});
+
 export const sidebar = style({
   position: "fixed",
   top: "0",

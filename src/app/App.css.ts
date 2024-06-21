@@ -10,6 +10,20 @@ export const app = style({
   background: vars.colorsVars.background,
 });
 
+export const smallScreenHide = style({
+  "@media": {
+    "screen and (max-width: 1160px)": {
+      display: "none",
+    },
+  },
+});
+export const bigScreenHide = style({
+  "@media": {
+    "screen and (min-width: 1160px)": {
+      display: "none",
+    },
+  },
+});
 globalStyle("h1, h2, h3, h4, h5, h6", {
   margin: "0",
 })

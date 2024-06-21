@@ -10,9 +10,10 @@ interface ButtonProps {
   className?: string;
 }
 
-interface ButtonHoverProps extends ButtonProps {
+interface ButtonHoverableWithTooltip extends ButtonProps {
   tooltipContent: ReactNode;
   tooltipInteractive?: boolean;
+  popoutDelay?: number;
 }
 
 export const Button = ({ onClick, children, ...rest }: ButtonProps) => {
@@ -27,8 +28,9 @@ export const ButtonHoverableWithTooltip = ({
   onClick,
   tooltipContent,
   tooltipInteractive = false,
+  popoutDelay = 300,
   children,
-}: ButtonHoverProps) => {
+}: ButtonHoverableWithTooltip) => {
   const [isHovered, setIsHovered] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -47,7 +49,7 @@ export const ButtonHoverableWithTooltip = ({
     }
     timeoutRef.current = setTimeout(() => {
       setIsHovered(true);
-    }, 500);
+    }, popoutDelay);
   };
 
   const handlePointerLeave = () => {

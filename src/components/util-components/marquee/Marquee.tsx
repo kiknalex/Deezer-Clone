@@ -1,18 +1,13 @@
 import React, { useRef, useEffect, useState, ReactNode } from "react";
-import {
-  marquee,
-  marqueeWrapper,
-  maskImage,
-} from "./Marquee.css";
+import { marquee, marqueeWrapper, maskImage } from "./Marquee.css";
 import { debounce } from "@/utils/helpers";
 
 interface MarqueeProps {
-  key: string | number;
   className?: string;
   children: ReactNode;
 }
 
-const Marquee: React.FC<MarqueeProps> = ({ key, className, children }) => {
+const Marquee: React.FC<MarqueeProps> = ({ className, children }) => {
   const [needsDuplicate, setNeedsDuplicate] = useState(false);
   const [translateWidth, setTranslateWidth] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -23,7 +18,7 @@ const Marquee: React.FC<MarqueeProps> = ({ key, className, children }) => {
   const hoverTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const calculateAnimation = () => { 
+    const calculateAnimation = () => {
       const marqueeElement = marqueeRef.current;
       const wrapperElement = wrapperRef.current;
 
@@ -34,7 +29,8 @@ const Marquee: React.FC<MarqueeProps> = ({ key, className, children }) => {
             : wrapperElement.scrollWidth;
         const marqueeWidth = marqueeElement.offsetWidth;
 
-        if (wrapperWidth > marqueeWidth) { // Calculates if element overflows
+        if (wrapperWidth > marqueeWidth) {
+          // Calculates if element overflows
           setNeedsDuplicate(true); // triggers state to add 2nd element for smooth marquee animation.
           setTranslateWidth(wrapperWidth + paddingLeft);
           setDuration(wrapperWidth * 20);
@@ -54,7 +50,8 @@ const Marquee: React.FC<MarqueeProps> = ({ key, className, children }) => {
 
   const startAnimation = () => {
     const wrapperElement = wrapperRef.current;
-    if (wrapperElement && wrapperElement.getAnimations().length < 1) { // avoid adding more than 1 animation
+    if (wrapperElement && wrapperElement.getAnimations().length < 1) {
+      // avoid adding more than 1 animation
       const animation = wrapperElement.animate(
         [
           { transform: "translateX(0)" },
@@ -92,7 +89,6 @@ const Marquee: React.FC<MarqueeProps> = ({ key, className, children }) => {
 
   return (
     <div
-      key={key}
       className={`${marquee} ${needsDuplicate && maskImage}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

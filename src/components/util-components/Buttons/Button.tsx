@@ -47,7 +47,7 @@ export const ButtonHoverableWithTooltip = ({
     }
     timeoutRef.current = setTimeout(() => {
       setIsHovered(true);
-    }, 200);
+    }, 500);
   };
 
   const handlePointerLeave = () => {

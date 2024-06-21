@@ -1,19 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './app/App.tsx'
-import './index.css'
-import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app/App.tsx";
+import "./index.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="callback"></Route>
-      </Route>
-    
+    <Route
+      path="/"
+      loader={async () => {
+        return fetch(
+          "https://corsproxy.io/?https://api.deezer.com/playlist/2389444482"
+        );
+      }}
+      element={<App />}
+    ></Route>
   )
-)
+);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

@@ -13,11 +13,14 @@ import { Track } from "@/types/deezerApiTypes";
 
 const Player = ({ tracks }: { tracks: Track[] }) => {
   const [currentTrackId, setCurrentTrackId] = useState(0);
+  const [audioReady, setAudioReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
+ 
+  console.log(audioRef.current);
   const handleLoadedData = () => {
-    if (audioRef.current?.readyState > 2) {
+    if (audioRef.current && audioRef.current.readyState > 2) {
+      setAudioReady(true);
       audioRef.current?.play();
     }
   }
@@ -78,7 +81,7 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
             src={tracks[currentTrackId].preview}
           ></audio>
 
-          {audioRef.current !== null ? (
+          {audioReady ? (
             <div
               style={{ minWidth: "700px" }}
               className={`${sprinkles({

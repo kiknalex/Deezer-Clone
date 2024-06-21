@@ -6,29 +6,20 @@ import { MusicData, Track } from "@/types/deezerApiTypes"; // Assuming Track typ
 
 import Player from "@/components/music-player/Player";
 import Sidebar from "@/components/sidebar/Sidebar";
+import { useLoaderData } from "react-router-dom";
 
 const proxy = "https://corsproxy.io/?";
 
 const App = () => {
+  const loaderData: MusicData = useLoaderData() as MusicData;
   const [playlist, setPlaylist] = useState<MusicData | null>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [darkMode, setDarkMode] = useState(false);
-  console.log(playlist);
   useEffect(() => {
-    fetch(proxy + "https://api.deezer.com/playlist/2389444482")
-      .then((response) => response.json())
-      .then((data: MusicData) => {
-        console.log(data);
-        setPlaylist(data);
-        // Filter tracks with preview
-        if (data.tracks && data.tracks.data) {
-          setTracks(
-            data.tracks.data.filter((track: Track) => track.preview !== "")
-          );
-        }
-      })
-      .catch((error) => console.error(error));
-  }, []);
+    if(loaderData.tracks.data) {
+      setTracks(loaderData.tracks.data);
+    }
+  }, [loaderData]);
 
   return (
     <div className={`${container} ${app} ${darkMode ? darkTheme : lightTheme}`}>

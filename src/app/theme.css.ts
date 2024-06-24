@@ -1,6 +1,12 @@
 // theme.css.ts
+import { sidebar, sidebarWidth } from "@/components/sidebar/Sidebar.css";
 import colors from "@/styles/colors.css";
-import { createTheme, createThemeContract } from "@vanilla-extract/css";
+import {
+  assignVars,
+  createTheme,
+  createThemeContract,
+  style,
+} from "@vanilla-extract/css";
 
 const colorsVars = createThemeContract({
   textPrimary: null,
@@ -31,7 +37,7 @@ export const lightTheme = createTheme(colorsVars, {
   sliderTrack: "#EBE7EE",
   linkHover: "#ebe7ee",
   linkActive: "#e1dde4",
-  inputPlaceholder: colors["--stone-6"]
+  inputPlaceholder: colors["--stone-6"],
 });
 
 export const darkTheme = createTheme(colorsVars, {
@@ -47,7 +53,29 @@ export const darkTheme = createTheme(colorsVars, {
   sliderTrack: "#29282D",
   linkHover: "#29282d",
   linkActive: "#3a393d",
-  inputPlaceholder: colors["--stone-8"]
+  inputPlaceholder: colors["--stone-8"],
 });
 
-export const vars = { colorsVars };
+const isLoggedInVars = createThemeContract({
+  sidebarWidth: null,
+});
+
+export const loggedIn = style({
+  "@media": {
+    "screen and (min-width: 1160px)": {
+      vars: assignVars(isLoggedInVars, {
+        sidebarWidth: "272px",
+      }),
+    },
+    "screen and (max-width: 1160px)": {
+      vars: assignVars(isLoggedInVars, {
+        sidebarWidth: "80px",
+      }),
+    },
+  },
+});
+
+export const loggedOut = createTheme(isLoggedInVars, {
+  sidebarWidth: "0px",
+})
+export const vars = { colorsVars, isLoggedInVars };

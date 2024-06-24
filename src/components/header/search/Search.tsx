@@ -47,7 +47,7 @@ const Search = () => {
             paddingX: "size-5",
             height: "100",
             color: "--gray-7",
-          })} ${buttonClear} ${isHovered && buttonClearShow}`} aria-label="Clear"><span className={sprinkles({fontSize: "font-size-6"})}><i className="fa-solid fa-xmark"></i></span></button>
+          })} ${buttonClear} ${isHovered && inputValue.length > 0 && buttonClearShow}`} aria-label="Clear"><span className={sprinkles({fontSize: "font-size-6"})}><i className="fa-solid fa-xmark"></i></span></button>
       </div>
     </search>
   );

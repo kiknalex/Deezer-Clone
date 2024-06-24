@@ -49,15 +49,8 @@ globalStyle("body", {
 globalStyle("#root", {
   minHeight: "100vh",
   vars: {
-    "--sidebar-width": "272px",
-  },
-  "@media": {
-    "screen and (max-width: 1160px)": {
-      vars: {
-        "--sidebar-width": "80px",
-      },
-    },
-  },
+    "--sidebar-width": "0px"
+  }
 });
 globalStyle("button", {
   all: "unset",

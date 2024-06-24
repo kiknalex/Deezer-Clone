@@ -36,11 +36,12 @@ export const searchInput = style({
 });
 
 export const buttonClear = style({
-  cursor: "pointer",
+  
   opacity: 0,
   transition: "opacity 0.150s",
 });
 
 export const buttonClearShow = style({
   opacity: 1,
+  cursor: "pointer",
 });

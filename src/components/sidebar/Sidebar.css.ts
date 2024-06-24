@@ -11,7 +11,7 @@ export const sidebar = style({
   top: "0",
   left: "0",
   bottom: "0",
-  width: "var(--sidebar-width)",
+  width: vars.isLoggedInVars.sidebarWidth,
   height: "100%",
   display: "flex",
   flexDirection: "column",

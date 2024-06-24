@@ -1,6 +1,6 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
-import ColorsHSL, { colors } from "./colors.css";
+import colors from "./colors.css";
 import { fontFamily, fontSize, fontWeight } from "./typography.css";
 import { position, size, sizePx } from "./sizes.css";
 
@@ -49,8 +49,8 @@ const responsiveProperties = defineProperties({
 
 const systemProperties = defineProperties({
   properties: {
-    color: ColorsHSL,
-    background: ColorsHSL,
+    color: colors,
+    background: colors,
     fontFamily: fontFamily,
     fontSize: fontSize,
     fontWeight: fontWeight,

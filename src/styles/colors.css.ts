@@ -15,7 +15,7 @@ export const Gray = {
   '--gray-8': '#343a40',
   '--gray-9': '#212529',
   '--gray-10': '#16191d',
-  '--gray-11': '#0d0f12',
+  '--gray-11': '#0f0d13',
   '--gray-12': '#030507',
 }
 
@@ -307,7 +307,7 @@ export const Jungle = {
   '--jungle-12': '#3d4d04',
 }
 
-const ColorsHSL = {
+const colors = {
   ...BlackWhite,
   ...Gray,
   ...Stone,
@@ -330,4 +330,4 @@ const ColorsHSL = {
   ...Jungle,
 }
 
-export default ColorsHSL
+export default colors;

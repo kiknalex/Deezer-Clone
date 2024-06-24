@@ -7,7 +7,7 @@ export const container = style({
 
 export const app = style({
   color: vars.colorsVars.textPrimary,
-  background: vars.colorsVars.background,
+  backgroundColor: vars.colorsVars.background,
 });
 
 export const smallScreenHide = style({
@@ -26,7 +26,7 @@ export const bigScreenHide = style({
 });
 globalStyle("h1, h2, h3, h4, h5, h6", {
   margin: "0",
-})
+});
 globalStyle("a", {
   textDecoration: "none",
   color: "unset",
@@ -48,6 +48,16 @@ globalStyle("body", {
 });
 globalStyle("#root", {
   minHeight: "100vh",
+  vars: {
+    "--sidebar-width": "272px",
+  },
+  "@media": {
+    "screen and (max-width: 1160px)": {
+      vars: {
+        "--sidebar-width": "80px",
+      },
+    },
+  },
 });
 globalStyle("button", {
   all: "unset",

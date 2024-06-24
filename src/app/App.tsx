@@ -6,7 +6,8 @@ import { MusicData, Track } from "@/types/deezerApiTypes"; // Assuming Track typ
 
 import Player from "@/components/music-player/Player";
 import Sidebar from "@/components/sidebar/Sidebar";
-import { useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
+import Header from "@/components/header/Header";
 
 const proxy = "https://corsproxy.io/?";
 
@@ -21,12 +22,16 @@ const App = () => {
     }
   }, [loaderData]);
 
+  const handleDarkModeClick = () => {
+    setDarkMode(!darkMode)
+  }
+
   return (
     <div className={`${container} ${app} ${darkMode ? darkTheme : lightTheme}`}>
-      <button onClick={() => setDarkMode(!darkMode)}>dark mode</button>
+      <Header handleDarkModeClick={handleDarkModeClick} />
       <Sidebar />
-
-      <div>{tracks.length > 0 && <Player tracks={tracks} />}</div>
+      {/* <div>{tracks.length > 0 && <Player tracks={tracks} />}</div> */}
+      <Outlet />
     </div>
   );
 };

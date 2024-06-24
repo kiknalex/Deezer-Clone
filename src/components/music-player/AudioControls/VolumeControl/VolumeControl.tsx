@@ -63,6 +63,7 @@ const VolumeControl = ({
       tooltipInteractive={true}
       tooltipContent={inputElement}
       onClick={toggleMute}
+      popoutDelay={100}
     >
       <span
         style={{

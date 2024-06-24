@@ -38,7 +38,7 @@ const TrackInfo = ({ track }: { track: Track }) => {
           </a>
         </Marquee>
         <Marquee key={track.title + track.artist.name}>
-          <a href="#" className={`${linkHover} ${sprinkles({fontSize: "font-size-2", color: "textSecondary"})}`}>
+          <a href="#" className={`${linkHover} ${sprinkles({fontSize: "font-size-2", color: "--gray-6"})}`}>
             {track.artist.name}
           </a>
         </Marquee>

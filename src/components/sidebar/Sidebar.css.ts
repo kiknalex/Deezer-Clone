@@ -11,6 +11,7 @@ export const sidebar = style({
   top: "0",
   left: "0",
   bottom: "0",
+  width: "var(--sidebar-width)",
   height: "100%",
   display: "flex",
   flexDirection: "column",
@@ -19,17 +20,7 @@ export const sidebar = style({
   color: vars.colorsVars.textPrimary,
   background: vars.colorsVars.backgroundSecondary,
   borderRight: `solid ${vars.colorsVars.borderColor} 1px`,
-  vars: {
-    [sidebarWidth]: "272px",
-  },
-  width: sidebarWidth,
-  "@media": {
-    "screen and (max-width: 1160px)": {
-      vars: {
-        [sidebarWidth]: "80px",
-      },
-    },
-  },
+  
 });
 
 export const link = style({

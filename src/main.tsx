@@ -14,7 +14,7 @@ const router = createBrowserRouter(
       path="/"
       loader={async () => {
         return fetch(
-          "https://corsproxy.io/?https://api.deezer.com/playlist/2389444482"
+          "https://corsproxy.io/?https://api.deezer.com/playlist/6682665064"
         );
       }}
       element={<App />}

@@ -1,4 +1,5 @@
 // theme.css.ts
+import colors from "@/styles/colors.css";
 import { createTheme, createThemeContract } from "@vanilla-extract/css";
 
 const colorsVars = createThemeContract({
@@ -14,6 +15,7 @@ const colorsVars = createThemeContract({
   sliderTrack: null,
   linkHover: null,
   linkActive: null,
+  inputPlaceholder: null,
 });
 
 export const lightTheme = createTheme(colorsVars, {
@@ -29,6 +31,7 @@ export const lightTheme = createTheme(colorsVars, {
   sliderTrack: "#EBE7EE",
   linkHover: "#ebe7ee",
   linkActive: "#e1dde4",
+  inputPlaceholder: colors["--stone-6"]
 });
 
 export const darkTheme = createTheme(colorsVars, {
@@ -44,6 +47,7 @@ export const darkTheme = createTheme(colorsVars, {
   sliderTrack: "#29282D",
   linkHover: "#29282d",
   linkActive: "#3a393d",
+  inputPlaceholder: colors["--stone-8"]
 });
 
 export const vars = { colorsVars };

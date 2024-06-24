@@ -7,7 +7,7 @@ export const headerStyle = style({
     top: "0px",
     left: vars.isLoggedInVars.sidebarWidth,
     right: "0px",
-    height: "80px",
+    height: "var(--header-height)",
     borderBottom: `1px solid ${vars.colorsVars.borderColor}`,
     backgroundColor: vars.colorsVars.background,
 })

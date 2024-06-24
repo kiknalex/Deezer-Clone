@@ -49,7 +49,9 @@ globalStyle("body", {
 globalStyle("#root", {
   minHeight: "100vh",
   vars: {
-    "--sidebar-width": "0px"
+    "--sidebar-width": "0px",
+    "--header-height": "80px",
+    "--player-height": "80px",
   }
 });
 globalStyle("button", {

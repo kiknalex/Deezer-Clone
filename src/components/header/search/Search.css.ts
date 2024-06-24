@@ -9,17 +9,17 @@ export const searchWrapper = style({
 
 export const searchInput = style({
   all: "unset",
-  backgroundColor: vars.colorsVars.linkHover,
+  background: vars.colorsVars.linkHover,
   width: "100%",
   height: "100%",
   border: "3px solid transparent",
   borderRadius: "9px",
   paddingInlineStart: sizePx["size-11"],
   paddingInlineEnd: sizePx["size-11"],
+  transition: "filter 0.2s",
 
   ":hover": {
-    backgroundColor: vars.colorsVars.linkActive,
-    transition: "background-color 0.2s",
+    filter: "contrast(0.9)",
   },
   "::placeholder": {
     color: vars.colorsVars.inputPlaceholder,
@@ -35,10 +35,14 @@ export const searchInput = style({
   },
 });
 
+export const buttonSearch = style({
+  zIndex: "2",
+})
+
 export const buttonClear = style({
-  
   opacity: 0,
   transition: "opacity 0.150s",
+  color: vars.colorsVars.textSecondary,
 });
 
 export const buttonClearShow = style({

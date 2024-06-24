@@ -1,5 +1,5 @@
 import { sprinkles } from "@/styles/sprinkles.css";
-import { buttonClear, buttonClearShow, searchInput, searchWrapper } from "./Search.css";
+import { buttonClear, buttonClearShow, buttonSearch, searchInput, searchWrapper } from "./Search.css";
 import { useState } from "react";
 
 const Search = () => {
@@ -18,11 +18,11 @@ const Search = () => {
         })} ${searchWrapper}`}
       >
         <button
-          className={sprinkles({
+          className={`${sprinkles({
             position: "absolute",
             left: "0",
             marginLeft: "size-7",
-          })}
+          })} ${buttonSearch}`}
           aria-label="Search button"
         >
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -46,7 +46,6 @@ const Search = () => {
             right: "0",
             paddingX: "size-5",
             height: "100",
-            color: "--gray-7",
           })} ${buttonClear} ${isHovered && inputValue.length > 0 && buttonClearShow}`} aria-label="Clear"><span className={sprinkles({fontSize: "font-size-6"})}><i className="fa-solid fa-xmark"></i></span></button>
       </div>
     </search>

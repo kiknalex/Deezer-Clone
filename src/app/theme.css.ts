@@ -1,5 +1,3 @@
-// theme.css.ts
-import { sidebar, sidebarWidth } from "@/components/sidebar/Sidebar.css";
 import colors from "@/styles/colors.css";
 import {
   assignVars,

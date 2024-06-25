@@ -14,4 +14,5 @@ export const playerLayout = style({
   backgroundColor: vars.colorsVars.backgroundSecondary,
   borderTop: `1px solid ${vars.colorsVars.borderColor}`,
   height: "var(--player-height)",
+  zIndex: "200",
 });

@@ -20,7 +20,7 @@ export const sidebar = style({
   color: vars.colorsVars.textPrimary,
   background: vars.colorsVars.backgroundSecondary,
   borderRight: `solid ${vars.colorsVars.borderColor} 1px`,
-  
+  zIndex: "100",
 });
 
 export const link = style({

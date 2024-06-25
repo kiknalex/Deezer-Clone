@@ -10,4 +10,5 @@ export const headerStyle = style({
     height: "var(--header-height)",
     borderBottom: `1px solid ${vars.colorsVars.borderColor}`,
     backgroundColor: vars.colorsVars.background,
+    zIndex: "90",
 })

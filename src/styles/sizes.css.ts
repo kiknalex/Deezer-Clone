@@ -59,11 +59,10 @@ export const position = {
 };
 
 export const mediaSize = {
-  "size-xxs": "240px",
-  "size-xs": "360px",
-  "size-sm": "480px",
-  "size-md": "768px",
-  "size-lg": "1160px",
-  "size-xl": "1440px",
-  "size-xxl": "1920px",
+  "size-xs": "768px",
+  "size-sm": "940px",
+  "size-md": "1200px",
+  "size-lg": "1310px",
+  "size-xl": "1430px",
+  "size-xxl": "1728px",
 };

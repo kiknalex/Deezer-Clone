@@ -1,38 +1,48 @@
 import { container } from "@/app/App.css";
 import { gridLayout } from "./ChannelsGrid.css";
 import ChannelCard from "./channel-card/ChannelCard";
+import { sprinkles } from "@/styles/sprinkles.css";
 
-const ChannelsGrid = () => {
+interface ChannelsGridProps {
+  category: string;
+}
+
+const ChannelsGrid = ({ category }: ChannelsGridProps) => {
   return (
-    <div className={`${container} ${gridLayout}`}>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Hi</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-      <ChannelCard to="/">Metal Rock</ChannelCard>
-    </div>
+    <section>
+      <h2 className={`${sprinkles({ paddingY: "size-5" })} ${container}`}>
+        {category}
+      </h2>
+      <div className={`${container} ${gridLayout}`}>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Hi</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+        <ChannelCard to="/">Metal Rock</ChannelCard>
+      </div>
+    </section>
   );
 };
 

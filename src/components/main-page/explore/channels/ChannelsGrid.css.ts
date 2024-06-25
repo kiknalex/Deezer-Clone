@@ -7,7 +7,7 @@ export const gridLayout = style({
   gridTemplateRows: "auto",
   columnGap: "24px",
   rowGap: "24px",
-  justifyContent: "center",
+  marginTop: "24px",
   "@media": {
     [`screen and (min-width: ${mediaSize["size-xs"]})`]: {},
     [`screen and (min-width: ${mediaSize["size-sm"]})`]: {},

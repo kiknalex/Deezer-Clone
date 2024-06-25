@@ -42,7 +42,6 @@ export const volumeInput = style({
     width: "14px",
     height: "14px",
     borderRadius: "50%",
-    
   },
 });
 

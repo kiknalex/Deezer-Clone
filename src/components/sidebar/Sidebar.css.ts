@@ -1,4 +1,3 @@
-import { playerHeight } from "../music-player/Player.css";
 import { vars } from "@/app/theme.css";
 import { fontSize } from "@/styles/typography.css";
 import { createVar, style } from "@vanilla-extract/css";
@@ -16,7 +15,7 @@ export const sidebar = style({
   display: "flex",
   flexDirection: "column",
   alignContent: "center",
-  paddingBottom: playerHeight,
+  paddingBottom: "var(--player-height)",
   color: vars.colorsVars.textPrimary,
   background: vars.colorsVars.backgroundSecondary,
   borderRight: `solid ${vars.colorsVars.borderColor} 1px`,

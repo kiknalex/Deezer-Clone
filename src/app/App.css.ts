@@ -1,8 +1,18 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "./theme.css";
+import { mediaSize } from "@/styles/sizes.css";
 
 export const container = style({
   paddingInline: 20,
+  marginInline: "auto",
+  '@media': {
+    [`screen and (min-width: ${mediaSize["size-xs"]})`]: { width: '716px' },
+    [`screen and (min-width: ${mediaSize["size-sm"]})`]: { width: '826px' },
+    [`screen and (min-width: ${mediaSize["size-md"]})`]: { width: '902px' },
+    [`screen and (min-width: ${mediaSize["size-lg"]})`]: { width: '1034px' },
+    [`screen and (min-width: ${mediaSize["size-xl"]})`]: { width: '1154px' },
+    [`screen and (min-width: ${mediaSize["size-xxl"]})`]: { width: '1452px' },
+  },
 });
 
 export const app = style({
@@ -52,7 +62,7 @@ globalStyle("#root", {
     "--sidebar-width": "0px",
     "--header-height": "80px",
     "--player-height": "80px",
-  }
+  },
 });
 globalStyle("button", {
   all: "unset",

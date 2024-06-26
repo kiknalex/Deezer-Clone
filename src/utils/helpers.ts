@@ -8,6 +8,6 @@ export const debounce = (func: NoArgVoidFunction, wait: number): NoArgVoidFuncti
     };
   };
 
-  export const encodeForURL = (text) => {
+  export const encodeForURL = (text: string) => {
     return encodeURIComponent(text.toLowerCase().replace(/ /g, ''));
 }

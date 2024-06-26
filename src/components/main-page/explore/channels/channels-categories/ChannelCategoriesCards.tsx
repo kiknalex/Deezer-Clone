@@ -1,4 +1,5 @@
 import ChannelCard from "@/components/main-page/explore/channels/channel-card/ChannelCard";
+import { encodeForURL } from "@/utils/helpers";
 
 const genres = [
     "Pop", "Rap/Hip Hop", "Rock", "Dance", "R&B", "Alternative", 
@@ -11,7 +12,7 @@ const ChannelGenreCards = () => {
         <>
             {genres.map((genre, index) => (
                 
-                <ChannelCard key={index} to={`/channels/${encodeURIComponent(genre.toLowerCase().replace(/ /g, ''))}`}>
+                <ChannelCard key={index} to={`/channels/${encodeForURL(genre)}`}>
                     {genre}
                 </ChannelCard>
             ))}

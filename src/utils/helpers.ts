@@ -7,3 +7,7 @@ export const debounce = (func: NoArgVoidFunction, wait: number): NoArgVoidFuncti
       timeout = setTimeout(() => func(), wait);
     };
   };
+
+  export const encodeForURL = (text) => {
+    return encodeURIComponent(text.toLowerCase().replace(/ /g, ''));
+}

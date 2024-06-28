@@ -12,6 +12,7 @@ import {
 import ChannelsGrid from "./components/main-page/explore/channels/ChannelsGrid.tsx";
 import ChannelGenreCards from "./components/main-page/explore/channels/channels-categories/ChannelCategoriesCards.tsx";
 import ChannelPage from "./components/main-page/explore/channel-page/ChannelPage.tsx";
+import { encodeForURL } from "./utils/helpers.ts";
 const proxy = "https://corsproxy.io/?";
 const defaultUrl = "https://api.deezer.com";
 const delay = (ms) => {
@@ -45,16 +46,25 @@ const router = createBrowserRouter(
         path="channels/:channelName"
         element={<ChannelPage />}
         loader={async ({ params }) => {
+          const allGenres = await fetch(proxy + defaultUrl + "/genre").then(
+            (response) => response.json()
+          );
+          // Find the genre object that matches the encoded channel name
+          const genreObj = allGenres.data.find(
+            (genre) =>
+              encodeForURL(genre.name) === encodeForURL(params.channelName)
+          );
+          const id = genreObj.id;
+          const genreName = genreObj.name;
           const genreRadios = fetch(
-            proxy + defaultUrl + "/genre/113/radios"
-          ).then(response => response.json());
+            proxy + defaultUrl + `/genre/${id}/radios`
+          ).then((response) => response.json());
           const genreArtists = fetch(
-            proxy + defaultUrl + "/genre/113/artists"
-          ).then(response => response.json());
+            proxy + defaultUrl + `/genre/${id}/artists`
+          ).then((response) => response.json());
           const editorialReleases = fetch(
-            proxy + defaultUrl + "/editorial/113/releases"
-          ).then(response => response.json());
-
+            proxy + defaultUrl + `/editorial/${id}/releases`
+          ).then((response) => response.json());
           const delayLoad = delay(500);
 
           return defer({
@@ -64,6 +74,7 @@ const router = createBrowserRouter(
               editorialReleases,
               delayLoad,
             ]),
+            genreName
           });
         }}
       ></Route>

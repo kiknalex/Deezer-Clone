@@ -1,4 +1,3 @@
-import { vars } from "@/app/theme.css";
 import { mediaSize } from "@/styles/sizes.css";
 import { style } from "@vanilla-extract/css";
 
@@ -8,9 +7,14 @@ export const carouselStyle = style({
   minWidth: "600px",
   vars: { "--carousel-gap": "24px" },
   "@media": {
+    [`screen and (min-width: ${mediaSize["size-xs"]})`]: {},
     [`screen and (min-width: ${mediaSize["size-sm"]})`]: {
       vars: { "--carousel-gap": "34px" },
     },
+    [`screen and (min-width: ${mediaSize["size-md"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-lg"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-xl"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-xxl"]})`]: {},
   },
 });
 
@@ -27,33 +31,13 @@ export const carouselList = style({
   gridAutoFlow: "column",
   columnGap: "var(--carousel-gap)",
   "@media": {
-    [`screen and (min-width: ${mediaSize["size-xxl"]})`]: {
-      gridAutoColumns: "calc(20% - var(--carousel-gap))",
+    [`screen and (min-width: ${mediaSize["size-xs"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-sm"]})`]: {
     },
+    [`screen and (min-width: ${mediaSize["size-md"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-lg"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-xl"]})`]: {},
+    [`screen and (min-width: ${mediaSize["size-xxl"]})`]: {gridAutoColumns: "calc(20% - var(--carousel-gap))"},
   },
 });
-
-export const controlButton = style({
-  cursor: "pointer",
-  color: vars.colorsVars.buttonCommon,
-  textAlign: "center",
-  width: "50px",
-  height: "50px",
-  borderRadius: "50%",
-  transition: "background-color 0.2s, opacity 0.2s",
-  ":hover": {
-    backgroundColor: vars.colorsVars.linkHover,
-  },
-  ":active": {
-    backgroundColor: vars.colorsVars.linkActive,
-  },
-  ":disabled": {
-    cursor: "not-allowed",
-    opacity: "0.2",
-  },
-  selectors: {
-    "&:hover:disabled": {
-      backgroundColor: "transparent",
-    },
-  },
-});
+export const slideStyle = style({});

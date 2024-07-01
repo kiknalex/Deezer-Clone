@@ -5,9 +5,10 @@ import { Await, useLoaderData } from "react-router-dom";
 import PlaylistCard from "../../playlist-card/PlaylistCard";
 import { container } from "@/app/App.css";
 import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
+import { genrePageLoaderData } from "@/utils/loaders";
 
 const ChannelPage = () => {
-  const { data } = useLoaderData();
+  const { data } = useLoaderData() as genrePageLoaderData;
 
   return (
     <div>

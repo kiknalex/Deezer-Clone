@@ -1,4 +1,4 @@
-export interface MusicData {
+export interface TrackData {
   id: number;
   title: string;
   description: string;
@@ -60,9 +60,14 @@ export interface Track {
 export interface Artist {
   id: number;
   name: string;
-  link: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  link?: string;
   tracklist: string;
-  type: string;
+  type: "artist";
 }
 
 export interface Album {
@@ -99,4 +104,31 @@ export interface Radio {
   title: string;
   tracklist: string;
   type: "radio";
+}
+
+interface User {
+  id: number;
+  name: string;
+  tracklist: string;
+  type: string;
+}
+
+export interface Playlist {
+  id: number;
+  title: string;
+  public: boolean;
+  nb_tracks: number;
+  link: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  checksum: string;
+  tracklist: string;
+  creation_date: string;
+  md5_image: string;
+  picture_type: string;
+  user: User;
+  type: "playlist";
 }

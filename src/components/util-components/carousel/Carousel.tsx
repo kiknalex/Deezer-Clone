@@ -46,6 +46,7 @@ const Carousel = ({ slides, heading }: CarouselProps) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginBottom: "size-3"
         })}
       >
         <h2>{heading}</h2>

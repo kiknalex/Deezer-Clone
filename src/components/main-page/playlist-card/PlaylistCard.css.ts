@@ -4,14 +4,14 @@ import { size } from "@/styles/sizes.css";
 import { fontSize } from "@/styles/typography.css";
 import { style } from "@vanilla-extract/css";
 
-export const cardImg = style({
-  width: "100%",
-  height: "auto",
-  borderRadius: "9px",
-});
 
 export const link = linkHover;
 
+export const artistLink = style([{
+  marginTop: size["size-1"],
+  fontSize: size["size-4"],
+  color: colors["--gray-6"]
+}])
 export const tracksNumber = style({
   fontSize: fontSize["font-size-1"],
   color: colors["--gray-6"],

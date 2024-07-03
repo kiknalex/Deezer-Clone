@@ -22,13 +22,13 @@ const PlaybackInfo = ({
   }>({ time: null, positionX: 0 });
   const audioElement = audioRef.current!;
   const handleTimeUpdate = useCallback(() => {
-    // useCallback to save function reference to dynamically remove and add EventListeners.
+    // useCallback to save function reference to dynamically remove EventListener.
     setPlayedTime(audioElement.currentTime);
   }, [audioElement]);
   useSubscribeBrowserEvent(audioRef, handleTimeUpdate, "timeupdate");
 
   const formatTime = (time: number) => {
-    //format: 00:00
+    // format: 00:00
     if (isNaN(time)) {
       return "00:00";
     }
@@ -40,7 +40,8 @@ const PlaybackInfo = ({
       .padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
-  const handlePointerMove = (e: React.PointerEvent<HTMLInputElement>) => {
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLInputElement>) => {
     // calculate current time hover box position
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -56,24 +57,26 @@ const PlaybackInfo = ({
     setHoverTime({ time: Math.round(time), positionX: x });
   };
 
-  const handlePointerUp = (e: React.PointerEvent<HTMLInputElement>) => {
+  const handleMouseUp = (e: React.MouseEvent<HTMLInputElement>) => {
     audioElement.addEventListener("timeupdate", handleTimeUpdate);
     audioElement.currentTime = Number(playedTime);
     if (Number(e.currentTarget.value) >= audioElement.duration) {
       handleNextClick();
     }
   };
-  const handlePointerDown = () => {
+
+  const handleMouseDown = () => {
     audioElement.removeEventListener("timeupdate", handleTimeUpdate);
   };
 
-  const handlePointerLeave = () => {
+  const handleMouseLeave = () => {
     setHoverTime({ time: null, positionX: 0 });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlayedTime(Number(e.target.value));
   };
+
   return (
     <div
       className={`${sprinkles({
@@ -105,10 +108,10 @@ const PlaybackInfo = ({
           min="0"
           max={Math.round(audioElement.duration || 0)}
           value={playedTime}
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
-          onPointerUp={handlePointerUp}
-          onPointerDown={handlePointerDown}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseDown={handleMouseDown}
           onChange={handleInputChange}
         />
         {hoverTime.time !== null ? (

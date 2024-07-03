@@ -3,7 +3,6 @@ import CardImgLink from "./CardImgLink/CardImgLink";
 import { Artist } from "@/types/deezerApiTypes";
 import { artistLink, link, tracksNumber } from "./PlaylistCard.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { squareImg } from "./CardImgLink/CardImgLink.css";
 
 interface CardProps {
   imgSrc: string;
@@ -28,7 +27,7 @@ export const PlaylistCard = ({
 }: PlaylistCardProps) => {
   return (
     <div className={sprinkles({ display: "flex", flexDirection: "column" })}>
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} alt="" />
+      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} alt="" tracklist={tracklist} />
       <Link
         to=""
         className={`${sprinkles({
@@ -52,7 +51,7 @@ export const ArtistCard = ({ imgSrc, title, tracklist }: CardProps) => {
         alignItems: "center",
       })}
     >
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} shape="circle" alt={title} />
+      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} shape="circle" alt={title} tracklist={tracklist} />
       <Link
         to=""
         className={`${sprinkles({
@@ -80,7 +79,7 @@ export const AlbumCard = ({
         flexDirection: "column",
       })}
     >
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} imgClass={squareImg} />
+      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} alt={title} tracklist={tracklist} />
       <Link
         to=""
         className={`${sprinkles({

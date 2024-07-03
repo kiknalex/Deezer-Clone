@@ -8,6 +8,7 @@ const TrackPreview = ({ track }: { track: Track }) => {
   if (!track) {
     return null; // Return null or a placeholder when track is undefined
   }
+  console.log(track);
   return (
     <div
       className={`${sprinkles({
@@ -20,7 +21,7 @@ const TrackPreview = ({ track }: { track: Track }) => {
         <img
           className={`${sprinkles({ marginRight: "size-3" })} ${imageSize}`}
           key={track.md5_image}
-          src={track.album.cover_small}
+          src={track?.album?.cover_small ?? "/cover_default.jpg"}
           width="56"
           height="56"
           alt="Next track"

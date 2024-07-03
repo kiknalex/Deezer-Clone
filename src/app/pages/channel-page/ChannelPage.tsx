@@ -6,7 +6,7 @@ import {
   PlaylistCard,
   ArtistCard,
   AlbumCard,
-} from "../../../components/main-page/playlist-card/PlaylistCard";
+} from "@/components/main-page/playlist-card/PlaylistCard";
 import { container } from "@/app/App.css";
 import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
 import { genrePageLoaderData } from "@/utils/loaders";

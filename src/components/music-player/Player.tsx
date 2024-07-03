@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 
 import { playerLayout, playerPosition } from "./Player.css";
 import { sprinkles } from "@/styles/sprinkles.css";
@@ -9,23 +9,25 @@ import PlaybackInfo from "./TrackPlaybackControls/PlaybackInfo/PlaybackInfo";
 import TrackControls from "./TrackPlaybackControls/TrackControls/TrackControls";
 import TrackInfo from "./TrackInfo/TrackInfo";
 import { Track } from "@/types/deezerApiTypes";
+import { MusicContext, MusicContextType } from "@/app/App";
 
 const Player = ({ tracks }: { tracks: Track[] }) => {
-  const [currentTrackId, setCurrentTrackId] = useState(0);
   const [audioReady, setAudioReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { currentTrackIndex, handleTrackNext } = useContext(
+    MusicContext
+  ) as MusicContextType;
 
   const handleLoadedData = () => {
     if (audioRef.current && audioRef.current.readyState > 2) {
       setAudioReady(true);
-      audioRef.current?.play();
+      // audioRef.current?.play();
+      startPlay();
     }
-  }
-  const handleEnded = () => {
-    if (currentTrackId < tracks.length - 1) {
-      setCurrentTrackId((cti) => cti + 1);
-    }
+  };
+  const handleTrackEnded = () => {
+    handleTrackNext();
   };
 
   const stopPlay = () => {
@@ -54,29 +56,15 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
     }
   };
 
-  const handlePreviousClick = () => {
-    if (currentTrackId > 0) {
-      setCurrentTrackId((cti) => cti - 1);
-      setIsPlaying(true);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentTrackId < tracks.length - 1) {
-      setCurrentTrackId((cti) => cti + 1);
-      setIsPlaying(true);
-    }
-  };
-
   return (
     <>
       {tracks && tracks.length > 0 && (
         <>
           <audio
             onLoadedData={handleLoadedData}
-            onEnded={handleEnded}
+            onEnded={handleTrackEnded}
             ref={audioRef}
-            src={tracks[currentTrackId].preview}
+            src={tracks[currentTrackIndex].preview}
           ></audio>
 
           {audioReady ? (
@@ -86,19 +74,16 @@ const Player = ({ tracks }: { tracks: Track[] }) => {
                 paddingX: "size-3",
               })} ${playerLayout} ${playerPosition}`}
             >
-              <TrackInfo track={tracks[currentTrackId]} />
+              <TrackInfo track={tracks[currentTrackIndex]} />
               <TrackPlaybackControls>
                 <TrackControls
-                  handlePreviousClick={handlePreviousClick}
                   togglePlay={togglePlay}
-                  handleNextClick={handleNextClick}
                   isPlaying={isPlaying}
                   tracks={tracks}
-                  currentTrackId={currentTrackId}
                 />
                 <PlaybackInfo
                   audioRef={audioRef}
-                  handleNextClick={handleNextClick}
+                  // handleNextClick={handleNextClick}
                 />
               </TrackPlaybackControls>
               <AudioControls audioRef={audioRef} />

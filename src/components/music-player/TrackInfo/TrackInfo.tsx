@@ -15,7 +15,7 @@ const TrackInfo = ({ track }: { track: Track }) => {
     >
       <div>
         <img
-          src={track?.album.cover_small ?? ""}
+          src={track?.album?.cover_small ?? "/cover_default.jpg"}
           className={`${sprinkles({ marginRight: "size-3" })} ${imageSize}`}
           key={track.md5_image}
           width="56"

@@ -6,24 +6,23 @@ import {
 import { sprinkles } from "@/styles/sprinkles.css";
 import { Track } from "@/types/deezerApiTypes";
 import TrackPreview from "./TrackPreview/TrackPreview";
+import { useContext } from "react";
+import { MusicContext, MusicContextType } from "@/app/App";
 
 interface TrackControlsProps {
-  handlePreviousClick: () => void;
   togglePlay: () => void;
-  handleNextClick: () => void;
   isPlaying: boolean;
   tracks: Track[];
   currentTrackId: number;
 }
 
 const TrackControls = ({
-  handlePreviousClick,
   togglePlay,
-  handleNextClick,
   isPlaying,
   tracks,
-  currentTrackId,
 }: TrackControlsProps) => {
+  const { currentTrackIndex, handleTrackPrevious, handleTrackNext } =
+    useContext(MusicContext) as MusicContextType;
   return (
     <div
       className={`${sprinkles({
@@ -33,9 +32,9 @@ const TrackControls = ({
       })}`}
     >
       <ButtonHoverableWithTooltip
-        onClick={handlePreviousClick}
+        onClick={handleTrackPrevious}
         tooltipInteractive={true}
-        tooltipContent={<TrackPreview track={tracks[currentTrackId - 1]} />}
+        tooltipContent={<TrackPreview track={tracks[currentTrackIndex - 1]} />}
         className={`${commonButton}`}
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
@@ -64,9 +63,9 @@ const TrackControls = ({
         )}
       </button>
       <ButtonHoverableWithTooltip
-        onClick={handleNextClick}
+        onClick={handleTrackNext}
         tooltipInteractive={true}
-        tooltipContent={<TrackPreview track={tracks[currentTrackId + 1]} />}
+        tooltipContent={<TrackPreview track={tracks[currentTrackIndex + 1]} />}
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>

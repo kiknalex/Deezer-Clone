@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import {
   buttonAction,
   buttonIcon,
@@ -10,12 +10,15 @@ import {
   squareImg,
 } from "./CardImgLink.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { getTracksData } from "@/utils/fetchers";
+import { MusicContext, MusicContextType } from "@/app/App";
 interface CardImgLinkProps {
   imgSrc: string;
   linkSrc: string;
   alt: string;
   shape?: "square" | "circle";
+  tracklist: string;
 }
 
 const CardImgLink = ({
@@ -23,15 +26,17 @@ const CardImgLink = ({
   linkSrc,
   alt,
   shape = "square",
+  tracklist,
 }: CardImgLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const {handleTracklistChange} = useContext(MusicContext) as MusicContextType;
   const shapeClass = shape === "square" ? squareImg : circleImg;
   const handleMouseOver = () => {
     setIsHovered(true);
   };
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget && !e.currentTarget.contains(e.relatedTarget as Node)) {
+    if (e.relatedTarget && !e.currentTarget.contains(e.relatedTarget as Node)) {
       setIsHovered(false);
     }
   };
@@ -41,6 +46,9 @@ const CardImgLink = ({
       navigate(linkSrc);
     }
   };
+  const handlePlayClick = async () => {
+    handleTracklistChange(tracklist);
+  }
   return (
     <div
       className={`${linkContainer} ${shapeClass}`}
@@ -64,7 +72,11 @@ const CardImgLink = ({
         }`}
       >
         <li>
-          <button aria-label="Play" className={buttonAction}>
+          <button
+            onClick={handlePlayClick}
+            aria-label="Play"
+            className={buttonAction}
+          >
             <span className={buttonIcon}>
               <i className={"fa-solid fa-play"}></i>
             </span>

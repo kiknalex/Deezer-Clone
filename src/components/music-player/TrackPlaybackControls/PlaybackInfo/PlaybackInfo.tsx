@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useState } from "react";
+import { RefObject, useCallback, useContext, useState } from "react";
 import {
   activeTrack,
   sliderTrack,
@@ -7,13 +7,12 @@ import {
 } from "./PlaybackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
+import { MusicContext, MusicContextType } from "@/app/App";
 
 const PlaybackInfo = ({
   audioRef,
-  handleNextClick,
 }: {
   audioRef: RefObject<HTMLAudioElement>;
-  handleNextClick: () => void;
 }) => {
   const [playedTime, setPlayedTime] = useState(0);
   const [hoverTime, setHoverTime] = useState<{
@@ -21,6 +20,7 @@ const PlaybackInfo = ({
     positionX: number;
   }>({ time: null, positionX: 0 });
   const audioElement = audioRef.current!;
+  const {handleTrackNext} = useContext(MusicContext) as MusicContextType;
   const handleTimeUpdate = useCallback(() => {
     // useCallback to save function reference to dynamically remove EventListener.
     setPlayedTime(audioElement.currentTime);
@@ -61,7 +61,7 @@ const PlaybackInfo = ({
     audioElement.addEventListener("timeupdate", handleTimeUpdate);
     audioElement.currentTime = Number(playedTime);
     if (Number(e.currentTarget.value) >= audioElement.duration) {
-      handleNextClick();
+      handleTrackNext();
     }
   };
 

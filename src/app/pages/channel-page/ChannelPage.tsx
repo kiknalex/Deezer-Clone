@@ -2,7 +2,11 @@ import Carousel from "@/components/util-components/carousel/Carousel";
 import LoaderSpin from "@/components/util-components/loader-spin/LoaderSpin";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
-import PlaylistCard from "../../playlist-card/PlaylistCard";
+import {
+  PlaylistCard,
+  ArtistCard,
+  AlbumCard,
+} from "../../../components/main-page/playlist-card/PlaylistCard";
 import { container } from "@/app/App.css";
 import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
 import { genrePageLoaderData } from "@/utils/loaders";
@@ -27,16 +31,24 @@ const ChannelPage = () => {
                 <Carousel
                   heading="Playlists"
                   slides={chartPlaylists.data.map((playlist: Playlist) => (
-                    <PlaylistCard imgSrc={playlist.picture_medium} />
+                    <PlaylistCard
+                      imgSrc={playlist.picture_medium}
+                      title={playlist.title}
+                      numberOfTracks={playlist.nb_tracks}
+                      tracklist={playlist.tracklist}
+                    />
                   ))}
                 />
               </section>
-
               <section className={container}>
                 <Carousel
                   heading="Artists"
                   slides={genreArtists.data.map((artist: Artist) => (
-                    <PlaylistCard imgSrc={artist.picture_medium} />
+                    <ArtistCard
+                      imgSrc={artist.picture_medium}
+                      title={artist.name}
+                      tracklist={artist.tracklist}
+                    />
                   ))}
                 />
               </section>
@@ -44,14 +56,20 @@ const ChannelPage = () => {
                 <Carousel
                   heading="Editorial Releases"
                   slides={editorialReleases.data.map((release: Release) => (
-                    <PlaylistCard imgSrc={release.cover_medium} />
+                    <AlbumCard
+                      imgSrc={release.cover_medium}
+                      title={release.title}
+                      artist={release.artist}
+                      releaseDate={release.release_date}
+                      tracklist={release.tracklist}
+                    />
                   ))}
                 />
               </section>
               <section className={container}>
                 <Carousel
                   slides={genreRadios.data.map((radio: Radio) => (
-                    <PlaylistCard imgSrc={radio.picture_medium} />
+                    <PlaylistCard imgSrc={radio.picture_medium} tracklist={radio.tracklist} />
                   ))}
                   heading="Radios"
                 />

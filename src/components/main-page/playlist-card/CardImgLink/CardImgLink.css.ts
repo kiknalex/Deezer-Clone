@@ -7,7 +7,7 @@ export const cardImg = style({
   display: "block",
   width: "100%",
   height: "auto",
-  
+
   selectors: {
     "&::after": {
       backgroundColor: vars.colorsVars.backgroundSecondary,
@@ -22,8 +22,8 @@ export const cardImg = style({
       opacity: "0.24",
     },
     "&:hover": {
-      boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px"
-    }
+      boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+    },
   },
 });
 
@@ -60,8 +60,6 @@ export const listButtons = style({
   left: "10px",
   display: "flex",
   justifyContent: "center",
-  opacity: "0",
-  transition: "opacity 0.2s",
 });
 export const listButtonsCenter = style([
   listButtons,
@@ -70,9 +68,7 @@ export const listButtonsCenter = style([
     transform: "translateX(-50%)",
   },
 ]);
-export const listVisible = style({
-  opacity: "1",
-});
+export const listVisible = style({});
 export const buttonAction = style({
   display: "flex",
   justifyContent: "center",
@@ -82,8 +78,17 @@ export const buttonAction = style({
   borderRadius: "50%",
   backgroundColor: colors.white,
   zIndex: "20",
+  transition: "opacity 0.2s",
+  opacity: "0",
+  selectors: {
+    [`${linkContainer}:hover &`]: {
+      opacity: "1",
+    },
+  },
 });
-
+export const buttonVisible = style({
+  opacity: "1",
+});
 export const buttonIcon = style({
   color: "black",
   fontSize: fontSize["font-size-6"],

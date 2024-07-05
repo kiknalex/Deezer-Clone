@@ -1,7 +1,8 @@
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   buttonAction,
   buttonIcon,
+  buttonVisible,
   circleImg,
   linkContainer,
   listButtons,
@@ -11,7 +12,6 @@ import {
 } from "./CardImgLink.css";
 
 import { useContext, useState } from "react";
-import { getTracksData } from "@/utils/fetchers";
 import { MusicContext, MusicContextType } from "@/app/App";
 interface CardImgLinkProps {
   imgSrc: string;
@@ -22,24 +22,17 @@ interface CardImgLinkProps {
 }
 
 const CardImgLink = ({
+  // refactor hover to css
   imgSrc,
   linkSrc,
   alt,
   shape = "square",
   tracklist,
 }: CardImgLinkProps) => {
-  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const {handleTracklistChange} = useContext(MusicContext) as MusicContextType;
+  const { currentTracklist, isPlaying, handleTracklistChange, togglePlay } =
+    useContext(MusicContext) as MusicContextType;
   const shapeClass = shape === "square" ? squareImg : circleImg;
-  const handleMouseOver = () => {
-    setIsHovered(true);
-  };
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.relatedTarget && !e.currentTarget.contains(e.relatedTarget as Node)) {
-      setIsHovered(false);
-    }
-  };
 
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -47,13 +40,12 @@ const CardImgLink = ({
     }
   };
   const handlePlayClick = async () => {
-    handleTracklistChange(tracklist);
-  }
+    if (currentTracklist !== tracklist) handleTracklistChange(tracklist);
+    togglePlay();
+  };
   return (
     <div
       className={`${linkContainer} ${shapeClass}`}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
       onClick={handleContainerClick}
     >
       <div>
@@ -66,19 +58,25 @@ const CardImgLink = ({
           alt={alt}
         />
       </div>
-      <ul
-        className={` ${isHovered && listVisible} ${
-          shape === "square" ? listButtons : listButtonsCenter
-        }`}
-      >
-        <li>
+      <ul className={`${shape === "square" ? listButtons : listButtonsCenter}`}>
+        <li
+          className={
+            isPlaying && currentTracklist === tracklist ? buttonVisible : ""
+          }
+        >
           <button
             onClick={handlePlayClick}
             aria-label="Play"
-            className={buttonAction}
+            className={`${buttonAction} ${
+              isPlaying && currentTracklist === tracklist ? buttonVisible : ""
+            }`}
           >
             <span className={buttonIcon}>
-              <i className={"fa-solid fa-play"}></i>
+              {isPlaying && currentTracklist === tracklist ? (
+                <i className="fa-solid fa-pause"></i>
+              ) : (
+                <i className={"fa-solid fa-play"}></i>
+              )}
             </span>
           </button>
         </li>

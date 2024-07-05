@@ -39,9 +39,9 @@ const CardImgLink = ({
     }
   };
   const handlePlayClick = async () => {
-    if (currentTracklist !== tracklist) await handleTracklistChange(tracklist);
-    else togglePlay();
-    
+    currentTracklist !== tracklist
+      ? await handleTracklistChange(tracklist)
+      : togglePlay();
   };
   return (
     <div

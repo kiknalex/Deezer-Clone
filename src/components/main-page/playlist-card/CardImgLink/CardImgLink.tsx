@@ -7,11 +7,10 @@ import {
   linkContainer,
   listButtons,
   listButtonsCenter,
-  listVisible,
   squareImg,
 } from "./CardImgLink.css";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
 interface CardImgLinkProps {
   imgSrc: string;
@@ -40,8 +39,9 @@ const CardImgLink = ({
     }
   };
   const handlePlayClick = async () => {
-    if (currentTracklist !== tracklist) handleTracklistChange(tracklist);
-    togglePlay();
+    if (currentTracklist !== tracklist) await handleTracklistChange(tracklist);
+    else togglePlay();
+    
   };
   return (
     <div

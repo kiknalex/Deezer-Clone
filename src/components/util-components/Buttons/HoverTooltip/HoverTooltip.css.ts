@@ -1,5 +1,5 @@
 import { style, createVar } from "@vanilla-extract/css";
-import { vars } from "../../../app/theme.css";
+import { vars } from "@/app/theme.css";
 
 export const arrowPosition = createVar();
 

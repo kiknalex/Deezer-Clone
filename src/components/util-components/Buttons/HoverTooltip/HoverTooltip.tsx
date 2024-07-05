@@ -31,25 +31,16 @@ const HoverTooltip = ({
 
       const tooltipRect = tooltipElement.getBoundingClientRect();
       const buttonRect = buttonElement.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-      // Calculate the tooltip's expected position based on the button's position
-      const tooltipLeft =
-        buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
-      console.log(tooltipRect);
-      if (tooltipLeft + tooltipRect.width + scrollbarWidth > viewportWidth) {
-        // if tooltips position overflows adjust accordingly
-        const valueToSubtract =
-          tooltipLeft + tooltipRect.width + scrollbarWidth - viewportWidth;
-        setOffset(valueToSubtract);
+      const viewportWidth = document.documentElement.clientWidth;
 
-        if (valueToSubtract + 10 < tooltipRect.width / 2) {
-          // calculate arrow offset based on tooltip offset and width
-          setArrowOffset(valueToSubtract);
-        } else {
-          setArrowOffset(tooltipRect.width / 2 - 10); // Adjust to a sensible default
-        }
+      const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+      const tooltipRightEdge = buttonCenterX + tooltipRect.width / 2;
+
+      if (tooltipRightEdge > viewportWidth) {
+        const overflow = tooltipRightEdge - viewportWidth;
+        const tooltipCenterWidth = tooltipRect.width / 2;
+        setOffset(overflow);
+        setArrowOffset(Math.min(overflow, tooltipCenterWidth - 10));
       } else {
         setOffset(0);
         setArrowOffset(0);
@@ -80,7 +71,7 @@ const HoverTooltip = ({
       }}
       className={`${tooltip} ${sprinkles({
         padding: "size-1",
-      })} ${className && className} ${tooltipInteractive ? backgroundStyle : ""}`}
+      })} ${className || ""} ${tooltipInteractive && backgroundStyle}`}
     >
       {children}
     </div>

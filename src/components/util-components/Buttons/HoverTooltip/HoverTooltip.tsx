@@ -5,8 +5,8 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { sprinkles } from "@/styles/sprinkles.css";
 interface HoverTooltipProps {
   tooltipInteractive: boolean;
-  onPointerEnter: () => void;
-  onPointerLeave: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
   buttonRef: RefObject<HTMLButtonElement>;
   className?: string;
   children: ReactNode;
@@ -14,8 +14,8 @@ interface HoverTooltipProps {
 
 const HoverTooltip = ({
   tooltipInteractive,
-  onPointerEnter,
-  onPointerLeave,
+  onMouseEnter,
+  onMouseLeave,
   buttonRef,
   className,
   children,
@@ -37,7 +37,7 @@ const HoverTooltip = ({
       // Calculate the tooltip's expected position based on the button's position
       const tooltipLeft =
         buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
-
+      console.log(tooltipRect);
       if (tooltipLeft + tooltipRect.width + scrollbarWidth > viewportWidth) {
         // if tooltips position overflows adjust accordingly
         const valueToSubtract =
@@ -71,8 +71,8 @@ const HoverTooltip = ({
 
   return (
     <div
-      onPointerEnter={onPointerEnter}
-      onPointerLeave={onPointerLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       ref={tooltipRef}
       style={{
         transform: `translateX(calc(-50% - ${offset}px))`,

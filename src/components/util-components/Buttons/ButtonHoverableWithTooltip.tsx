@@ -1,8 +1,8 @@
 import { ReactNode, useState, useRef, useEffect } from "react";
 import { commonButton } from "./ButtonHoverableWithTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import HoverTooltip from "@/components/util-components/HoverTooltip/HoverTooltip";
-import { tooltipVisible } from "@/components/util-components/HoverTooltip/HoverTooltip.css";
+import HoverTooltip from "@/components/util-components/Buttons/HoverTooltip/HoverTooltip";
+import { tooltipVisible } from "@/components/util-components/Buttons/HoverTooltip/HoverTooltip.css";
 
 interface ButtonProps {
   onClick?: () => void;
@@ -35,7 +35,7 @@ export const ButtonHoverableWithTooltip = ({
     };
   }, []);
 
-  const handlePointerEnter = () => {
+  const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -44,7 +44,7 @@ export const ButtonHoverableWithTooltip = ({
     }, popoutDelay);
   };
 
-  const handlePointerLeave = () => {
+  const handleMouseLeave = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -53,7 +53,7 @@ export const ButtonHoverableWithTooltip = ({
     }, 300);
   };
 
-  const handleTooltipPointerEnter = () => {
+  const handleTooltipMouseEnter = () => {
     if (!timeoutRef.current || !tooltipInteractive) return;
 
     if (tooltipInteractive) {
@@ -61,7 +61,7 @@ export const ButtonHoverableWithTooltip = ({
       setIsHovered(true);
     }
   };
-  const handleTooltipPointerLeave = () => {
+  const handleTooltipMouseLeave = () => {
     if (!timeoutRef.current || !tooltipInteractive) return;
 
     clearTimeout(timeoutRef.current);
@@ -74,16 +74,16 @@ export const ButtonHoverableWithTooltip = ({
     <div className={sprinkles({ position: "relative" })}>
       <HoverTooltip
         tooltipInteractive={tooltipInteractive}
-        onPointerEnter={handleTooltipPointerEnter}
-        onPointerLeave={handleTooltipPointerLeave}
+        onMouseEnter={handleTooltipMouseEnter}
+        onMouseLeave={handleTooltipMouseLeave}
         buttonRef={buttonRef}
         className={isHovered ? tooltipVisible : ""}
       >
         {tooltipContent}
       </HoverTooltip>
       <button
-        onPointerEnter={handlePointerEnter}
-        onPointerLeave={handlePointerLeave}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={onClick}
         ref={buttonRef}
         className={commonButton}

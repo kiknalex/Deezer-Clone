@@ -3,51 +3,59 @@ import { tooltip, arrowPosition, backgroundStyle } from "./HoverTooltip.css";
 import { debounce } from "@/utils/helpers";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { sprinkles } from "@/styles/sprinkles.css";
+
 interface HoverTooltipProps {
   tooltipInteractive: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
   buttonRef: RefObject<HTMLButtonElement>;
   className?: string;
   children: ReactNode;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
 const HoverTooltip = ({
   tooltipInteractive,
-  onMouseEnter,
-  onMouseLeave,
   buttonRef,
   className,
   children,
+  onMouseEnter,
+  onMouseLeave,
 }: HoverTooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState(0);
   const [arrowOffset, setArrowOffset] = useState(0);
+
   useEffect(() => {
     const calculateTooltipPosition = () => {
-      const tooltipElement = tooltipRef.current;
       const buttonElement = buttonRef.current;
+      const tooltipElement = tooltipRef.current;
       if (!tooltipElement || !buttonElement) return;
 
       const tooltipRect = tooltipElement.getBoundingClientRect();
       const buttonRect = buttonElement.getBoundingClientRect();
-      const viewportWidth = document.documentElement.clientWidth;
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      const viewportWidth = window.innerWidth;
 
       const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-      const tooltipRightEdge = buttonCenterX + tooltipRect.width / 2;
+      const tooltipCenterWidth = tooltipRect.width / 2;
 
-      if (tooltipRightEdge > viewportWidth) {
-        const overflow = tooltipRightEdge - viewportWidth;
-        const tooltipCenterWidth = tooltipRect.width / 2;
-        setOffset(overflow);
-        setArrowOffset(Math.min(overflow, tooltipCenterWidth - 10));
+      const tooltipLeftEdge = buttonCenterX - tooltipCenterWidth;
+      const tooltipRightEdge = buttonCenterX + tooltipCenterWidth;
+
+      if (tooltipRightEdge > viewportWidth - scrollbarWidth) {
+        const overflowRight = tooltipRightEdge - viewportWidth + scrollbarWidth;
+        setOffset(overflowRight);
+        setArrowOffset(Math.min(overflowRight, tooltipCenterWidth - 10));
+      } else if (tooltipLeftEdge < 0) {
+        const overflowLeft = tooltipLeftEdge;
+        setOffset(overflowLeft);
+        setArrowOffset(Math.min(overflowLeft, tooltipCenterWidth - 10));
       } else {
         setOffset(0);
         setArrowOffset(0);
       }
     };
-
-    calculateTooltipPosition();
 
     const debouncedCalculateTooltipPosition = debounce(
       calculateTooltipPosition,
@@ -55,7 +63,13 @@ const HoverTooltip = ({
     );
 
     window.addEventListener("resize", debouncedCalculateTooltipPosition);
+    // Initial calculation
+    const initialCalcTimer = setTimeout(() => {
+      //  to handle incorrect offset calculation on initial render in chrome.
+      calculateTooltipPosition();
+    }, 200);
     return () => {
+      clearTimeout(initialCalcTimer);
       window.removeEventListener("resize", debouncedCalculateTooltipPosition);
     };
   }, [buttonRef]);
@@ -69,9 +83,9 @@ const HoverTooltip = ({
         transform: `translateX(calc(-50% - ${offset}px))`,
         ...assignInlineVars({ [arrowPosition]: `${arrowOffset}px` }),
       }}
-      className={`${tooltip} ${sprinkles({
-        padding: "size-1",
-      })} ${className || ""} ${tooltipInteractive && backgroundStyle}`}
+      className={`${tooltip} ${sprinkles({ padding: "size-1" })} ${
+        tooltipInteractive && backgroundStyle
+      } ${className || ""}`}
     >
       {children}
     </div>

@@ -71,7 +71,7 @@ export const ButtonHoverableWithTooltip = ({
   };
 
   return (
-    <div className={sprinkles({ position: "relative" })}>
+    <div className={sprinkles({ position: "relative", display: "flex", justifyContent: "center" })}>
       <HoverTooltip
         tooltipInteractive={tooltipInteractive}
         onMouseEnter={handleTooltipMouseEnter}

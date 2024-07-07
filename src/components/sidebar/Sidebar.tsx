@@ -11,6 +11,7 @@ import { smallScreenHide } from "@/app/App.css";
 import { vars } from "@/app/theme.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import SubscribeCard from "./SubscribeCard/SubscribeCard";
+import { ButtonHoverableWithTooltip } from "../util-components/Buttons/ButtonHoverableWithTooltip";
 
 const Sidebar = () => {
   return (
@@ -85,6 +86,7 @@ const Sidebar = () => {
             </h2>
           </NavLink>
           <NavLink
+          to="/channels/explore"
             className={`${sprinkles({
               display: "flex",
               alignItems: "center",
@@ -106,7 +108,7 @@ const Sidebar = () => {
           </NavLink>
         </nav>
         <SubscribeCard href="https://github.com/kiknalex/Deezer-Clone">
-          This project is intended solely for educational purposes.
+          This project is intended solely for demonstrational purposes.
         </SubscribeCard>
       </div>
     </div>

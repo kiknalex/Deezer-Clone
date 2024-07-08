@@ -11,11 +11,10 @@ import { smallScreenHide } from "@/app/App.css";
 import { vars } from "@/app/theme.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import SubscribeCard from "./SubscribeCard/SubscribeCard";
-import { ButtonHoverableWithTooltip } from "../util-components/Buttons/ButtonHoverableWithTooltip";
 
 const Sidebar = () => {
   return (
-    <div className={`${sidebar}`}>
+    <aside className={`${sidebar}`}>
       <div
         className={sprinkles({
           display: "flex",
@@ -111,7 +110,7 @@ const Sidebar = () => {
           This project is intended solely for demonstrational purposes.
         </SubscribeCard>
       </div>
-    </div>
+    </aside>
   );
 };
 

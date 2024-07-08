@@ -21,7 +21,6 @@ interface CardImgLinkProps {
 }
 
 const CardImgLink = ({
-  // refactor hover to css
   imgSrc,
   linkSrc,
   alt,

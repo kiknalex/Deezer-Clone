@@ -1,12 +1,10 @@
 import { sprinkles } from "@/styles/sprinkles.css";
 import VolumeControl from "./VolumeControl/VolumeControl";
-import { RefObject } from "react";
+import { useContext } from "react";
+import { MusicContext, MusicContextType } from "@/app/App";
 
-interface AudioControlsProps {
-    audioRef: RefObject<HTMLAudioElement>;
-}
-
-const AudioControls = ({audioRef}: AudioControlsProps) => {
+const AudioControls = () => {
+  const { audioRef } = useContext(MusicContext) as MusicContextType;
   return (
     <div
       className={sprinkles({

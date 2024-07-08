@@ -6,9 +6,8 @@ import Marquee from "@/components/util-components/marquee/Marquee";
 
 const TrackPreview = ({ track }: { track: Track }) => {
   if (!track) {
-    return null; // Return null or a placeholder when track is undefined
+    return null;
   }
-  console.log(track);
   return (
     <div
       className={`${sprinkles({
@@ -27,7 +26,8 @@ const TrackPreview = ({ track }: { track: Track }) => {
           alt="Next track"
         />
       </div>
-      <div style={{minWidth: "0px"}}
+      <div
+        style={{ minWidth: "0px" }}
         className={`${sprinkles({
           display: "flex",
           placeItems: "center",
@@ -35,21 +35,21 @@ const TrackPreview = ({ track }: { track: Track }) => {
         })}`}
       >
         <Marquee key={track.title + track.artist.name}>
-        <a
-          href="#"
-          className={`${sprinkles({ fontSize: "font-size-2" })} ${linkHover}`}
-        >
-          {track.title}
-        </a>
-        <span className={sprinkles({paddingX: "size-1"})}>&#8226;</span>
-        <a
-          href="#"
-          className={`${sprinkles({
-            fontSize: "font-size-2",
-          })} ${linkHover}`}
-        >
-          {track.artist.name}
-        </a>
+          <a
+            href="#"
+            className={`${sprinkles({ fontSize: "font-size-2" })} ${linkHover}`}
+          >
+            {track.title}
+          </a>
+          <span className={sprinkles({ paddingX: "size-1" })}>&#8226;</span>
+          <a
+            href="#"
+            className={`${sprinkles({
+              fontSize: "font-size-2",
+            })} ${linkHover}`}
+          >
+            {track.artist.name}
+          </a>
         </Marquee>
       </div>
     </div>

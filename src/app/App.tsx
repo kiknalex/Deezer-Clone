@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { RefObject, createContext, useRef, useState } from "react";
 import { app } from "./App.css";
 import { darkTheme, lightTheme, loggedIn } from "./theme.css";
 
@@ -14,23 +14,27 @@ import { getTracksData } from "@/utils/fetchers";
 export type MusicContextType = {
   tracks: Track[];
   currentTrackIndex: number;
+  currentTracklist: string | null;
+  isPlaying: boolean;
+  audioRef: RefObject<HTMLAudioElement>;
   handleTracklistChange: (tracklist: string) => Promise<void>;
   handleTrackNext: () => void;
   handleTrackPrevious: () => void;
+  startPlay: () => void;
+  stopPlay: () => void;
+  togglePlay: () => void;
 };
-
 export const MusicContext = createContext<MusicContextType | null>(null);
 
 const App = () => {
   const loaderData = useLoaderData() as TrackData;
-  const [tracks, setTracks] = useState<Track[]>([]);
+  const [tracks, setTracks] = useState<Track[]>(loaderData.tracks.data);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    if (loaderData.tracks.data) {
-      setTracks(loaderData.tracks.data);
-    }
-  }, [loaderData]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
   };
@@ -41,6 +45,7 @@ const App = () => {
         (track: Track) => track.readable && track.preview
       );
       setTracks(filteredData);
+      setCurrentTracklist(tracklist);
     }
     setCurrentTrackIndex(0);
   };
@@ -54,18 +59,46 @@ const App = () => {
       setCurrentTrackIndex((cti) => cti - 1);
     }
   };
+  const stopPlay = () => {
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
+
+      audioElement.pause();
+      setIsPlaying(false);
+  };
+
+  const startPlay = () => {
+    if (!navigator.userActivation.hasBeenActive) return; // checks if user has interacted at least once with the document
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
+
+    audioElement.play();
+    setIsPlaying(true);
+  };
+  const togglePlay = () => {
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
+
+    isPlaying ? stopPlay() : startPlay();
+  };
   const contextValue = {
     tracks,
     currentTrackIndex,
+    currentTracklist,
+    isPlaying,
+    audioRef,
     handleTracklistChange,
     handleTrackNext,
     handleTrackPrevious,
+    startPlay,
+    stopPlay,
+    togglePlay,
   };
   return (
     <div className={`${app} ${darkMode ? darkTheme : lightTheme} ${loggedIn}`}>
       <Header handleDarkModeClick={handleDarkModeClick} />
       <MusicContext.Provider value={contextValue}>
-        {tracks.length > 0 && <Player tracks={tracks} />}
+        {tracks.length > 0 && <Player />}
         <Mainpage />
       </MusicContext.Provider>
       <Sidebar />

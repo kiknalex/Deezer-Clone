@@ -3,7 +3,7 @@ import { vars } from "./theme.css";
 import { mediaSize } from "@/styles/sizes.css";
 
 export const container = style({
-  paddingInline: 20,
+  padding: 24,
   marginInline: "auto",
   '@media': {
     [`screen and (min-width: ${mediaSize["size-xs"]})`]: { width: '716px' },
@@ -18,6 +18,7 @@ export const container = style({
 export const app = style({
   color: vars.colorsVars.textPrimary,
   backgroundColor: vars.colorsVars.background,
+  paddingBottom: "var(--player-height)",
 });
 
 export const smallScreenHide = style({
@@ -34,7 +35,7 @@ export const bigScreenHide = style({
     },
   },
 });
-globalStyle("h1, h2, h3, h4, h5, h6", {
+globalStyle("h1, h2, h3, h4, h5, h6, p, ul", {
   margin: "0",
 });
 globalStyle("a", {
@@ -44,8 +45,9 @@ globalStyle("a", {
 globalStyle("input[type='range']", {
   margin: "0",
 });
-globalStyle("p", {
-  margin: 0,
+globalStyle("ul", {
+  listStyle: "none",
+  padding: "0",
 });
 
 globalStyle("*, :after, :before", {

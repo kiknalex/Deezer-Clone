@@ -1,10 +1,13 @@
-import { Track } from "@/types/deezerApiTypes";
 import { imageSize } from "./TrackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { linkHover } from "../TrackPlaybackControls/TrackControls/TrackPreview/TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
+import { useContext } from "react";
+import { MusicContext, MusicContextType } from "@/app/App";
 
-const TrackInfo = ({ track }: { track: Track }) => {
+const TrackInfo = () => {
+  const { tracks, currentTrackIndex } = useContext(MusicContext) as MusicContextType;
+  const track = tracks[currentTrackIndex];
   return (
     <div
       className={`${sprinkles({
@@ -38,7 +41,13 @@ const TrackInfo = ({ track }: { track: Track }) => {
           </a>
         </Marquee>
         <Marquee key={track.title + track.artist.name}>
-          <a href="#" className={`${linkHover} ${sprinkles({fontSize: "font-size-2", color: "--gray-6"})}`}>
+          <a
+            href="#"
+            className={`${linkHover} ${sprinkles({
+              fontSize: "font-size-2",
+              color: "--gray-6",
+            })}`}
+          >
             {track.artist.name}
           </a>
         </Marquee>

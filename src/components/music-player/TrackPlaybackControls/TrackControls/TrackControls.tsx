@@ -4,25 +4,20 @@ import {
   commonButton,
 } from "@/components/util-components/Buttons/ButtonHoverableWithTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { Track } from "@/types/deezerApiTypes";
 import TrackPreview from "./TrackPreview/TrackPreview";
 import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
 
-interface TrackControlsProps {
-  togglePlay: () => void;
-  isPlaying: boolean;
-  tracks: Track[];
-  currentTrackId: number;
-}
 
-const TrackControls = ({
-  togglePlay,
-  isPlaying,
-  tracks,
-}: TrackControlsProps) => {
-  const { currentTrackIndex, handleTrackPrevious, handleTrackNext } =
-    useContext(MusicContext) as MusicContextType;
+const TrackControls = () => {
+  const {
+    tracks,
+    currentTrackIndex,
+    isPlaying,
+    togglePlay,
+    handleTrackPrevious,
+    handleTrackNext,
+  } = useContext(MusicContext) as MusicContextType;
   return (
     <div
       className={`${sprinkles({

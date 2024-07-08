@@ -7,21 +7,12 @@ import {
   RouterProvider,
   Route,
   createRoutesFromElements,
-  defer,
 } from "react-router-dom";
 import ChannelsGrid from "./components/main-page/explore/channels/ChannelsGrid.tsx";
 import ChannelGenreCards from "./components/main-page/explore/channels/channels-categories/ChannelCategoriesCards.tsx";
-import ChannelPage from "./components/main-page/explore/channel-page/ChannelPage.tsx";
-import { encodeForURL } from "./utils/helpers.ts";
-const proxy = "https://corsproxy.io/?";
-const defaultUrl = "https://api.deezer.com";
-const delay = (ms) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(null);
-    }, ms);
-  });
-};
+import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
+import { channelPageLoader } from "./utils/loaders.ts";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,38 +36,7 @@ const router = createBrowserRouter(
       <Route
         path="channels/:channelName"
         element={<ChannelPage />}
-        loader={async ({ params }) => {
-          const allGenres = await fetch(proxy + defaultUrl + "/genre").then(
-            (response) => response.json()
-          );
-          // Find the genre object that matches the encoded channel name
-          const genreObj = allGenres.data.find(
-            (genre) =>
-              encodeForURL(genre.name) === encodeForURL(params.channelName)
-          );
-          const id = genreObj.id;
-          const genreName = genreObj.name;
-          const genreRadios = fetch(
-            proxy + defaultUrl + `/genre/${id}/radios`
-          ).then((response) => response.json());
-          const genreArtists = fetch(
-            proxy + defaultUrl + `/genre/${id}/artists`
-          ).then((response) => response.json());
-          const editorialReleases = fetch(
-            proxy + defaultUrl + `/editorial/${id}/releases`
-          ).then((response) => response.json());
-          const delayLoad = delay(500);
-
-          return defer({
-            data: Promise.all([
-              genreRadios,
-              genreArtists,
-              editorialReleases,
-              delayLoad,
-            ]),
-            genreName
-          });
-        }}
+        loader={channelPageLoader}
       ></Route>
     </Route>
   )

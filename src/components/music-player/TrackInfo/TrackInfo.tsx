@@ -6,7 +6,9 @@ import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
 
 const TrackInfo = () => {
-  const { tracks, currentTrackIndex } = useContext(MusicContext) as MusicContextType;
+  const { tracks, currentTrackIndex } = useContext(
+    MusicContext
+  ) as MusicContextType;
   const track = tracks[currentTrackIndex];
   return (
     <div
@@ -18,7 +20,10 @@ const TrackInfo = () => {
     >
       <div>
         <img
-          src={track?.album?.cover_small ?? "/cover_default.jpg"}
+          src={
+            (track?.album?.cover_small || track?.album?.cover_medium) ??
+            "/cover_default.jpg"
+          }
           className={`${sprinkles({ marginRight: "size-3" })} ${imageSize}`}
           key={track.md5_image}
           width="56"

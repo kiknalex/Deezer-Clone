@@ -9,10 +9,10 @@ import {
 } from "@/components/main-page/playlist-card/PlaylistCard";
 import { container } from "@/app/App.css";
 import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
-import { genrePageLoaderData } from "@/utils/loaders";
+import { channelPageLoaderData } from "@/utils/loaders";
 
 const ChannelPage = () => {
-  const { data } = useLoaderData() as genrePageLoaderData;
+  const { data } = useLoaderData() as channelPageLoaderData;
 
   return (
     <div>

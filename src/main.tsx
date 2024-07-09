@@ -11,13 +11,15 @@ import {
 import ChannelsGrid from "./components/main-page/explore/channels/ChannelsGrid.tsx";
 import ChannelGenreCards from "./components/main-page/explore/channels/channels-categories/ChannelCategoriesCards.tsx";
 import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
-import { channelPageLoader } from "./utils/loaders.ts";
+import { channelPageLoader, homePageLoader } from "./utils/loaders.ts";
+import HomePage from "./app/pages/home-page/HomePage.tsx";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    
     <Route
-      path="/"
+      path=""
       loader={async () => {
         return fetch(
           "https://corsproxy.io/?https://api.deezer.com/album/302127"
@@ -25,6 +27,7 @@ const router = createBrowserRouter(
       }}
       element={<App />}
     >
+      <Route path="" loader={homePageLoader} element={<HomePage />}></Route>
       <Route
         path="channels/explore"
         element={

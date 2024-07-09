@@ -1,7 +1,8 @@
 import { encodeForURL } from "@/utils/helpers.ts";
-import { defer } from "react-router-dom";
+import { LoaderFunction, LoaderFunctionArgs, defer } from "react-router-dom";
 import { getAllGenresPromise } from "./fetchers";
 import {
+  Album,
   Artist,
   Genre,
   Playlist,
@@ -18,7 +19,7 @@ const delay = (ms: number) => {
     }, ms);
   });
 };
-export interface genrePageLoaderData {
+export interface channelPageLoaderData {
   data: {
     genreRadios: { data: Radio[] };
     genreArtists: { data: Artist[] };
@@ -28,11 +29,8 @@ export interface genrePageLoaderData {
   };
 }
 
-export const channelPageLoader = async ({
-  params,
-}: {
-  params: { channelName: string };
-}) => {
+
+export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
   const genreNameWithIdPromise = getAllGenresPromise();
   return defer({
     data: genreNameWithIdPromise.then(async (nameWithIdData) => {
@@ -81,8 +79,6 @@ export const channelPageLoader = async ({
         delayPromise,
       ]);
 
-      console.log("Fetched Data:", { radios, artists, releases, playlists });
-
       // Return the combined data
       return {
         genreRadios: radios,
@@ -91,6 +87,38 @@ export const channelPageLoader = async ({
         chartPlaylists: playlists,
         genreName,
       };
+    }),
+  });
+};
+
+
+
+
+export const homePageLoader = () => {
+  const editorialSelectionPromise = fetch(
+    proxy + defaultUrl + "/editorial/0/selection"
+  ).then((response) => response.json());
+  const editorialChartsPromise = fetch(
+    proxy + defaultUrl + "/editorial/0/charts"
+  ).then((response) => response.json());
+  const editorialReleasesPromise = fetch(
+    proxy + defaultUrl + "/editorial/0/releases"
+  ).then((response) => response.json());
+  const topArtistsPromise = fetch(proxy + defaultUrl + "/chart/0/artists").then(
+    (response) => response.json()
+  );
+
+  const delayPromise = delay(800);
+  return defer({
+    data: Promise.all([
+      editorialSelectionPromise,
+      editorialChartsPromise,
+      editorialReleasesPromise,
+      topArtistsPromise,
+      delayPromise,
+    ]).then((values) => {
+      const [selection, charts, releases, artists] = values;
+      return { selection, charts, releases, artists };
     }),
   });
 };

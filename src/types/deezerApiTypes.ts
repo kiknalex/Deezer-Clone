@@ -73,6 +73,7 @@ export interface Artist {
 export interface Album {
   id: number;
   title: string;
+  artist: Artist;
   cover: string;
   cover_small: string;
   cover_medium: string;
@@ -80,7 +81,7 @@ export interface Album {
   cover_xl: string;
   md5_image: string;
   tracklist: string;
-  type: string;
+  type: "album";
 }
 
 export interface Genre {

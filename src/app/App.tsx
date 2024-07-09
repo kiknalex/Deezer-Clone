@@ -1,4 +1,4 @@
-import { RefObject, createContext, useRef, useState } from "react";
+import { RefObject, createContext, useEffect, useRef, useState } from "react";
 import { app } from "./App.css";
 import { darkTheme, lightTheme, loggedIn } from "./theme.css";
 
@@ -9,7 +9,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useLoaderData } from "react-router-dom";
 import Header from "@/components/header/Header";
 import Mainpage from "@/components/main-page/Mainpage";
-import { getTracksData } from "@/utils/fetchers";
+import { getTracklistData } from "@/utils/fetchers";
 
 export type MusicContextType = {
   tracks: Track[];
@@ -32,14 +32,21 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
   const [darkMode, setDarkMode] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
   };
+  useEffect(() => {
+    // Initialize Deezer SDK
+    window.DZ.init({
+      channelUrl: "http://localhost:5173/",
+    });
+  }, []);
+
   const handleTracklistChange = async (tracklist: string) => {
-    const newTracks = await getTracksData(tracklist);
+    const newTracks = await getTracklistData(tracklist);
     if (newTracks) {
       const filteredData = newTracks.data.filter(
         (track: Track) => track.readable && track.preview
@@ -63,12 +70,13 @@ const App = () => {
     const audioElement = audioRef.current;
     if (!audioElement) return;
 
-      audioElement.pause();
-      setIsPlaying(false);
+    audioElement.pause();
+    setIsPlaying(false);
   };
 
   const startPlay = () => {
     if (!navigator.userActivation.hasBeenActive) return; // checks if user has interacted at least once with the document
+
     const audioElement = audioRef.current;
     if (!audioElement) return;
 

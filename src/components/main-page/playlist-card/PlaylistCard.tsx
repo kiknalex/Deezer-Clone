@@ -16,7 +16,7 @@ interface PlaylistCardProps extends CardProps {
 
 interface AlbumCardProps extends CardProps {
   artist: Artist;
-  releaseDate: string;
+  releaseDate?: string;
 }
 
 export const PlaylistCard = ({
@@ -51,7 +51,13 @@ export const ArtistCard = ({ imgSrc, title, tracklist }: CardProps) => {
         alignItems: "center",
       })}
     >
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} shape="circle" alt={title} tracklist={tracklist} />
+      <CardImgLink
+        imgSrc={imgSrc}
+        linkSrc={"/"}
+        shape="circle"
+        alt={title}
+        tracklist={tracklist}
+      />
       <Link
         to=""
         className={`${sprinkles({
@@ -79,7 +85,12 @@ export const AlbumCard = ({
         flexDirection: "column",
       })}
     >
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} alt={title} tracklist={tracklist} />
+      <CardImgLink
+        imgSrc={imgSrc}
+        linkSrc={"/"}
+        alt={title}
+        tracklist={tracklist}
+      />
       <Link
         to=""
         className={`${sprinkles({
@@ -95,7 +106,7 @@ export const AlbumCard = ({
           {artist.name}
         </Link>
       </p>
-      <p className={artistLink}>Released on {releaseDate}</p>
+      {releaseDate && <p className={artistLink}>Released on {releaseDate}</p>}
     </div>
   );
 };

@@ -14,6 +14,9 @@ import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
 import { channelPageLoader, homePageLoader } from "./utils/loaders.ts";
 import HomePage from "./app/pages/home-page/HomePage.tsx";
 
+window.DZ.init({
+  channelUrl: "http://localhost:5173/",
+});
 
 const router = createBrowserRouter(
   createRoutesFromElements(

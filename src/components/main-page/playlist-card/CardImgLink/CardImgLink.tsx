@@ -31,15 +31,16 @@ const CardImgLink = ({
   const { currentTracklist, isPlaying, handleTracklistChange, togglePlay } =
     useContext(MusicContext) as MusicContextType;
   const shapeClass = shape === "square" ? squareImg : circleImg;
-
+  const tracklistQuery = tracklist.replace("https://api.deezer.com", "");
+  
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       navigate(linkSrc);
     }
   };
   const handlePlayClick = async () => {
-    currentTracklist !== tracklist
-      ? handleTracklistChange(tracklist)
+    currentTracklist !== tracklistQuery
+      ? handleTracklistChange(tracklistQuery)
       : togglePlay();
   };
   return (
@@ -60,18 +61,22 @@ const CardImgLink = ({
       <ul className={`${shape === "square" ? listButtons : listButtonsCenter}`}>
         <li
           className={
-            isPlaying && currentTracklist === tracklist ? buttonVisible : ""
+            isPlaying && currentTracklist === tracklistQuery
+              ? buttonVisible
+              : ""
           }
         >
           <button
             onClick={handlePlayClick}
             aria-label="Play"
             className={`${buttonAction} ${
-              isPlaying && currentTracklist === tracklist ? buttonVisible : ""
+              isPlaying && currentTracklist === tracklistQuery
+                ? buttonVisible
+                : ""
             }`}
           >
             <span className={buttonIcon}>
-              {isPlaying && currentTracklist === tracklist ? (
+              {isPlaying && currentTracklist === tracklistQuery ? (
                 <i className="fa-solid fa-pause"></i>
               ) : (
                 <i className={"fa-solid fa-play"}></i>

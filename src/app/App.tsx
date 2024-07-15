@@ -9,7 +9,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useLoaderData } from "react-router-dom";
 import Header from "@/components/header/Header";
 import Mainpage from "@/components/main-page/Mainpage";
-import { getTracklistData } from "@/utils/fetchers";
+import { getTrackData, getTracklistData } from "@/utils/fetchers";
 
 export type MusicContextType = {
   tracks: Track[];
@@ -38,12 +38,6 @@ const App = () => {
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
   };
-  useEffect(() => {
-    // Initialize Deezer SDK
-    window.DZ.init({
-      channelUrl: "http://localhost:5173/",
-    });
-  }, []);
 
   const handleTracklistChange = async (tracklist: string) => {
     const newTracks = await getTracklistData(tracklist);

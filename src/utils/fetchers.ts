@@ -1,6 +1,3 @@
-const proxy = "https://corsproxy.io/?";
-const defaultUrl = "https://api.deezer.com";
-
 export const sdkFetchPromise = (endpoint: string) => {
   return new Promise((resolve, reject) => {
     DZ.api(endpoint, (response) => {
@@ -20,7 +17,6 @@ export const getAllGenresPromise = async () => {
 
 export const getTracklistData = async (tracklist: string) => {
   const data = sdkFetchPromise(tracklist);
-  console.log(data);
   return data;
 };
 

@@ -1,20 +1,30 @@
 const proxy = "https://corsproxy.io/?";
 const defaultUrl = "https://api.deezer.com";
 
+export const sdkFetchPromise = (endpoint: string) => {
+  return new Promise((resolve, reject) => {
+    DZ.api(endpoint, (response) => {
+      if (response.error) {
+        reject(response.error);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+};
+
 export const getAllGenresPromise = async () => {
-  const allGenresResponse = await fetch(proxy + defaultUrl + "/genre");
-  const allGenresData = allGenresResponse.json();
+  const allGenresData = sdkFetchPromise("/genre");
   return allGenresData;
 };
 
 export const getTracklistData = async (tracklist: string) => {
-  const response = await fetch(proxy + tracklist);
-  const data = await response.json();
+  const data = sdkFetchPromise(tracklist);
+  console.log(data);
   return data;
 };
 
 export const getTrackData = async (id: number) => {
-  const response = await fetch(proxy + defaultUrl + `/track/${id}`);
-  const data = await response.json();
+  const data = await sdkFetchPromise(`/track/${id}`);
   return data;
 };

@@ -18,8 +18,8 @@ const ChannelCard = ({ to, children }: ChannelCardProps) => {
       (hue >= 30 && hue <= 60) || // Exclude hues from 30 to 60 (yellow-green to yellow)
       (hue >= 90 && hue <= 150) || // Exclude hues from 90 to 150 (green to cyan)
       (hue >= 170 && hue <= 180) || // Exclude hues from 170 to 180 (cyan to blue)
-      lightness < 20 ||
-      lightness > 55 || // Exclude very dark and very light colors
+      lightness < 30 ||
+      lightness > 60 || // Exclude very dark and very light colors
       (hue >= 50 && hue <= 70) // Exclude very yellow
     );
 

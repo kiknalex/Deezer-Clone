@@ -12,7 +12,7 @@ export const searchInput = style({
   background: vars.colorsVars.linkHover,
   width: "100%",
   height: "100%",
-  border: "3px solid transparent",
+  border: "2px solid transparent",
   borderRadius: "9px",
   paddingInlineStart: sizePx["size-11"],
   paddingInlineEnd: sizePx["size-11"],

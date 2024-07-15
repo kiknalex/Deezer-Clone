@@ -41,7 +41,8 @@ const App = () => {
 
   const handleTracklistChange = async (tracklist: string) => {
     const newTracks = await getTracklistData(tracklist);
-    if (newTracks) {
+    console.log(newTracks);
+    if (newTracks.data.length > 0) {
       const filteredData = newTracks.data.filter(
         (track: Track) => track.readable && track.preview
       );

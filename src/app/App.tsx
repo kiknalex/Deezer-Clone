@@ -48,8 +48,9 @@ const App = () => {
       );
       setTracks(filteredData);
       setCurrentTracklist(tracklist);
+      setCurrentTrackIndex(0);
     }
-    setCurrentTrackIndex(0);
+    
   };
   const handleTrackNext = () => {
     if (currentTrackIndex < tracks.length - 1) {

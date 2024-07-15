@@ -1,12 +1,14 @@
 import { encodeForURL } from "@/utils/helpers.ts";
 import { LoaderFunctionArgs, defer } from "react-router-dom";
-import { getAllGenresPromise, sdkFetchPromise } from "./fetchers";
+import { getAllGenresPromise, sdkFetch } from "./fetchers";
 import {
+  Album,
   Artist,
   Genre,
   Playlist,
   Radio,
   Release,
+  Track,
 } from "@/types/deezerApiTypes";
 
 const delay = (ms: number) => {
@@ -30,15 +32,6 @@ export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
   const genreNameWithIdPromise = getAllGenresPromise();
   return defer({
     data: genreNameWithIdPromise.then(async (nameWithIdData) => {
-      // Check if the data contains the genres array
-      if (
-        !nameWithIdData ||
-        !nameWithIdData.data ||
-        !Array.isArray(nameWithIdData.data)
-      ) {
-        throw new Error("Invalid genre data");
-      }
-
       // Find the genre object within the data array
       const genreObj = nameWithIdData.data.find(
         (genre: Genre) =>
@@ -53,17 +46,14 @@ export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
       const genreId = genreObj.id;
       const genreName = genreObj.name;
 
-      // Fetch the data using the genreId
-      const genreRadiosPromise = sdkFetchPromise(`/genre/${genreId}/radios`);
-      const genreArtistsPromise = sdkFetchPromise(`/genre/${genreId}/artists`);
-      const editorialReleasesPromise = sdkFetchPromise(
+      const genreRadiosPromise = sdkFetch(`/genre/${genreId}/radios`);
+      const genreArtistsPromise = sdkFetch(`/genre/${genreId}/artists`);
+      const editorialReleasesPromise = sdkFetch(
         `/editorial/${genreId}/releases`
       );
-      const chartPlaylistsPromise = sdkFetchPromise(
-        `/chart/${genreId}/playlists`
-      );
+      const chartPlaylistsPromise = sdkFetch(`/chart/${genreId}/playlists`);
       const delayPromise = delay(800); // wait at least 0.8s to avoid jagged transition between spinner and page
-      // Wait for all promises to resolve
+
       const [radios, artists, releases, playlists] = await Promise.all([
         genreRadiosPromise,
         genreArtistsPromise,
@@ -84,11 +74,20 @@ export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
   });
 };
 
+export interface homePageLoaderData {
+  data: {
+    selection: Album[];
+    charts: Track[];
+    releases: Album[];
+    artists: Artist[];
+  };
+}
+
 export const homePageLoader = () => {
-  const editorialSelectionPromise = sdkFetchPromise("/editorial/0/selection");
-  const editorialChartsPromise = sdkFetchPromise("/editorial/0/charts");
-  const editorialReleasesPromise = sdkFetchPromise("/editorial/0/releases");
-  const topArtistsPromise = sdkFetchPromise("/chart/0/artists");
+  const editorialSelectionPromise = sdkFetch("/editorial/0/selection");
+  const editorialChartsPromise = sdkFetch("/editorial/0/charts");
+  const editorialReleasesPromise = sdkFetch("/editorial/0/releases");
+  const topArtistsPromise = sdkFetch("/chart/0/artists");
 
   const delayPromise = delay(800);
   return defer({
@@ -103,4 +102,18 @@ export const homePageLoader = () => {
       return { selection, charts, releases, artists };
     }),
   });
+};
+
+export interface searchPageLoaderData {
+  artists: { data: Artist[] };
+  albums: { data: Album[] };
+}
+
+export const searchPageLoader = async ({ params }: LoaderFunctionArgs) => {
+  const artistsData = await sdkFetch(`/search/artist?q=${params.searchQuery}`);
+  const albumsData = await sdkFetch(`/search/album?q=${params.searchQuery}`);
+  return {
+    artists: artistsData,
+    albums: albumsData,
+  };
 };

@@ -6,14 +6,22 @@ import {
   searchInput,
   searchWrapper,
 } from "./Search.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDebounce } from "@/hooks/useDebounce";
 
 const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    if (!pathname.includes("/search")) {
+      setInputValue("");
+    }
+  }, [pathname]);
+
   const debouncedNavigate = useDebounce((value) => {
     navigate("/search/" + value);
   }, 500);

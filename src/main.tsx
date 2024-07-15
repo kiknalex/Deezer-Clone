@@ -11,8 +11,13 @@ import {
 import ChannelsGrid from "./components/main-page/explore/channels/ChannelsGrid.tsx";
 import ChannelGenreCards from "./components/main-page/explore/channels/channels-categories/ChannelCategoriesCards.tsx";
 import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
-import { channelPageLoader, homePageLoader } from "./utils/loaders.ts";
+import {
+  channelPageLoader,
+  homePageLoader,
+  searchPageLoader,
+} from "./utils/loaders.ts";
 import HomePage from "./app/pages/home-page/HomePage.tsx";
+import SearchPage from "./app/pages/search-page/SearchPage.tsx";
 
 window.DZ.init({
   channelUrl: "http://localhost:5173/",
@@ -20,7 +25,6 @@ window.DZ.init({
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    
     <Route
       path=""
       loader={async () => {
@@ -43,6 +47,11 @@ const router = createBrowserRouter(
         path="channels/:channelName"
         element={<ChannelPage />}
         loader={channelPageLoader}
+      ></Route>
+      <Route
+        path="search/:searchQuery"
+        element={<SearchPage />}
+        loader={searchPageLoader}
       ></Route>
     </Route>
   )

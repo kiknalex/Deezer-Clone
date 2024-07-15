@@ -7,11 +7,12 @@ import {
 import Carousel from "@/components/util-components/carousel/Carousel";
 import LoaderSpin from "@/components/util-components/loader-spin/LoaderSpin";
 import { Album, Artist, Playlist, Release } from "@/types/deezerApiTypes";
+import { homePageLoaderData } from "@/utils/loaders";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
-  const data = useLoaderData();
+  const data = useLoaderData() as homePageLoaderData;
   return (
     <div>
       <Suspense fallback={<LoaderSpin />}>
@@ -71,7 +72,6 @@ const HomePage = () => {
                     ))}
                   />
                 </section>
-                <section></section>
               </>
             );
           }}

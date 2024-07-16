@@ -23,7 +23,7 @@ const Sidebar = () => {
           paddingBottom: "size-5",
         })}
       >
-        <Link to="#" className={`${link} ${sprinkles({ paddingX: "size-4" })}`}>
+        <Link to="/" className={`${link} ${sprinkles({ paddingX: "size-4" })}`}>
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +65,7 @@ const Sidebar = () => {
           })}`}
         >
           <NavLink
+            to="/"
             className={`${sprinkles({
               display: "flex",
               alignItems: "center",
@@ -85,7 +86,7 @@ const Sidebar = () => {
             </h2>
           </NavLink>
           <NavLink
-          to="/channels/explore"
+            to="/channels/explore"
             className={`${sprinkles({
               display: "flex",
               alignItems: "center",

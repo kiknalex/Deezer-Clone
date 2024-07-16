@@ -1,9 +1,9 @@
 import { vars } from "@/app/theme.css";
+import colors, { Purple } from "@/styles/colors.css";
 import { fontSize } from "@/styles/typography.css";
 import { createVar, style } from "@vanilla-extract/css";
 
 export const sidebarWidth = createVar();
-
 
 export const sidebar = style({
   position: "fixed",
@@ -29,16 +29,22 @@ export const link = style({
       justifyContent: "center",
     },
   },
-})
+});
 
 export const navLink = style({
   borderRadius: "9px",
   transition: "background-color 0.150s",
+
   ":hover": {
     backgroundColor: vars.colorsVars.linkHover,
   },
   ":active": {
-    backgroundColor: vars.colorsVars.linkActive
+    backgroundColor: vars.colorsVars.linkActive,
+  },
+  selectors: {
+    [`&.active `]: {
+      color: vars.colorsVars.buttonImportant,
+    },
   },
   "@media": {
     "screen and (max-width: 1160px)": {
@@ -46,7 +52,7 @@ export const navLink = style({
       justifyContent: "center",
     },
   },
-})
+});
 export const deezerHeartLogo = style({
   height: "32px",
   "@media": {
@@ -62,7 +68,7 @@ export const deezerTextLogo = style({
       display: "none",
     },
   },
-})
+});
 
 export const navLogoSpan = style({
   width: "24px",
@@ -70,4 +76,9 @@ export const navLogoSpan = style({
   color: vars.colorsVars.textPrimary,
   display: "flex",
   justifyContent: "center",
-})
+  selectors: {
+    [`${navLink}.active &`]: {
+      color: vars.colorsVars.buttonImportant,
+    },
+  },
+});

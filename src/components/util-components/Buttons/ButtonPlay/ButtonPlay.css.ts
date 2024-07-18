@@ -12,3 +12,9 @@ export const baseButton = style({
   cursor: "pointer",
   transition: "opacity 0.3s, background-color 0.3s",
 });
+
+
+export const buttonIcon = style({
+    color: "white",
+    fontSize: "1em",
+})

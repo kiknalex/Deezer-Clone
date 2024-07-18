@@ -1,5 +1,4 @@
-import { sprinkles } from "@/styles/sprinkles.css";
-import { baseButton } from "./ButtonPlay.css";
+import { baseButton, buttonIcon } from "./ButtonPlay.css";
 
 interface ButtonPlayProps {
     isPlaying: boolean;
@@ -12,19 +11,13 @@ const ButtonPlay = ({ isPlaying, className = baseButton, onClick }: ButtonPlayPr
     <button onClick={onClick} className={className}>
       {isPlaying ? (
         <span
-          className={`${sprinkles({
-            color: "white",
-            fontSize: "font-size-4",
-          })}`}
+          className={`${buttonIcon}`}
         >
           <i className="fa-solid fa-pause"></i>
         </span>
       ) : (
         <span
-          className={`${sprinkles({
-            color: "white",
-            fontSize: "font-size-4",
-          })}`}
+          className={`${buttonIcon}`}
         >
           <i className={"fa-solid fa-play"}></i>
         </span>

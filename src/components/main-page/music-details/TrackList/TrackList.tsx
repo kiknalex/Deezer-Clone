@@ -35,6 +35,7 @@ const TrackList = ({ musicData }) => {
       </div>
       <ul>
         {tracks.map((track, index: number) => (
+          track.preview &&
           <Track
             track={track}
             index={index + 1}

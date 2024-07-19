@@ -29,10 +29,11 @@ export const MusicContext = createContext<MusicContextType | null>(null);
 const App = () => {
   const loaderData = useLoaderData() as TrackData;
   const [tracks, setTracks] = useState<Track[]>(loaderData.tracks.data);
+  console.log(tracks);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  
+
   const [darkMode, setDarkMode] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const handleDarkModeClick = () => {
@@ -44,13 +45,12 @@ const App = () => {
     console.log(newTracks);
     if (newTracks.data.length > 0) {
       const filteredData = newTracks.data.filter(
-        (track: Track) => track.readable && track.preview
+        (track: Track) => track.preview
       );
       setTracks(filteredData);
       setCurrentTracklist(tracklist);
       setCurrentTrackIndex(0);
     }
-    
   };
   const handleTrackNext = () => {
     if (currentTrackIndex < tracks.length - 1) {

@@ -3,6 +3,7 @@ import {
   addedDate,
   albumLink,
   artistLink,
+  buttonHidden,
   buttonImage,
   buttonPlay,
   durationInfo,
@@ -15,6 +16,8 @@ import {
 import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";
 import { Link } from "react-router-dom";
 import { formatTime, unixToDateString } from "@/utils/helpers";
+import { useContext } from "react";
+import { MusicContext, MusicContextType } from "@/app/App";
 
 const Track = ({
   track,
@@ -25,6 +28,10 @@ const Track = ({
   showAddedDate,
   showDuration,
 }) => {
+  const { isPlaying, tracks, currentTrackIndex } = useContext(
+    MusicContext
+  ) as MusicContextType;
+  const currentTrack = tracks[currentTrackIndex];
   return (
     <div className={trackContainer}>
       <div className={trackInfo}>
@@ -37,7 +44,12 @@ const Track = ({
               height="50"
               alt=""
             />
-            <ButtonPlay className={buttonPlay} />
+            <ButtonPlay
+              className={`${buttonPlay} ${
+                track.id !== currentTrack.id && buttonHidden
+              }`}
+              isPlaying={isPlaying && track.id === currentTrack.id}
+            />
           </div>
           <button className={trackNameButton}>
             {index}. {track.title}

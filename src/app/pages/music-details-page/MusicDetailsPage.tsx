@@ -18,13 +18,13 @@ import TrackList from "@/components/main-page/music-details/TrackList/TrackList"
 
 const MusicDetailsPage = () => {
   const data = useLoaderData();
-  
+
   return (
     <Suspense fallback={<LoaderSpin />}>
       <Await resolve={data.allPromises}>
         {(musicData) => (
           <>
-          {console.log(musicData)}
+            {console.log(musicData)}
             <section className={`${container} ${headingContainer}`}>
               <div className={mainImageContainer}>
                 <img
@@ -61,7 +61,10 @@ const MusicDetailsPage = () => {
                         alt="artist"
                       />
                     </Link>
-                    <Link to={`/artist/${musicData.artist.id}`} className={creatorBadgeLink}>
+                    <Link
+                      to={`/artist/${musicData.artist.id}`}
+                      className={creatorBadgeLink}
+                    >
                       {musicData.artist.name}
                     </Link>
                   </div>
@@ -79,14 +82,16 @@ const MusicDetailsPage = () => {
             <div className={container}>
               <ActionPanel tracklist={musicData.tracklist} />
             </div>
-            {musicData && <div className={container}>
-               <TrackList musicData={musicData} />
-            </div>}
+            {musicData && (
+              <div className={container}>
+                <TrackList musicData={musicData} />
+              </div>
+            )}
           </>
         )}
-      </Await> 
+      </Await>
     </Suspense>
-  );// artistColumn, albumColumn, timeAddedColumn
+  );
 };
 
 export default MusicDetailsPage;

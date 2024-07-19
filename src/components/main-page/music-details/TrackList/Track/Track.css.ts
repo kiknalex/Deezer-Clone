@@ -35,8 +35,10 @@ export const buttonImage = style({
   width: "40px",
   height: "auto",
 });
-export const buttonPlay = style({
+export const buttonHidden = style({
   visibility: "hidden",
+})
+export const buttonPlay = style({
   position: "absolute",
   selectors: {
     [`${trackContainer}:hover &`]: {
@@ -44,7 +46,6 @@ export const buttonPlay = style({
     },
   },
 });
-
 const link = style({
   cursor: "pointer",
   ":hover": {

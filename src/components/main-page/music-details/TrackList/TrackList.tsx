@@ -1,5 +1,4 @@
-import { sprinkles } from "@/styles/sprinkles.css";
-import Track from "./Track/Track";
+import TrackRow from "./Track/TrackRow";
 import {
   addedInfo,
   albumInfo,
@@ -36,7 +35,7 @@ const TrackList = ({ musicData }) => {
       <ul>
         {tracks.map((track, index: number) => (
           track.preview &&
-          <Track
+          <TrackRow
             track={track}
             index={index + 1}
             key={track.id}

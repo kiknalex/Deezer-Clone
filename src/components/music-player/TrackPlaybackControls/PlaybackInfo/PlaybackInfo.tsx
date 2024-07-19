@@ -8,6 +8,7 @@ import {
 import { sprinkles } from "@/styles/sprinkles.css";
 import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
 import { MusicContext, MusicContextType } from "@/app/App";
+import { formatTime } from "@/utils/helpers";
 
 const PlaybackInfo = () => {
   const [playedTime, setPlayedTime] = useState(0);
@@ -24,19 +25,7 @@ const PlaybackInfo = () => {
   }, [audioElement]);
   useSubscribeBrowserEvent(audioRef, handleTimeUpdate, "timeupdate");
 
-  const formatTime = (time: number) => {
-    // format: 00:00
-    if (isNaN(time)) {
-      return "00:00";
-    }
-    const minutes = Math.floor(time / 60)
-      .toString()
-      .padStart(2, "0");
-    const seconds = Math.floor(time % 60)
-      .toString()
-      .padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  };
+  
 
   const handleMouseMove = (e: React.MouseEvent<HTMLInputElement>) => {
     // calculate current time hover box position

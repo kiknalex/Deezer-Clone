@@ -100,7 +100,7 @@ const App = () => {
   };
   return (
     <div className={`${app} ${darkMode ? darkTheme : lightTheme} ${loggedIn}`}>
-      <Header handleDarkModeClick={handleDarkModeClick} />
+      <Header onClick={handleDarkModeClick} darkMode={darkMode} />
       <MusicContext.Provider value={contextValue}>
         {tracks.length > 0 && <Player />}
         <Mainpage />

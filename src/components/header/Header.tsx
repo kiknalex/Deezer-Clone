@@ -1,12 +1,38 @@
 import { sprinkles } from "@/styles/sprinkles.css";
-import { headerStyle } from "./Header.css";
+import { darkmodeButton, headerStyle } from "./Header.css";
 import Search from "./search/Search";
 
-const Header = ({ handleDarkModeClick }) => {
+const Header = ({
+  darkMode,
+  onClick,
+}: {
+  darkMode: boolean;
+  onClick: () => void;
+}) => {
   return (
-    <header className={`${sprinkles({ display: "flex", alignItems: "center", padding: "size-6" })} ${headerStyle}`}>
+    <header
+      className={`${sprinkles({
+        display: "flex",
+        alignItems: "center",
+        padding: "size-6",
+      })} ${headerStyle}`}
+    >
       <Search />
-      <button onClick={handleDarkModeClick} className={sprinkles({marginRight: "size-3"})}>dark mode</button>
+      <button
+        onClick={onClick}
+        className={darkmodeButton}
+        aria-label={`${darkMode ? "Dark" : "Light"} mode`}
+      >
+        {darkMode ? (
+          <span>
+            <i className="fa-regular fa-sun"></i>
+          </span>
+        ) : (
+          <span>
+            <i className="fa-regular fa-moon"></i>
+          </span>
+        )}
+      </button>
     </header>
   );
 };

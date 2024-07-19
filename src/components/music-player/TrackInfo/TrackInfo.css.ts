@@ -8,9 +8,6 @@ export const imageSize = style({
   height: "auto",
 });
 
-
-
-
 export const musicTrack = style({
   display: "flex",
   flexDirection: "column",

@@ -1,5 +1,4 @@
 import { vars } from "@/app/theme.css";
-import colors, { Purple } from "@/styles/colors.css";
 import { fontSize } from "@/styles/typography.css";
 import { createVar, style } from "@vanilla-extract/css";
 

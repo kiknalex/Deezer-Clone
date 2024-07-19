@@ -15,7 +15,7 @@ const Search = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     if (!pathname.includes("/search")) {
       setInputValue("");

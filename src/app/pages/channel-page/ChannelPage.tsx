@@ -6,13 +6,13 @@ import {
   PlaylistCard,
   ArtistCard,
   AlbumCard,
-} from "@/components/main-page/playlist-card/PlaylistCard";
+} from "@/components/main-page/music-card/MusicCard";
 import { container } from "@/app/App.css";
 import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
-import { channelPageLoaderData } from "@/utils/loaders";
+import { channelLoaderData } from "@/utils/loaders";
 
 const ChannelPage = () => {
-  const { data } = useLoaderData() as channelPageLoaderData;
+  const { data } = useLoaderData() as channelLoaderData;
 
   return (
     <div>
@@ -36,6 +36,7 @@ const ChannelPage = () => {
                       title={playlist.title}
                       numberOfTracks={playlist.nb_tracks}
                       tracklist={playlist.tracklist}
+                      id={playlist.id}
                     />
                   ))}
                 />
@@ -48,6 +49,7 @@ const ChannelPage = () => {
                       imgSrc={artist.picture_medium}
                       title={artist.name}
                       tracklist={artist.tracklist}
+                      id={artist.id}
                     />
                   ))}
                 />
@@ -62,6 +64,7 @@ const ChannelPage = () => {
                       artist={release.artist}
                       releaseDate={release.release_date}
                       tracklist={release.tracklist}
+                      id={release.id}
                     />
                   ))}
                 />

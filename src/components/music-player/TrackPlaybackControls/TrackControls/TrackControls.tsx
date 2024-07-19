@@ -7,7 +7,7 @@ import { sprinkles } from "@/styles/sprinkles.css";
 import TrackPreview from "./TrackPreview/TrackPreview";
 import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
-
+import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";
 
 const TrackControls = () => {
   const {
@@ -36,27 +36,11 @@ const TrackControls = () => {
           <i className="fa-solid fa-backward-step"></i>
         </span>
       </ButtonHoverableWithTooltip>
-      <button onClick={togglePlay} className={`${playButton} `}>
-        {isPlaying ? (
-          <span
-            className={`${sprinkles({
-              color: "white",
-              fontSize: "font-size-4",
-            })}`}
-          >
-            <i className="fa-solid fa-pause"></i>
-          </span>
-        ) : (
-          <span
-            className={`${sprinkles({
-              color: "white",
-              fontSize: "font-size-4",
-            })}`}
-          >
-            <i className={"fa-solid fa-play"}></i>
-          </span>
-        )}
-      </button>
+      <ButtonPlay
+        className={playButton}
+        onClick={togglePlay}
+        isPlaying={isPlaying}
+      />
       <ButtonHoverableWithTooltip
         onClick={handleTrackNext}
         tooltipInteractive={true}

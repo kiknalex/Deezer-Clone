@@ -14,7 +14,7 @@ const Player = () => {
   const [audioReady, setAudioReady] = useState(false);
   const { tracks, audioRef, currentTrackIndex, startPlay, handleTrackNext } =
     useContext(MusicContext) as MusicContextType;
-
+  console.log(tracks);
   const handleLoadedData = () => {
     if (audioRef.current && audioRef.current.readyState > 2) {
       setAudioReady(true);

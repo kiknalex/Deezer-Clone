@@ -4,16 +4,16 @@ import ChannelGenreCards from "@/components/main-page/explore/channels/channels-
 import {
   AlbumCard,
   ArtistCard,
-} from "@/components/main-page/playlist-card/PlaylistCard";
+} from "@/components/main-page/music-card/MusicCard";
 import Carousel from "@/components/util-components/carousel/Carousel";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { Album, Artist } from "@/types/deezerApiTypes";
-import { searchPageLoaderData } from "@/utils/loaders";
+import { SearchLoaderData } from "@/utils/loaders";
 import { useLoaderData, useParams } from "react-router-dom";
 
 const SearchPage = () => {
   const params = useParams();
-  const data = useLoaderData() as searchPageLoaderData;
+  const data = useLoaderData() as SearchLoaderData;
   const artists = data.artists.data;
   const albums = data.albums.data;
   console.log(artists);
@@ -46,6 +46,7 @@ const SearchPage = () => {
                 imgSrc={album.cover_medium}
                 artist={album.artist}
                 tracklist={album.tracklist}
+                id={album.id}
               />
             ))}
           />

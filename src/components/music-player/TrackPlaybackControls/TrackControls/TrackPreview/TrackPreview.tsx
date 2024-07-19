@@ -3,6 +3,7 @@ import { sprinkles } from "@/styles/sprinkles.css";
 import { Track } from "@/types/deezerApiTypes";
 import { imageSize, previewWidth } from "./TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
+import { Link } from "react-router-dom";
 
 const TrackPreview = ({ track }: { track: Track }) => {
   if (!track) {
@@ -35,21 +36,21 @@ const TrackPreview = ({ track }: { track: Track }) => {
         })}`}
       >
         <Marquee key={track.title + track.artist.name}>
-          <a
-            href="#"
+          <Link
+            to={`/album/${track?.album?.id}`}
             className={`${sprinkles({ fontSize: "font-size-2" })} ${linkHover}`}
           >
             {track.title}
-          </a>
+          </Link>
           <span className={sprinkles({ paddingX: "size-1" })}>&#8226;</span>
-          <a
-            href="#"
+          <Link
+            to={`/artist/${track.artist.id}`}
             className={`${sprinkles({
               fontSize: "font-size-2",
             })} ${linkHover}`}
           >
             {track.artist.name}
-          </a>
+          </Link>
         </Marquee>
       </div>
     </div>

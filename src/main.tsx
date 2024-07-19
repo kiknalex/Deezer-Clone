@@ -12,12 +12,15 @@ import ChannelsGrid from "./components/main-page/explore/channels/ChannelsGrid.t
 import ChannelGenreCards from "./components/main-page/explore/channels/channels-categories/ChannelCategoriesCards.tsx";
 import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
 import {
-  channelPageLoader,
-  homePageLoader,
-  searchPageLoader,
+  MusicDetailsLoader,
+  channelLoader,
+  homeLoader,
+  searchLoader,
 } from "./utils/loaders.ts";
 import HomePage from "./app/pages/home-page/HomePage.tsx";
 import SearchPage from "./app/pages/search-page/SearchPage.tsx";
+import MusicDetailsPage from "./app/pages/music-details-page/MusicDetailsPage.tsx";
+import ArtistDetailsPage from "./app/pages/artist-details-page/ArtistDetailsPage.tsx";
 
 window.DZ.init({
   channelUrl: "http://localhost:5173/",
@@ -34,7 +37,7 @@ const router = createBrowserRouter(
       }}
       element={<App />}
     >
-      <Route path="" loader={homePageLoader} element={<HomePage />}></Route>
+      <Route path="" loader={homeLoader} element={<HomePage />}></Route>
       <Route
         path="channels/explore"
         element={
@@ -46,13 +49,15 @@ const router = createBrowserRouter(
       <Route
         path="channels/:channelName"
         element={<ChannelPage />}
-        loader={channelPageLoader}
+        loader={channelLoader}
       ></Route>
       <Route
         path="search/:searchQuery"
         element={<SearchPage />}
-        loader={searchPageLoader}
+        loader={searchLoader}
       ></Route>
+      <Route path="artist/:id" element={<ArtistDetailsPage />}></Route>
+      <Route path=":type/:id" element={<MusicDetailsPage />} loader={MusicDetailsLoader}></Route>
     </Route>
   )
 );

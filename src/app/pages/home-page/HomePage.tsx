@@ -3,16 +3,16 @@ import {
   AlbumCard,
   ArtistCard,
   PlaylistCard,
-} from "@/components/main-page/playlist-card/PlaylistCard";
+} from "@/components/main-page/music-card/MusicCard";
 import Carousel from "@/components/util-components/carousel/Carousel";
 import LoaderSpin from "@/components/util-components/loader-spin/LoaderSpin";
 import { Album, Artist, Playlist, Release } from "@/types/deezerApiTypes";
-import { homePageLoaderData } from "@/utils/loaders";
+import { homeLoaderData } from "@/utils/loaders";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
-  const data = useLoaderData() as homePageLoaderData;
+  const data = useLoaderData() as homeLoaderData;
   return (
     <div>
       <Suspense fallback={<LoaderSpin />}>
@@ -29,6 +29,7 @@ const HomePage = () => {
                         title={playlist.title}
                         numberOfTracks={playlist.nb_tracks}
                         tracklist={playlist.tracklist}
+                        id={playlist.id}
                       />
                     ))}
                   />
@@ -42,6 +43,7 @@ const HomePage = () => {
                         title={selection.title}
                         artist={selection.artist}
                         tracklist={selection.tracklist}
+                        id={selection.id}
                       />
                     ))}
                   />
@@ -56,6 +58,7 @@ const HomePage = () => {
                         title={release.title}
                         tracklist={release.tracklist}
                         artist={release.artist}
+                        id={release.id}
                       />
                     ))}
                   />
@@ -68,6 +71,7 @@ const HomePage = () => {
                         imgSrc={artist.picture_medium}
                         title={artist.name}
                         tracklist={artist.tracklist}
+                        id={artist.id}
                       />
                     ))}
                   />

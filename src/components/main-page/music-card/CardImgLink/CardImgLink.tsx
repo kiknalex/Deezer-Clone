@@ -38,7 +38,7 @@ const CardImgLink = ({
       navigate(linkSrc);
     }
   };
-  const handlePlayClick = async () => {
+  const handlePlayClick = () => {
     currentTracklist !== tracklistQuery
       ? handleTracklistChange(tracklistQuery)
       : togglePlay();

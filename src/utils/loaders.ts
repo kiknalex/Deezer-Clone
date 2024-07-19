@@ -18,7 +18,7 @@ const delay = (ms: number) => {
     }, ms);
   });
 };
-export interface channelPageLoaderData {
+export interface channelLoaderData {
   data: {
     genreRadios: { data: Radio[] };
     genreArtists: { data: Artist[] };
@@ -28,7 +28,7 @@ export interface channelPageLoaderData {
   };
 }
 
-export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
+export const channelLoader = async ({ params }: LoaderFunctionArgs) => {
   const genreNameWithIdPromise = getAllGenresPromise();
   return defer({
     data: genreNameWithIdPromise.then(async (nameWithIdData) => {
@@ -74,7 +74,7 @@ export const channelPageLoader = async ({ params }: LoaderFunctionArgs) => {
   });
 };
 
-export interface homePageLoaderData {
+export interface homeLoaderData {
   data: {
     selection: Album[];
     charts: Track[];
@@ -83,7 +83,7 @@ export interface homePageLoaderData {
   };
 }
 
-export const homePageLoader = () => {
+export const homeLoader = () => {
   const editorialSelectionPromise = sdkFetch("/editorial/0/selection");
   const editorialChartsPromise = sdkFetch("/editorial/0/charts");
   const editorialReleasesPromise = sdkFetch("/editorial/0/releases");
@@ -104,16 +104,30 @@ export const homePageLoader = () => {
   });
 };
 
-export interface searchPageLoaderData {
+export interface SearchLoaderData {
   artists: { data: Artist[] };
   albums: { data: Album[] };
 }
 
-export const searchPageLoader = async ({ params }: LoaderFunctionArgs) => {
+export const searchLoader = async ({ params }: LoaderFunctionArgs) => {
   const artistsData = await sdkFetch(`/search/artist?q=${params.searchQuery}`);
   const albumsData = await sdkFetch(`/search/album?q=${params.searchQuery}`);
   return {
     artists: artistsData,
     albums: albumsData,
   };
+};
+
+export const MusicDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
+  if (!["album", "playlist"].includes(params.type as string)) {
+    throw new Error("Wrong type");
+  }
+
+  const delayPromise = delay(500);
+  const dataPromise = sdkFetch(`/${params.type}/${params.id}`);
+
+  const allPromises = Promise.all([dataPromise, delayPromise]).then(
+    (values) => values[0]
+  );
+  return defer({ allPromises });
 };

@@ -11,13 +11,13 @@ export const sdkFetch = (endpoint: string) => {
 };
 
 export const getAllGenresPromise = async () => {
-  const allGenresData = sdkFetch("/genre");
-  return allGenresData;
+  const promise = sdkFetch("/genre");
+  return promise;
 };
 
 export const getTracklistData = async (tracklist: string) => {
-  const data = sdkFetch(tracklist);
-  return data;
+  const promise = sdkFetch(tracklist);
+  return promise;
 };
 
 export const getTrackData = async (id: number) => {

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import CardImgLink from "./CardImgLink/CardImgLink";
 import { Artist } from "@/types/deezerApiTypes";
-import { artistLink, link, tracksNumber } from "./PlaylistCard.css";
+import { artistLink, link, tracksNumber } from "./MusicCard.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 
 interface CardProps {
   imgSrc: string;
   title: string;
   tracklist: string;
+  id: number;
 }
 
 interface PlaylistCardProps extends CardProps {
@@ -24,12 +25,13 @@ export const PlaylistCard = ({
   title,
   tracklist,
   numberOfTracks,
+  id
 }: PlaylistCardProps) => {
   return (
     <div className={sprinkles({ display: "flex", flexDirection: "column" })}>
-      <CardImgLink imgSrc={imgSrc} linkSrc={"/"} alt="" tracklist={tracklist} />
+      <CardImgLink imgSrc={imgSrc} linkSrc={`/playlist/${id}`} alt="" tracklist={tracklist} />
       <Link
-        to=""
+        to={`/playlist/${id}`}
         className={`${sprinkles({
           fontSize: "font-size-2",
           marginTop: "size-3",
@@ -42,7 +44,7 @@ export const PlaylistCard = ({
   );
 };
 
-export const ArtistCard = ({ imgSrc, title, tracklist }: CardProps) => {
+export const ArtistCard = ({ imgSrc, title, tracklist, id }: CardProps) => {
   return (
     <div
       className={sprinkles({
@@ -53,13 +55,13 @@ export const ArtistCard = ({ imgSrc, title, tracklist }: CardProps) => {
     >
       <CardImgLink
         imgSrc={imgSrc}
-        linkSrc={"/"}
+        linkSrc={`/artist/${id}`}
         shape="circle"
         alt={title}
         tracklist={tracklist}
       />
       <Link
-        to=""
+        to={`/artist/${id}`}
         className={`${sprinkles({
           fontSize: "font-size-2",
           marginTop: "size-3",
@@ -77,6 +79,7 @@ export const AlbumCard = ({
   tracklist,
   artist,
   releaseDate,
+  id
 }: AlbumCardProps) => {
   return (
     <div
@@ -87,12 +90,12 @@ export const AlbumCard = ({
     >
       <CardImgLink
         imgSrc={imgSrc}
-        linkSrc={"/"}
+        linkSrc={`/album/${id}`}
         alt={title}
         tracklist={tracklist}
       />
       <Link
-        to=""
+        to={`/album/${id}`}
         className={`${sprinkles({
           fontSize: "font-size-2",
           marginTop: "size-3",
@@ -102,7 +105,7 @@ export const AlbumCard = ({
       </Link>
       <p className={artistLink}>
         by{" "}
-        <Link to="" className={`${artistLink} ${link}`}>
+        <Link to={`/artist/${artist.id}`} className={`${artistLink} ${link}`}>
           {artist.name}
         </Link>
       </p>

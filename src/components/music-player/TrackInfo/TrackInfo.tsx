@@ -4,12 +4,14 @@ import { linkHover } from "../TrackPlaybackControls/TrackControls/TrackPreview/T
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
+import { Link } from "react-router-dom";
 
 const TrackInfo = () => {
   const { tracks, currentTrackIndex } = useContext(
     MusicContext
   ) as MusicContextType;
   const track = tracks[currentTrackIndex];
+  console.log(track);
   return (
     <div
       className={`${sprinkles({
@@ -41,20 +43,20 @@ const TrackInfo = () => {
         })}`}
       >
         <Marquee key={track.title}>
-          <a href="#" className={linkHover}>
+          <Link to={`/album/${track?.album?.id}`} className={linkHover}>
             {track.title}
-          </a>
+          </Link>
         </Marquee>
         <Marquee key={track.title + track.artist.name}>
-          <a
-            href="#"
+          <Link
+            to={`/artist/${track.artist.id}`}
             className={`${linkHover} ${sprinkles({
               fontSize: "font-size-2",
               color: "--gray-6",
             })}`}
           >
             {track.artist.name}
-          </a>
+          </Link>
         </Marquee>
       </div>
     </div>

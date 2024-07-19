@@ -28,49 +28,48 @@ export interface channelLoaderData {
   };
 }
 
-export const channelLoader = async ({ params }: LoaderFunctionArgs) => {
+export const channelLoader = ({ params }: LoaderFunctionArgs) => {
   const genreNameWithIdPromise = getAllGenresPromise();
+  const dataPromise = genreNameWithIdPromise.then(async (value) => {
+    const genres = value as { data: Genre[] };
+    // Find the genre object within the data array
+    const genreObj = genres.data.find(
+      (genre: Genre) =>
+        encodeForURL(genre.name) === encodeForURL(params.channelName as string)
+    );
+
+    if (!genreObj) {
+      throw new Error("Genre not found");
+    }
+
+    const genreId = genreObj.id;
+    const genreName = genreObj.name;
+
+    const genreRadiosPromise = sdkFetch(`/genre/${genreId}/radios`);
+    const genreArtistsPromise = sdkFetch(`/genre/${genreId}/artists`);
+    const editorialReleasesPromise = sdkFetch(`/editorial/${genreId}/releases`);
+    const chartPlaylistsPromise = sdkFetch(`/chart/${genreId}/playlists`);
+    const delayPromise = delay(800); // wait at least 0.8s to avoid jagged transition between spinner and page
+
+    const [radios, artists, releases, playlists] = await Promise.all([
+      genreRadiosPromise,
+      genreArtistsPromise,
+      editorialReleasesPromise,
+      chartPlaylistsPromise,
+      delayPromise,
+    ]);
+
+    // Return the combined data
+    return {
+      genreRadios: radios,
+      genreArtists: artists,
+      editorialReleases: releases,
+      chartPlaylists: playlists,
+      genreName,
+    };
+  });
   return defer({
-    data: genreNameWithIdPromise.then(async (nameWithIdData) => {
-      // Find the genre object within the data array
-      const genreObj = nameWithIdData.data.find(
-        (genre: Genre) =>
-          encodeForURL(genre.name) ===
-          encodeForURL(params.channelName as string)
-      );
-
-      if (!genreObj) {
-        throw new Error("Genre not found");
-      }
-
-      const genreId = genreObj.id;
-      const genreName = genreObj.name;
-
-      const genreRadiosPromise = sdkFetch(`/genre/${genreId}/radios`);
-      const genreArtistsPromise = sdkFetch(`/genre/${genreId}/artists`);
-      const editorialReleasesPromise = sdkFetch(
-        `/editorial/${genreId}/releases`
-      );
-      const chartPlaylistsPromise = sdkFetch(`/chart/${genreId}/playlists`);
-      const delayPromise = delay(800); // wait at least 0.8s to avoid jagged transition between spinner and page
-
-      const [radios, artists, releases, playlists] = await Promise.all([
-        genreRadiosPromise,
-        genreArtistsPromise,
-        editorialReleasesPromise,
-        chartPlaylistsPromise,
-        delayPromise,
-      ]);
-
-      // Return the combined data
-      return {
-        genreRadios: radios,
-        genreArtists: artists,
-        editorialReleases: releases,
-        chartPlaylists: playlists,
-        genreName,
-      };
-    }),
+    data: dataPromise,
   });
 };
 
@@ -100,7 +99,7 @@ export const homeLoader = () => {
     ]).then((values) => {
       const [selection, charts, releases, artists] = values;
       return { selection, charts, releases, artists };
-    }),
+    }).catch(error => console.error(error)),
   });
 };
 
@@ -128,6 +127,6 @@ export const MusicDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
 
   const allPromises = Promise.all([dataPromise, delayPromise]).then(
     (values) => values[0]
-  );
+  ).catch(error => console.error(error));
   return defer({ allPromises });
 };

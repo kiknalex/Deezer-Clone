@@ -9,7 +9,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useLoaderData } from "react-router-dom";
 import Header from "@/components/header/Header";
 import Mainpage from "@/components/main-page/Mainpage";
-import { getTracklistData } from "@/utils/fetchers";
+import { getTracklistPromise } from "@/utils/fetchers";
 
 export type MusicContextType = {
   tracks: Track[];
@@ -29,7 +29,6 @@ export const MusicContext = createContext<MusicContextType | null>(null);
 const App = () => {
   const loaderData = useLoaderData() as TrackData;
   const [tracks, setTracks] = useState<Track[]>(loaderData.tracks.data);
-  console.log(tracks);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -41,7 +40,7 @@ const App = () => {
   };
 
   const handleTracklistChange = async (tracklist: string) => {
-    const newTracks = await getTracklistData(tracklist);
+    const newTracks = await getTracklistPromise(tracklist) as {data: Track[]};
     console.log(newTracks);
     if (newTracks.data.length > 0) {
       const filteredData = newTracks.data.filter(

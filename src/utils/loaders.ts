@@ -45,14 +45,12 @@ export const channelLoader = ({ params }: LoaderFunctionArgs) => {
     const genreId = genreObj.id;
     const genreName = genreObj.name;
 
-    const genreRadiosPromise = sdkFetch(`/genre/${genreId}/radios`);
     const genreArtistsPromise = sdkFetch(`/genre/${genreId}/artists`);
     const editorialReleasesPromise = sdkFetch(`/editorial/${genreId}/releases`);
     const chartPlaylistsPromise = sdkFetch(`/chart/${genreId}/playlists`);
     const delayPromise = delay(800); // wait at least 0.8s to avoid jagged transition between spinner and page
 
-    const [radios, artists, releases, playlists] = await Promise.all([
-      genreRadiosPromise,
+    const [artists, releases, playlists] = await Promise.all([
       genreArtistsPromise,
       editorialReleasesPromise,
       chartPlaylistsPromise,
@@ -61,7 +59,6 @@ export const channelLoader = ({ params }: LoaderFunctionArgs) => {
 
     // Return the combined data
     return {
-      genreRadios: radios,
       genreArtists: artists,
       editorialReleases: releases,
       chartPlaylists: playlists,
@@ -117,16 +114,19 @@ export const searchLoader = async ({ params }: LoaderFunctionArgs) => {
   };
 };
 
+
+export type MusicDetails = Album | Playlist;
+
 export const MusicDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
   if (!["album", "playlist"].includes(params.type as string)) {
     throw new Error("Wrong type");
   }
 
   const delayPromise = delay(500);
-  const dataPromise = sdkFetch(`/${params.type}/${params.id}`);
+  const musicDetailsPromise = sdkFetch(`/${params.type}/${params.id}`);
 
-  const allPromises = Promise.all([dataPromise, delayPromise]).then(
+  const allPromises = Promise.all([musicDetailsPromise, delayPromise]).then(
     (values) => values[0]
   ).catch(error => console.error(error));
-  return defer({ allPromises });
+  return defer({ musicDetails: allPromises } );
 };

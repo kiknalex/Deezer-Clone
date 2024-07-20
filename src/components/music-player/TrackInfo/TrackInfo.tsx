@@ -11,7 +11,6 @@ const TrackInfo = () => {
     MusicContext
   ) as MusicContextType;
   const track = tracks[currentTrackIndex];
-  console.log(track);
   return (
     <div
       className={`${sprinkles({

@@ -1,7 +1,7 @@
 import { container } from "@/app/App.css";
 import LoaderSpin from "@/components/util-components/loader-spin/LoaderSpin";
 import { Suspense } from "react";
-import { Await, Link, useLoaderData, useParams } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import {
   creatorBadgeImg,
   creatorBadgeLink,
@@ -15,16 +15,16 @@ import { sprinkles } from "@/styles/sprinkles.css";
 import { secondsToHours } from "@/utils/helpers";
 import ActionPanel from "@/components/main-page/music-details/action-panel/ActionPanel";
 import TrackList from "@/components/main-page/music-details/TrackList/TrackList";
+import { MusicDetails } from "@/utils/loaders";
 
 const MusicDetailsPage = () => {
-  const data = useLoaderData();
+  const { musicDetails } = useLoaderData() as { musicDetails: MusicDetails };
 
   return (
     <Suspense fallback={<LoaderSpin />}>
-      <Await resolve={data.allPromises}>
+      <Await resolve={musicDetails}>
         {(musicData) => (
           <>
-            {console.log(musicData)}
             <section className={`${container} ${headingContainer}`}>
               <div className={mainImageContainer}>
                 <img
@@ -82,7 +82,7 @@ const MusicDetailsPage = () => {
             <div className={container}>
               <ActionPanel tracklist={musicData.tracklist} />
             </div>
-            {musicData && (
+            {musicData.tracks && (
               <div className={container}>
                 <TrackList musicData={musicData} />
               </div>

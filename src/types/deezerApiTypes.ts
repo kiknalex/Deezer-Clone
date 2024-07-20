@@ -52,8 +52,12 @@ export interface Track {
   preview: string;
   md5_image: string;
   time_add: number;
+  picture_xl?: string;
+  picture_big?: string;
+  picture_medium?: string;
+  picture_small?: string;
   artist: Artist;
-  album: Album;
+  album?: Album;
   type: string;
 }
 
@@ -81,7 +85,29 @@ export interface Album {
   cover_xl: string;
   md5_image: string;
   tracklist: string;
+  tracks?: { data: Track[] };
   type: "album";
+}
+
+export interface Playlist {
+  id: number;
+  title: string;
+  public: boolean;
+  nb_tracks: number;
+  link: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  checksum: string;
+  tracklist: string;
+  tracks?: { data: Track[] };
+  creation_date: string;
+  md5_image: string;
+  picture_type: string;
+  user: User;
+  type: "playlist";
 }
 
 export interface Genre {
@@ -112,26 +138,6 @@ interface User {
   name: string;
   tracklist: string;
   type: string;
-}
-
-export interface Playlist {
-  id: number;
-  title: string;
-  public: boolean;
-  nb_tracks: number;
-  link: string;
-  picture: string;
-  picture_small: string;
-  picture_medium: string;
-  picture_big: string;
-  picture_xl: string;
-  checksum: string;
-  tracklist: string;
-  creation_date: string;
-  md5_image: string;
-  picture_type: string;
-  user: User;
-  type: "playlist";
 }
 
 export interface Release {

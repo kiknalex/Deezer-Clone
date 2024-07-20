@@ -69,14 +69,6 @@ const ChannelPage = () => {
                   ))}
                 />
               </section>
-              <section className={container}>
-                <Carousel
-                  slides={genreRadios.data.map((radio: Radio) => (
-                    <PlaylistCard imgSrc={radio.picture_medium} tracklist={radio.tracklist} />
-                  ))}
-                  heading="Radios"
-                />
-              </section>
             </>
           )}
         </Await>

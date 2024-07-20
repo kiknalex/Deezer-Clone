@@ -31,7 +31,7 @@ const Marquee: React.FC<MarqueeProps> = ({ className, children }) => {
 
         if (wrapperWidth > marqueeWidth) {
           // Calculates if element overflows
-          setNeedsDuplicate(true); // triggers state to add 2nd element for smooth marquee animation.
+          setNeedsDuplicate(true); // triggers state to add duplicate element for continuous marquee animation.
           setTranslateWidth(wrapperWidth + paddingLeft);
           setDuration(wrapperWidth * 20);
         } else {

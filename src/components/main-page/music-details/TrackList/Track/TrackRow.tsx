@@ -18,8 +18,17 @@ import { Link } from "react-router-dom";
 import { formatTime, unixToDateString } from "@/utils/helpers";
 import { useContext } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
+import { Artist, Track } from "@/types/deezerApiTypes";
 
-
+interface TrackRowProps {
+  track: Track;
+  artist: Artist;
+  index: number;
+  showArtist: boolean;
+  showAlbum: boolean;
+  showAddedDate: boolean;
+  showDuration: boolean;
+}
 
 const TrackRow = ({
   track,
@@ -29,7 +38,7 @@ const TrackRow = ({
   showAlbum,
   showAddedDate,
   showDuration,
-}) => {
+}: TrackRowProps) => {
   const { isPlaying, tracks, currentTrackIndex } = useContext(
     MusicContext
   ) as MusicContextType;
@@ -41,7 +50,7 @@ const TrackRow = ({
           <div className={imgButtonContainer}>
             <img
               className={buttonImage}
-              src={track.picture_small || track.album.cover_small}
+              src={track.picture_small || track.album?.cover_small}
               width="50"
               height="50"
               alt=""
@@ -65,7 +74,7 @@ const TrackRow = ({
           </Link>
         </div>
       )}
-      {showAlbum && (
+      {showAlbum && track.album && (
         <div className={linkWrapper}>
           <Link className={`${albumLink}`} to={`/album/${track.album.id}`}>
             {track.album.title}

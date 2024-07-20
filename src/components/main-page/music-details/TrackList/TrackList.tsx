@@ -1,3 +1,4 @@
+import { MusicDetails } from "@/utils/loaders";
 import TrackRow from "./Track/TrackRow";
 import {
   addedInfo,
@@ -9,14 +10,18 @@ import {
   trackInfo,
 } from "./TrackList.css";
 
-const TrackList = ({ musicData }) => {
-  const tracks = musicData.tracks.data;
+interface TrackListProps {
+  musicData: MusicDetails;
+}
+
+const TrackList = ({ musicData }: TrackListProps) => {
+  const tracks = musicData.tracks!.data;
   const tracklistType: "album" | "playlist" = musicData.type;
 
   const showArtist = tracklistType === "playlist";
   const showAlbum = tracklistType === "playlist";
   const showAddedDate = tracklistType === "playlist";
-  const showDuration = tracklistType === "album" || "playlist";
+  const showDuration = tracklistType === "album" || tracklistType === "playlist";
   return (
     <>
       <div className={trackContainer}>
@@ -33,19 +38,21 @@ const TrackList = ({ musicData }) => {
         )}
       </div>
       <ul>
-        {tracks.map((track, index: number) => (
-          track.preview &&
-          <TrackRow
-            track={track}
-            index={index + 1}
-            key={track.id}
-            artist={track.artist}
-            showArtist={showArtist}
-            showAlbum={showAlbum}
-            showAddedDate={showAddedDate}
-            showDuration={showDuration}
-          />
-        ))}
+        {tracks.map(
+          (track, index: number) =>
+            track.preview && (
+              <TrackRow
+                track={track}
+                index={index + 1}
+                key={track.id}
+                artist={track.artist}
+                showArtist={showArtist}
+                showAlbum={showAlbum}
+                showAddedDate={showAddedDate}
+                showDuration={showDuration}
+              />
+            )
+        )}
       </ul>
     </>
   );

@@ -7,10 +7,8 @@ import { MusicContext, MusicContextType } from "@/app/App";
 import { Link } from "react-router-dom";
 
 const TrackInfo = () => {
-  const { tracks, currentTrackIndex } = useContext(
-    MusicContext
-  ) as MusicContextType;
-  const track = tracks[currentTrackIndex];
+  const { currentTrack } = useContext(MusicContext) as MusicContextType;
+  if (!currentTrack) return null;
   return (
     <div
       className={`${sprinkles({
@@ -22,11 +20,13 @@ const TrackInfo = () => {
       <div>
         <img
           src={
-            (track?.album?.cover_small || track?.album?.cover_medium) ??
+            (currentTrack.album?.cover_small ||
+              currentTrack.album?.cover_medium ||
+              currentTrack?.picture_small) ??
             "/cover_default.jpg"
           }
           className={`${sprinkles({ marginRight: "size-3" })} ${imageSize}`}
-          key={track.md5_image}
+          key={currentTrack.md5_image}
           width="56"
           height="56"
           alt=""
@@ -41,20 +41,20 @@ const TrackInfo = () => {
           gap: "size-1",
         })}`}
       >
-        <Marquee key={track.title}>
-          <Link to={`/album/${track?.album?.id}`} className={linkHover}>
-            {track.title}
+        <Marquee key={currentTrack.title}>
+          <Link to={`/album/${currentTrack.album?.id}`} className={linkHover}>
+            {currentTrack.title}
           </Link>
         </Marquee>
-        <Marquee key={track.title + track.artist.name}>
+        <Marquee key={currentTrack.title + currentTrack.artist.name}>
           <Link
-            to={`/artist/${track.artist.id}`}
+            to={`/artist/${currentTrack.artist.id}`}
             className={`${linkHover} ${sprinkles({
               fontSize: "font-size-2",
               color: "--gray-6",
             })}`}
           >
-            {track.artist.name}
+            {currentTrack.artist.name}
           </Link>
         </Marquee>
       </div>

@@ -9,13 +9,16 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useLoaderData } from "react-router-dom";
 import Header from "@/components/header/Header";
 import Mainpage from "@/components/main-page/Mainpage";
-import { getTracklistPromise } from "@/utils/fetchers";
+import { getTrackData, getTracklistPromise } from "@/utils/fetchers";
+import { firstVisitLoaderData } from "@/utils/loaders";
 
 export type MusicContextType = {
   tracks: Track[];
-  currentTrackIndex: number;
   currentTracklist: string | null;
   isPlaying: boolean;
+  prevTrack: TrackData | null;
+  currentTrack: TrackData | null;
+  nextTrack: TrackData | null;
   audioRef: RefObject<HTMLAudioElement>;
   handleTracklistChange: (tracklist: string) => Promise<void>;
   handleTrackNext: () => void;
@@ -27,19 +30,24 @@ export type MusicContextType = {
 export const MusicContext = createContext<MusicContextType | null>(null);
 
 const App = () => {
-  const loaderData = useLoaderData();
-  console.log(loaderData);
-  const [tracks, setTracks] = useState<Track[]>(loaderData.albumData.tracks.data);
+  const initialLoadData = useLoaderData() as firstVisitLoaderData;
+  console.log(initialLoadData);
+  const [tracks, setTracks] = useState<Track[]>(
+    initialLoadData.albumData.tracks!.data
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState({
-    current: null,
-    previous: null,
-    next: null,
-  });
+  const [currentTrack, setCurrentTrack] = useState<TrackData>(
+    initialLoadData.currentTrack
+  );
+  const [nextTrack, setNextTrack] = useState<TrackData | null>(
+    initialLoadData.nextTrack || null
+  );
+  const [prevTrack, setPrevTrack] = useState<TrackData | null>(null);
+
   const [darkMode, setDarkMode] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
   };
@@ -50,23 +58,55 @@ const App = () => {
     };
     console.log(newTracks);
     if (newTracks.data.length > 0) {
-      const filteredData = newTracks.data.filter(
-        (track: Track) => track.preview
-      );
-      setTracks(filteredData);
+      const currentTrackData = (await getTrackData(
+        newTracks.data[0].id
+      )) as TrackData;
+      const nextTrackData = newTracks.data[1]?.id
+        ? ((await getTrackData(newTracks.data[1].id)) as TrackData)
+        : null;
+      setCurrentTrack(currentTrackData);
+      setNextTrack(nextTrackData);
+      setPrevTrack(null);
+
+      setTracks(newTracks.data);
       setCurrentTracklist(tracklist);
-      setCurrentTrackIndex(0);
     }
   };
-  const handleTrackNext = () => {
-    if (currentTrackIndex < tracks.length - 1) {
-      setCurrentTrackIndex((cti) => cti + 1);
+  const handleTrackNext = async () => {
+    if (!nextTrack) return;
+
+    const nextTrackInfo = tracks.find(
+      (track) => track.id === nextTrack.id
+    ) as Track;
+    const nextTrackIndex = tracks.indexOf(nextTrackInfo);
+    if (tracks[nextTrackIndex + 1]) {
+      const nextTrackData = (await getTrackData(
+        tracks[nextTrackIndex + 1].id
+      )) as TrackData;
+      setNextTrack(nextTrackData);
+    } else {
+      setNextTrack(null);
     }
+    setCurrentTrack(nextTrack);
+    setPrevTrack(currentTrack);
   };
-  const handleTrackPrevious = () => {
-    if (currentTrackIndex > 0) {
-      setCurrentTrackIndex((cti) => cti - 1);
+  const handleTrackPrevious = async () => {
+    if (!prevTrack) return;
+
+    const prevTrackInfo = tracks.find(
+      (track) => track.id === prevTrack.id
+    ) as Track;
+    const prevTrackIndex = tracks.indexOf(prevTrackInfo);
+    if (tracks[prevTrackIndex - 1]) {
+      const prevTrackData = (await getTrackData(
+        tracks[prevTrackIndex - 1].id
+      )) as TrackData;
+      setPrevTrack(prevTrackData);
+    } else {
+      setPrevTrack(null);
     }
+    setCurrentTrack(prevTrack);
+    setNextTrack(currentTrack);
   };
   const stopPlay = () => {
     const audioElement = audioRef.current;
@@ -93,10 +133,12 @@ const App = () => {
   };
   const contextValue = {
     tracks,
-    currentTrackIndex,
     currentTracklist,
     isPlaying,
     audioRef,
+    prevTrack,
+    currentTrack,
+    nextTrack,
     handleTracklistChange,
     handleTrackNext,
     handleTrackPrevious,

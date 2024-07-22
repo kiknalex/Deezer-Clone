@@ -12,7 +12,7 @@ import { MusicContext, MusicContextType } from "@/app/App";
 
 const Player = () => {
   const [audioReady, setAudioReady] = useState(false);
-  const { tracks, audioRef, currentTrackIndex, startPlay, handleTrackNext } =
+  const { tracks, audioRef, currentTrack, startPlay, handleTrackNext } =
     useContext(MusicContext) as MusicContextType;
   const handleLoadedData = () => {
     if (audioRef.current && audioRef.current.readyState > 2) {
@@ -26,13 +26,13 @@ const Player = () => {
 
   return (
     <>
-      {tracks && tracks.length > 0 && (
+      {tracks.length > 0 && currentTrack && (
         <>
           <audio
             onLoadedData={handleLoadedData}
             onEnded={handleTrackEnded}
             ref={audioRef}
-            src={tracks[currentTrackIndex].preview}
+            src={currentTrack.preview}
           ></audio>
 
           {audioReady ? (

@@ -1,7 +1,10 @@
 export interface TrackData {
   id: number;
   title: string;
+  title_short: string;
+  title_version?: string;
   description: string;
+  isrc: string;
   duration: number;
   public: boolean;
   is_loved_track: boolean;
@@ -20,9 +23,39 @@ export interface TrackData {
   creation_date: string;
   md5_image: string;
   picture_type: string;
-  creator: Creator;
-  type: string;
+  track_position: number;
+  disk_number: number;
+  rank: number;
+  release_date: string;
+  explicit_lyrics: boolean;
+  explicit_content_lyrics: number;
+  explicit_content_cover: number;
+  preview: string;
+  bpm: number;
+  gain: number;
+  available_countries: string[];
+  contributors: Contributor[];
+  track_token: string;
+  artist: Artist;
+  album?: Album;
+  type: "track";
   tracks: Tracks;
+}
+
+export interface Contributor {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+  role: string;
 }
 
 export interface Creator {
@@ -58,7 +91,7 @@ export interface Track {
   picture_small?: string;
   artist: Artist;
   album?: Album;
-  type: string;
+  type: "track";
 }
 
 export interface Artist {

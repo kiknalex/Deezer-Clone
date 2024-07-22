@@ -1,11 +1,11 @@
 import { linkHover } from "./TrackPreview.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { Track } from "@/types/deezerApiTypes";
+import { TrackData } from "@/types/deezerApiTypes";
 import { imageSize, previewWidth } from "./TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { Link } from "react-router-dom";
 
-const TrackPreview = ({ track }: { track: Track }) => {
+const TrackPreview = ({ track }: { track: TrackData | null }) => {
   if (!track) {
     return null;
   }
@@ -21,7 +21,7 @@ const TrackPreview = ({ track }: { track: Track }) => {
         <img
           className={`${sprinkles({ marginRight: "size-3" })} ${imageSize}`}
           key={track.md5_image}
-          src={track?.album?.cover_small ?? "/cover_default.jpg"}
+          src={track.album?.cover_small ?? "/cover_default.jpg"}
           width="56"
           height="56"
           alt="Next track"

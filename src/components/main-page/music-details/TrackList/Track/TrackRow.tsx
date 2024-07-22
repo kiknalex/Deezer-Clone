@@ -39,10 +39,10 @@ const TrackRow = ({
   showAddedDate,
   showDuration,
 }: TrackRowProps) => {
-  const { isPlaying, tracks, currentTrackIndex } = useContext(
+  const { isPlaying, currentTrack } = useContext(
     MusicContext
   ) as MusicContextType;
-  const currentTrack = tracks[currentTrackIndex];
+
   return (
     <div className={trackContainer}>
       <div className={trackInfo}>
@@ -50,16 +50,16 @@ const TrackRow = ({
           <div className={imgButtonContainer}>
             <img
               className={buttonImage}
-              src={track.picture_small || track.album?.cover_small}
+              src={(track.picture_small || track.album?.cover_small) ?? "/cover_default.jpg"}
               width="50"
               height="50"
               alt=""
             />
             <ButtonPlay
               className={`${buttonPlay} ${
-                track.id !== currentTrack.id && buttonHidden
+                track.id !== currentTrack?.id && buttonHidden
               }`}
-              isPlaying={isPlaying && track.id === currentTrack.id}
+              isPlaying={isPlaying && track.id === currentTrack?.id}
             />
           </div>
           <button className={trackNameButton}>

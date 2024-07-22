@@ -9,6 +9,7 @@ import {
   Radio,
   Release,
   Track,
+  TrackData,
 } from "@/types/deezerApiTypes";
 
 const delay = (ms: number) => {
@@ -19,6 +20,12 @@ const delay = (ms: number) => {
   });
 };
 
+export interface firstVisitLoaderData {
+  albumData: Album;
+  currentTrack: TrackData,
+  nextTrack?: TrackData;
+}
+
 export const firstVisitLoader = async () => {
   const albumData = (await sdkFetch("/album/302127")) as Album;
   if (!albumData.tracks?.data[0].id && !albumData.tracks?.data[1].id) {
@@ -27,7 +34,7 @@ export const firstVisitLoader = async () => {
   const currentTrack = await sdkFetch(`/track/${albumData.tracks.data[0].id}`);
   const nextTrack = await sdkFetch(`/track/${albumData.tracks.data[1].id}`);
 
-  return {albumData, currentTrack, nextTrack};
+  return { albumData, currentTrack, nextTrack };
 };
 
 export interface channelLoaderData {

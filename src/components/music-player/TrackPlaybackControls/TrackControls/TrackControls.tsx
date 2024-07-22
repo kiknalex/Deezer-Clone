@@ -11,9 +11,9 @@ import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPl
 
 const TrackControls = () => {
   const {
-    tracks,
-    currentTrackIndex,
     isPlaying,
+    prevTrack,
+    nextTrack,
     togglePlay,
     handleTrackPrevious,
     handleTrackNext,
@@ -29,7 +29,7 @@ const TrackControls = () => {
       <ButtonHoverableWithTooltip
         onClick={handleTrackPrevious}
         tooltipInteractive={true}
-        tooltipContent={<TrackPreview track={tracks[currentTrackIndex - 1]} />}
+        tooltipContent={<TrackPreview track={prevTrack} />}
         className={`${commonButton}`}
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
@@ -44,7 +44,7 @@ const TrackControls = () => {
       <ButtonHoverableWithTooltip
         onClick={handleTrackNext}
         tooltipInteractive={true}
-        tooltipContent={<TrackPreview track={tracks[currentTrackIndex + 1]} />}
+        tooltipContent={<TrackPreview track={nextTrack} />}
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>

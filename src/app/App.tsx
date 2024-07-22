@@ -9,7 +9,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useLoaderData } from "react-router-dom";
 import Header from "@/components/header/Header";
 import Mainpage from "@/components/main-page/Mainpage";
-import { getTrackData, getTracklistPromise } from "@/utils/fetchers";
+import { getTrackData, getTracklistData } from "@/utils/fetchers";
 import { firstVisitLoaderData } from "@/utils/loaders";
 
 export type MusicContextType = {
@@ -53,7 +53,7 @@ const App = () => {
   };
 
   const handleTracklistChange = async (tracklist: string) => {
-    const newTracks = (await getTracklistPromise(tracklist)) as {
+    const newTracks = (await getTracklistData(tracklist)) as {
       data: Track[];
     };
     if (newTracks.data.length > 0) {

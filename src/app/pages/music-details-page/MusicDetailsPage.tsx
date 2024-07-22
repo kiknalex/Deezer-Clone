@@ -25,6 +25,7 @@ const MusicDetailsPage = () => {
       <Await resolve={musicDetails}>
         {(musicData) => (
           <>
+          {console.log(musicData)}
             <section className={`${container} ${headingContainer}`}>
               <div className={mainImageContainer}>
                 <img

@@ -19,9 +19,9 @@ export const getAllGenresPromise = async () => {
   return promise;
 };
 
-export const getTracklistPromise = async (tracklist: string) => {
-  const promise = sdkFetch(tracklist);
-  return promise;
+export const getTracklistData = async (tracklist: string) => {
+  const data = await sdkFetch(`${tracklist}?limit=100`);
+  return data;
 };
 
 export const getTrackData = async (id: number) => {

@@ -31,7 +31,7 @@ export const MusicContext = createContext<MusicContextType | null>(null);
 
 const App = () => {
   const initialLoadData = useLoaderData() as firstVisitLoaderData;
-  console.log(initialLoadData);
+  (initialLoadData);
   const [tracks, setTracks] = useState<Track[]>(
     initialLoadData.albumData.tracks!.data
   );
@@ -56,7 +56,6 @@ const App = () => {
     const newTracks = (await getTracklistPromise(tracklist)) as {
       data: Track[];
     };
-    console.log(newTracks);
     if (newTracks.data.length > 0) {
       const currentTrackData = (await getTrackData(
         newTracks.data[0].id

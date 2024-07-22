@@ -16,7 +16,7 @@ const SearchPage = () => {
   const data = useLoaderData() as SearchLoaderData;
   const artists = data.artists.data;
   const albums = data.albums.data;
-  console.log(artists);
+
   return (
     <div>
       {artists.length > 0 && (

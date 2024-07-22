@@ -23,7 +23,7 @@ const ActionPanel = ({ tracklist }: ActionPanelProps) => {
       <li>
         <ButtonPlay
           onClick={handlePlayClick}
-          isPlaying={isPlaying}
+          isPlaying={isPlaying && currentTracklist === tracklistQuery}
           className={buttonAction}
         />
       </li>

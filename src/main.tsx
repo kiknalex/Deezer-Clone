@@ -14,6 +14,7 @@ import ChannelPage from "./app/pages/channel-page/ChannelPage.tsx";
 import {
   MusicDetailsLoader,
   channelLoader,
+  firstVisitLoader,
   homeLoader,
   searchLoader,
 } from "./utils/loaders.ts";
@@ -30,11 +31,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       path=""
-      loader={async () => {
-        return fetch(
-          "https://corsproxy.io/?https://api.deezer.com/album/302127"
-        );
-      }}
+      loader={firstVisitLoader}
       element={<App />}
     >
       <Route path="" loader={homeLoader} element={<HomePage />}></Route>

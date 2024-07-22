@@ -27,12 +27,17 @@ export type MusicContextType = {
 export const MusicContext = createContext<MusicContextType | null>(null);
 
 const App = () => {
-  const loaderData = useLoaderData() as TrackData;
-  const [tracks, setTracks] = useState<Track[]>(loaderData.tracks.data);
+  const loaderData = useLoaderData();
+  console.log(loaderData);
+  const [tracks, setTracks] = useState<Track[]>(loaderData.albumData.tracks.data);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTracklist, setCurrentTracklist] = useState<string | null>(null);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-
+  const [currentTrack, setCurrentTrack] = useState({
+    current: null,
+    previous: null,
+    next: null,
+  });
   const [darkMode, setDarkMode] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const handleDarkModeClick = () => {
@@ -40,7 +45,9 @@ const App = () => {
   };
 
   const handleTracklistChange = async (tracklist: string) => {
-    const newTracks = await getTracklistPromise(tracklist) as {data: Track[]};
+    const newTracks = (await getTracklistPromise(tracklist)) as {
+      data: Track[];
+    };
     console.log(newTracks);
     if (newTracks.data.length > 0) {
       const filteredData = newTracks.data.filter(

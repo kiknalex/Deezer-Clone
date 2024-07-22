@@ -18,6 +18,18 @@ const delay = (ms: number) => {
     }, ms);
   });
 };
+
+export const firstVisitLoader = async () => {
+  const albumData = (await sdkFetch("/album/302127")) as Album;
+  if (!albumData.tracks?.data[0].id && !albumData.tracks?.data[1].id) {
+    return albumData;
+  }
+  const currentTrack = await sdkFetch(`/track/${albumData.tracks.data[0].id}`);
+  const nextTrack = await sdkFetch(`/track/${albumData.tracks.data[1].id}`);
+
+  return {albumData, currentTrack, nextTrack};
+};
+
 export interface channelLoaderData {
   data: {
     genreRadios: { data: Radio[] };
@@ -93,10 +105,12 @@ export const homeLoader = () => {
       editorialReleasesPromise,
       topArtistsPromise,
       delayPromise,
-    ]).then((values) => {
-      const [selection, charts, releases, artists] = values;
-      return { selection, charts, releases, artists };
-    }).catch(error => console.error(error)),
+    ])
+      .then((values) => {
+        const [selection, charts, releases, artists] = values;
+        return { selection, charts, releases, artists };
+      })
+      .catch((error) => console.error(error)),
   });
 };
 
@@ -114,7 +128,6 @@ export const searchLoader = async ({ params }: LoaderFunctionArgs) => {
   };
 };
 
-
 export type MusicDetails = Album | Playlist;
 
 export const MusicDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
@@ -125,8 +138,8 @@ export const MusicDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
   const delayPromise = delay(500);
   const musicDetailsPromise = sdkFetch(`/${params.type}/${params.id}`);
 
-  const allPromises = Promise.all([musicDetailsPromise, delayPromise]).then(
-    (values) => values[0]
-  ).catch(error => console.error(error));
-  return defer({ musicDetails: allPromises } );
+  const allPromises = Promise.all([musicDetailsPromise, delayPromise])
+    .then((values) => values[0])
+    .catch((error) => console.error(error));
+  return defer({ musicDetails: allPromises });
 };

@@ -8,7 +8,7 @@ import {
   AlbumCard,
 } from "@/components/main-page/music-card/MusicCard";
 import { container } from "@/app/App.css";
-import { Artist, Playlist, Radio, Release } from "@/types/deezerApiTypes";
+import { Artist, Playlist, Release } from "@/types/deezerApiTypes";
 import { channelLoaderData } from "@/utils/loaders";
 
 const ChannelPage = () => {
@@ -19,7 +19,6 @@ const ChannelPage = () => {
       <Suspense fallback={<LoaderSpin />}>
         <Await resolve={data}>
           {({
-            genreRadios,
             genreArtists,
             editorialReleases,
             chartPlaylists,

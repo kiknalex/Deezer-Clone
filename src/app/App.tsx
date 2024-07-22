@@ -20,9 +20,14 @@ export type MusicContextType = {
   currentTrack: TrackData | null;
   nextTrack: TrackData | null;
   audioRef: RefObject<HTMLAudioElement>;
-  handleTracklistChange: (tracklist: string) => Promise<void>;
+  handleTracklistChange: (tracklist: string, index: number) => Promise<void>;
   handleTrackNext: () => void;
   handleTrackPrevious: () => void;
+  handleTrackChange: (
+    prev: TrackData | null,
+    current: TrackData,
+    next: TrackData | null
+  ) => void;
   startPlay: () => void;
   stopPlay: () => void;
   togglePlay: () => void;
@@ -31,7 +36,7 @@ export const MusicContext = createContext<MusicContextType | null>(null);
 
 const App = () => {
   const initialLoadData = useLoaderData() as firstVisitLoaderData;
-  (initialLoadData);
+  initialLoadData;
   const [tracks, setTracks] = useState<Track[]>(
     initialLoadData.albumData.tracks!.data
   );
@@ -51,25 +56,50 @@ const App = () => {
   const handleDarkModeClick = () => {
     setDarkMode(!darkMode);
   };
+  console.log("rerender app");
+  const handleTracklistChange = async (tracklist: string, index: number) => {
+    try {
+      const newTracks = (await getTracklistData(tracklist)) as {
+        data: Track[];
+      };
+      if (newTracks.data.length <= 0) return;
+      const filteredTracks = newTracks.data.filter(track => track.preview);
+      if (!index) {
+        const currentTrackData = (await getTrackData(
+          filteredTracks[0].id
+        )) as TrackData;
+        const nextTrackData = filteredTracks[1]?.id
+          ? ((await getTrackData(filteredTracks[1].id)) as TrackData)
+          : null;
+        handleTrackChange(null, currentTrackData, nextTrackData);
+      } else {
+        const prevTrackData = filteredTracks[index - 1]?.id
+          ? ((await getTrackData(filteredTracks[index - 1].id)) as TrackData)
+          : null;
+        const currentTrackData = (await getTrackData(
+          filteredTracks[index].id
+        )) as TrackData;
+        const nextTrackData = filteredTracks[index + 1]?.id
+          ? ((await getTrackData(filteredTracks[index + 1].id)) as TrackData)
+          : null;
 
-  const handleTracklistChange = async (tracklist: string) => {
-    const newTracks = (await getTracklistData(tracklist)) as {
-      data: Track[];
-    };
-    if (newTracks.data.length > 0) {
-      const currentTrackData = (await getTrackData(
-        newTracks.data[0].id
-      )) as TrackData;
-      const nextTrackData = newTracks.data[1]?.id
-        ? ((await getTrackData(newTracks.data[1].id)) as TrackData)
-        : null;
-      setCurrentTrack(currentTrackData);
-      setNextTrack(nextTrackData);
-      setPrevTrack(null);
-
-      setTracks(newTracks.data);
+        handleTrackChange(prevTrackData, currentTrackData, nextTrackData);
+      }
+      setTracks(filteredTracks);
       setCurrentTracklist(tracklist);
+    } catch (error) {
+      console.error("Error handling tracklist change:", error);
     }
+  };
+
+  const handleTrackChange = (
+    prev: TrackData | null = null,
+    current: TrackData,
+    next: TrackData | null = null
+  ) => {
+    setPrevTrack(prev);
+    setCurrentTrack(current);
+    setNextTrack(next);
   };
   const handleTrackNext = async () => {
     if (!nextTrack) return;
@@ -141,6 +171,7 @@ const App = () => {
     handleTracklistChange,
     handleTrackNext,
     handleTrackPrevious,
+    handleTrackChange,
     startPlay,
     stopPlay,
     togglePlay,

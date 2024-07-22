@@ -19,13 +19,13 @@ import { MusicDetails } from "@/utils/loaders";
 
 const MusicDetailsPage = () => {
   const { musicDetails } = useLoaderData() as { musicDetails: MusicDetails };
-
+  console.log("rerender");
   return (
     <Suspense fallback={<LoaderSpin />}>
       <Await resolve={musicDetails}>
         {(musicData) => (
           <>
-          {console.log(musicData)}
+          {console.log("123")}
             <section className={`${container} ${headingContainer}`}>
               <div className={mainImageContainer}>
                 <img

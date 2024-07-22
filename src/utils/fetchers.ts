@@ -1,3 +1,4 @@
+import { TrackData } from "@/types/deezerApiTypes.ts";
 import { DeezerAPI } from "../../deezer.ts";
 
 declare const DZ: DeezerAPI;
@@ -25,6 +26,11 @@ export const getTracklistData = async (tracklist: string) => {
 };
 
 export const getTrackData = async (id: number) => {
-  const data = await sdkFetch(`/track/${id}`);
-  return data;
+  try {
+    const data = await sdkFetch(`/track/${id}`);
+    return data as TrackData;
+  } catch (error) {
+    console.error('Error fetching track data:', error);
+    return null;
+  }
 };

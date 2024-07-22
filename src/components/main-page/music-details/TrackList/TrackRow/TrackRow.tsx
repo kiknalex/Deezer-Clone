@@ -28,6 +28,7 @@ interface TrackRowProps {
   showAlbum: boolean;
   showAddedDate: boolean;
   showDuration: boolean;
+  handlePlayClick: (id: number, index: number) => void;
 }
 
 const TrackRow = ({
@@ -38,11 +39,12 @@ const TrackRow = ({
   showAlbum,
   showAddedDate,
   showDuration,
+  handlePlayClick
 }: TrackRowProps) => {
   const { isPlaying, currentTrack } = useContext(
     MusicContext
   ) as MusicContextType;
-
+  console.log("rerender");
   return (
     <div className={trackContainer}>
       <div className={trackInfo}>
@@ -50,20 +52,25 @@ const TrackRow = ({
           <div className={imgButtonContainer}>
             <img
               className={buttonImage}
-              src={(track.picture_small || track.album?.cover_small) ?? "/cover_default.jpg"}
+              src={
+                (track.picture_small || track.album?.cover_small) ??
+                "/cover_default.jpg"
+              }
               width="50"
               height="50"
               alt=""
+              loading="lazy"
             />
             <ButtonPlay
               className={`${buttonPlay} ${
                 track.id !== currentTrack?.id && buttonHidden
               }`}
+              onClick={() => handlePlayClick(track.id, index)}
               isPlaying={isPlaying && track.id === currentTrack?.id}
             />
           </div>
           <button className={trackNameButton}>
-            {index}. {track.title}
+            {index + 1}. {track.title}
           </button>
         </div>
       </div>

@@ -6,12 +6,16 @@ import {
   artistInfo,
   durationInfo,
   durationSpan,
+  imageSkeleton,
+  rowSkeletonContainer,
+  textSkeleton,
   trackContainer,
   trackInfo,
 } from "./TrackList.css";
 import { useContext, useMemo } from "react";
 import { MusicContext, MusicContextType } from "@/app/App";
 import { getTrackData } from "@/utils/fetchers";
+import VirtualizedRow from "@/components/util-components/list-virtualized/VirtualizedRow";
 
 interface TrackListProps {
   musicData: MusicDetails;
@@ -20,7 +24,10 @@ interface TrackListProps {
 const TrackList = ({ musicData }: TrackListProps) => {
   const { currentTracklist, handleTrackChange, handleTracklistChange } =
     useContext(MusicContext) as MusicContextType;
-  const tracks = useMemo(() => musicData.tracks!.data.filter(track => track.preview), [musicData]);
+  const tracks = useMemo(
+    () => musicData.tracks!.data.filter((track) => track.preview),
+    [musicData]
+  );
   const tracklistType: "album" | "playlist" = musicData.type;
   const tracklistQuery = musicData.tracklist.replace(
     "https://api.deezer.com",
@@ -61,6 +68,13 @@ const TrackList = ({ musicData }: TrackListProps) => {
       console.error("Error fetching new track in TrackRow:", error);
     }
   };
+
+  const trackRowSkeleton = (
+    <div className={rowSkeletonContainer}>
+      <div className={imageSkeleton}></div>
+      <div className={textSkeleton}></div>
+    </div>
+  );
   return (
     <>
       <div className={trackContainer}>
@@ -80,17 +94,18 @@ const TrackList = ({ musicData }: TrackListProps) => {
         {tracks.map(
           (track, index: number) =>
             track.preview && (
-              <TrackRow
-                track={track}
-                index={index}
-                key={track.id}
-                artist={track.artist}
-                showArtist={showArtist}
-                showAlbum={showAlbum}
-                showAddedDate={showAddedDate}
-                showDuration={showDuration}
-                handlePlayClick={handlePlayClick}
-              />
+              <VirtualizedRow initiallyOnScreen={index < 25} key={track.id} placeholder={trackRowSkeleton}>
+                <TrackRow
+                  track={track}
+                  index={index}
+                  artist={track.artist}
+                  showArtist={showArtist}
+                  showAlbum={showAlbum}
+                  showAddedDate={showAddedDate}
+                  showDuration={showDuration}
+                  handlePlayClick={handlePlayClick}
+                />
+              </VirtualizedRow>
             )
         )}
       </ul>

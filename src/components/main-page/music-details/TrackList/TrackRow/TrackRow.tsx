@@ -39,12 +39,11 @@ const TrackRow = ({
   showAlbum,
   showAddedDate,
   showDuration,
-  handlePlayClick
+  handlePlayClick,
 }: TrackRowProps) => {
   const { isPlaying, currentTrack } = useContext(
     MusicContext
   ) as MusicContextType;
-  console.log("rerender");
   return (
     <div className={trackContainer}>
       <div className={trackInfo}>

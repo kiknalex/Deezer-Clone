@@ -42,3 +42,26 @@ export const durationInfo = style({
 export const durationSpan = style({
   fontSize: fontSize["font-size-4"],
 });
+
+
+export const rowSkeletonContainer = style({
+  paddingInline: "10px",
+  height: "56px",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+})
+
+export const imageSkeleton = style({
+  width: "40px",
+  height: "40px",
+  backgroundColor: vars.colorsVars.borderColor,
+})
+
+export const textSkeleton = style({
+  height: "10px",
+  width: "95%",
+  marginLeft: "10px",
+  borderRadius: "12px",
+  backgroundColor: vars.colorsVars.borderColor,
+})

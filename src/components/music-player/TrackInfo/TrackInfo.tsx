@@ -1,9 +1,11 @@
-import { imageSize } from "./TrackInfo.css";
+import { artistName, imageSize, link } from "./TrackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { linkHover } from "../TrackPlaybackControls/TrackControls/TrackPreview/TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
 import { Link } from "react-router-dom";
 
 const TrackInfo = () => {
@@ -42,17 +44,14 @@ const TrackInfo = () => {
         })}`}
       >
         <Marquee key={currentTrack.title}>
-          <Link to={`/album/${currentTrack.album?.id}`} className={linkHover}>
+          <Link to={`/album/${currentTrack.album?.id}`} className={link}>
             {currentTrack.title}
           </Link>
         </Marquee>
         <Marquee key={currentTrack.title + currentTrack.artist.name}>
           <Link
             to={`/artist/${currentTrack.artist.id}`}
-            className={`${linkHover} ${sprinkles({
-              fontSize: "font-size-2",
-              color: "--gray-6",
-            })}`}
+            className={artistName}
           >
             {currentTrack.artist.name}
           </Link>

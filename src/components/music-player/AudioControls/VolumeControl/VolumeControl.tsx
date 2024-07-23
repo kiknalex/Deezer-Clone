@@ -64,6 +64,7 @@ const VolumeControl = ({
       tooltipContent={inputElement}
       onClick={toggleMute}
       popoutDelay={100}
+      ariaLabel="Change volume"
     >
       <span
         style={{

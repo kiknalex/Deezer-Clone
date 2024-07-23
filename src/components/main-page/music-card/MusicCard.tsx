@@ -29,7 +29,7 @@ export const PlaylistCard = ({
 }: PlaylistCardProps) => {
   return (
     <div className={sprinkles({ display: "flex", flexDirection: "column" })}>
-      <CardImgLink imgSrc={imgSrc} linkSrc={`/playlist/${id}`} alt="" tracklist={tracklist} />
+      <CardImgLink imgSrc={imgSrc} linkSrc={`/playlist/${id}`} tracklist={tracklist} />
       <Link
         to={`/playlist/${id}`}
         className={`${sprinkles({
@@ -57,7 +57,6 @@ export const ArtistCard = ({ imgSrc, title, tracklist, id }: CardProps) => {
         imgSrc={imgSrc}
         linkSrc={`/artist/${id}`}
         shape="circle"
-        alt={title}
         tracklist={tracklist}
       />
       <Link
@@ -91,7 +90,6 @@ export const AlbumCard = ({
       <CardImgLink
         imgSrc={imgSrc}
         linkSrc={`/album/${id}`}
-        alt={title}
         tracklist={tracklist}
       />
       <Link

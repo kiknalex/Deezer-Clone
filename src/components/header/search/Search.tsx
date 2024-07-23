@@ -42,16 +42,15 @@ const Search = () => {
           height: "100",
         })} ${searchWrapper}`}
       >
-        <button
+        <span
           className={`${sprinkles({
             position: "absolute",
             left: "0",
             marginLeft: "size-7",
           })} ${buttonSearch}`}
-          aria-label="Search button"
         >
           <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
+        </span>
         <input
           value={inputValue}
           onChange={handleInputChange}

@@ -23,7 +23,7 @@ const Sidebar = () => {
           paddingBottom: "size-5",
         })}
       >
-        <Link to="/" className={`${link} ${sprinkles({ paddingX: "size-4" })}`}>
+        <Link to="/" className={`${link} ${sprinkles({ paddingX: "size-4" })}`} aria-label="Home">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +72,7 @@ const Sidebar = () => {
               paddingX: "size-1",
               paddingY: "size-2",
             })} ${navLink}`}
+            aria-label="Home"
           >
             <span className={navLogoSpan}>
               <i className="fa-solid fa-house"></i>
@@ -93,6 +94,7 @@ const Sidebar = () => {
               paddingX: "size-1",
               paddingY: "size-3",
             })} ${navLink}`}
+            aria-label="Explore"
           >
             <span className={navLogoSpan}>
               <i className={`fa-solid fa-compass`}></i>

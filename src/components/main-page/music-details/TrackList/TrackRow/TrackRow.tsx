@@ -71,6 +71,7 @@ const TrackRow = ({
               }`}
               onClick={() => handlePlayClick(track.id, index)}
               isPlaying={isPlaying && track.id === currentTrack?.id}
+              ariaLabel="Play track"
             />
           </div>
           <button

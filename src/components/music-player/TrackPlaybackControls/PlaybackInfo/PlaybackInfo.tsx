@@ -90,6 +90,7 @@ const PlaybackInfo = () => {
 
         <input
           className={`${timePassedInput} ${sprinkles({ width: "100" })}`}
+          aria-label="Track time"
           type="range"
           min="0"
           max={Math.round(audioElement.duration || 0)}

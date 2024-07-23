@@ -1,5 +1,4 @@
 import { vars } from "@/app/theme.css";
-import colors from "@/styles/colors.css";
 import { fontSize } from "@/styles/typography.css";
 import { globalStyle, style } from "@vanilla-extract/css";
 
@@ -10,7 +9,7 @@ export const trackContainer = style({
   textTransform: "uppercase",
   fontSize: fontSize["font-size-2"],
   borderBottom: `1px solid ${vars.colorsVars.borderColor}`,
-  color: colors["--stone-7"],
+  color: vars.colorsVars.textSecondary,
 });
 
 globalStyle(`${trackContainer}>:not(:first-child)`, {

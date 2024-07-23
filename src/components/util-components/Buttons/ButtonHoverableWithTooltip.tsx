@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
   children: ReactNode;
   className?: string;
+  ariaLabel?: string;
 }
 
 interface ButtonHoverableWithTooltip extends ButtonProps {
@@ -21,6 +22,7 @@ export const ButtonHoverableWithTooltip = ({
   tooltipContent,
   tooltipInteractive = false,
   popoutDelay = 300,
+  ariaLabel,
   children,
 }: ButtonHoverableWithTooltip) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -87,6 +89,7 @@ export const ButtonHoverableWithTooltip = ({
         onClick={onClick}
         ref={buttonRef}
         className={commonButton}
+        aria-label={ariaLabel}
       >
         {children}
       </button>

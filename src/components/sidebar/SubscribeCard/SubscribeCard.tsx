@@ -33,6 +33,7 @@ const SubscribeCard = ({ href, children }: SubscribeCard) => {
         <p>{children}</p>
         <a
           target="_blank"
+          aria-label="Github"
           className={`${sprinkles({
             paddingY: "size-1",
             paddingX: "size-5",
@@ -48,6 +49,7 @@ const SubscribeCard = ({ href, children }: SubscribeCard) => {
       <div className={`${card} ${hideOnBigScreen}`}>
         <a
           target="_blank"
+          aria-label="Github"
           className={`${sprinkles({
             display: "flex",
             placeItems: "center",

@@ -18,9 +18,9 @@ const VirtualizedRow = ({
   children,
 }: VirtualizedRowProps) => {
   const [onScreen, setOnScreen] = useState(initiallyOnScreen);
-  const divRef = useRef<HTMLDivElement | null>(null);
+  const rowRef = useRef<HTMLLIElement | null>(null);
   useEffect(() => {
-    const divElement = divRef.current;
+    const divElement = rowRef.current;
     if (!divElement) return;
     const callback: IntersectionObserverCallback = (entries) => {
       if (entries[0].isIntersecting) {
@@ -40,7 +40,7 @@ const VirtualizedRow = ({
     };
   }, []);
 
-  return <div ref={divRef}>{onScreen ? children : placeholder}</div>;
+  return <li ref={rowRef}>{onScreen ? children : placeholder}</li>;
 };
 
 export default VirtualizedRow;

@@ -55,7 +55,7 @@ const CardImgLink = ({
           loading="lazy"
           width="250"
           height="250"
-          alt={alt}
+          alt=""
         />
       </div>
       <ul className={`${shape === "square" ? listButtons : listButtonsCenter}`}>

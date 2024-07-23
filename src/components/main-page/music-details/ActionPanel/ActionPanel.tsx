@@ -1,4 +1,7 @@
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
 import { buttonAction, buttonList } from "./ActionPanel.css";
 import { useContext } from "react";
 import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";
@@ -25,6 +28,7 @@ const ActionPanel = ({ tracklist }: ActionPanelProps) => {
           onClick={handlePlayClick}
           isPlaying={isPlaying && currentTracklist === tracklistQuery}
           className={buttonAction}
+          ariaLabel={`Play tracklist`}
         />
       </li>
     </ul>

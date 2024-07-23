@@ -1,3 +1,5 @@
+import { vars } from "@/app/theme.css";
+import { fontSize } from "@/styles/typography.css";
 import { style } from "@vanilla-extract/css";
 
 export const marqueeWrapper = style({
@@ -13,7 +15,15 @@ export const musicTrack = style({
   flexDirection: "column",
   alignItems: "start",
 });
-
-
-
-
+export const link = style({
+  ":hover": {
+    textDecoration: "underline",
+  },
+});
+export const artistName = style([
+  link,
+  {
+    color: vars.colorsVars.textSecondary,
+    fontSize: fontSize["font-size-2"],
+  },
+]);

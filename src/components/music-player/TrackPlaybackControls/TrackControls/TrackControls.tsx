@@ -31,6 +31,7 @@ const TrackControls = () => {
         tooltipInteractive={true}
         tooltipContent={<TrackPreview track={prevTrack} />}
         className={`${commonButton}`}
+        ariaLabel="Previous track"
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-backward-step"></i>
@@ -40,11 +41,13 @@ const TrackControls = () => {
         className={playButton}
         onClick={togglePlay}
         isPlaying={isPlaying}
+        ariaLabel={isPlaying ? "Pause" : "Play"}
       />
       <ButtonHoverableWithTooltip
         onClick={handleTrackNext}
         tooltipInteractive={true}
         tooltipContent={<TrackPreview track={nextTrack} />}
+        ariaLabel="Next track"
       >
         <span className={`${sprinkles({ fontSize: "font-size-5" })}`}>
           <i className="fa-solid fa-forward-step"></i>

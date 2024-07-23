@@ -1,5 +1,4 @@
 import { vars } from "@/app/theme.css";
-import colors from "@/styles/colors.css";
 import { fontSize } from "@/styles/typography.css";
 import { globalStyle, style } from "@vanilla-extract/css";
 
@@ -81,16 +80,16 @@ export const albumLink = link;
 export const artistLink = link;
 
 export const addedDate = style({
-  color: colors["--stone-7"],
+  color: vars.colorsVars.textSecondary,
   width: "100px",
 });
 
 export const durationInfo = style({
   width: "40px",
-  color: colors["--stone-7"],
+  color: vars.colorsVars.textSecondary,
 });
 
 export const durationSpan = style({
   fontSize: fontSize["font-size-4"],
-  color: colors["--stone-6"],
+  color: vars.colorsVars.textSecondary,
 });

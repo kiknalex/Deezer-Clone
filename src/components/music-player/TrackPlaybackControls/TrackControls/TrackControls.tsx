@@ -6,7 +6,7 @@ import {
 import { sprinkles } from "@/styles/sprinkles.css";
 import TrackPreview from "./TrackPreview/TrackPreview";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";
 
 const TrackControls = () => {

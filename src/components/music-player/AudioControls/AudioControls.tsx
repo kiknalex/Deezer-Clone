@@ -1,7 +1,7 @@
 import { sprinkles } from "@/styles/sprinkles.css";
 import VolumeControl from "./VolumeControl/VolumeControl";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 
 const AudioControls = () => {
   const { audioRef } = useContext(MusicContext) as MusicContextType;

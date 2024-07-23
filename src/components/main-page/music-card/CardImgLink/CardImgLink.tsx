@@ -11,7 +11,7 @@ import {
 } from "./CardImgLink.css";
 
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 interface CardImgLinkProps {
   imgSrc: string;
   linkSrc: string;

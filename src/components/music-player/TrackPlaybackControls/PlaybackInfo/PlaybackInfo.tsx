@@ -7,7 +7,7 @@ import {
 } from "./PlaybackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import { formatTime } from "@/utils/helpers";
 
 const PlaybackInfo = () => {

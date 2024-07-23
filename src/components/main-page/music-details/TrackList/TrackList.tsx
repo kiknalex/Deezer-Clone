@@ -13,7 +13,7 @@ import {
   trackInfo,
 } from "./TrackList.css";
 import { useContext, useMemo } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import { getTrackData } from "@/utils/fetchers";
 import VirtualizedRow from "@/components/util-components/list-virtualized/VirtualizedRow";
 

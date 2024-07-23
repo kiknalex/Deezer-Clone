@@ -1,5 +1,3 @@
-import { artistName, imageSize, link } from "./TrackInfo.css";
-import { sprinkles } from "@/styles/sprinkles.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { useContext } from "react";
 import {
@@ -7,6 +5,8 @@ import {
   MusicContextType,
 } from "@/components/main-page/Mainpage";
 import { Link } from "react-router-dom";
+import { artistName, imageSize, link } from "./TrackInfo.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 const TrackInfo = () => {
   const { currentTrack } = useContext(MusicContext) as MusicContextType;

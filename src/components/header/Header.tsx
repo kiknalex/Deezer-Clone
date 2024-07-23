@@ -1,6 +1,6 @@
+import Search from "./search/Search";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { darkmodeButton, headerStyle } from "./Header.css";
-import Search from "./search/Search";
 
 const Header = ({
   darkMode,

@@ -1,7 +1,11 @@
-import { container } from "@/app/App.css";
 import LoaderSpin from "@/components/util-components/loader-spin/LoaderSpin";
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
+import { secondsToHours } from "@/utils/helpers";
+import ActionPanel from "@/components/main-page/music-details/ActionPanel/ActionPanel";
+import TrackList from "@/components/main-page/music-details/TrackList/TrackList";
+import { MusicDetails } from "@/utils/loaders";
+import { sprinkles } from "@/styles/sprinkles.css";
 import {
   creatorBadgeImg,
   creatorBadgeLink,
@@ -11,11 +15,7 @@ import {
   mainImageContainer,
   musicInfoList,
 } from "./MusicDetailsPage.css";
-import { sprinkles } from "@/styles/sprinkles.css";
-import { secondsToHours } from "@/utils/helpers";
-import ActionPanel from "@/components/main-page/music-details/ActionPanel/ActionPanel";
-import TrackList from "@/components/main-page/music-details/TrackList/TrackList";
-import { MusicDetails } from "@/utils/loaders";
+import { container } from "@/app/App.css";
 
 const MusicDetailsPage = () => {
   const { musicDetails } = useLoaderData() as { musicDetails: MusicDetails };

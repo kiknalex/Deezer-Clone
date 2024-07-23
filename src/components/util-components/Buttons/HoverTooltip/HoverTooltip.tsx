@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
-import { tooltip, arrowPosition, backgroundStyle } from "./HoverTooltip.css";
 import { debounce } from "@/utils/helpers";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { tooltip, arrowPosition, backgroundStyle } from "./HoverTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 
 interface HoverTooltipProps {

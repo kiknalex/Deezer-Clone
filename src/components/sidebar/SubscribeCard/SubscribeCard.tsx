@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { sprinkles } from "@/styles/sprinkles.css";
 import {
   card,
@@ -5,7 +6,6 @@ import {
   hideOnBigScreen,
   hideOnSmallScreen,
 } from "./SubscribeCard.css";
-import { ReactNode } from "react";
 
 interface SubscribeCard {
   href: string;

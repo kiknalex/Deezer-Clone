@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import { vars } from "@/app/theme.css";
 import { logo } from "./Logo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { Link } from "react-router-dom";
 
 const Logo = () => {
   return (

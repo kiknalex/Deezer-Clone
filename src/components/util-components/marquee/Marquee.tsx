@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, ReactNode } from "react";
-import { marquee, marqueeWrapper, maskImage } from "./Marquee.css";
 import { debounce } from "@/utils/helpers";
+import { marquee, marqueeWrapper, maskImage } from "./Marquee.css";
 
 interface MarqueeProps {
   className?: string;

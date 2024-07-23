@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDebounce } from "@/hooks/useDebounce";
 import { sprinkles } from "@/styles/sprinkles.css";
 import {
   buttonClear,
@@ -6,9 +9,6 @@ import {
   searchInput,
   searchWrapper,
 } from "./Search.css";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDebounce } from "@/hooks/useDebounce";
 
 const Search = () => {
   const [inputValue, setInputValue] = useState("");

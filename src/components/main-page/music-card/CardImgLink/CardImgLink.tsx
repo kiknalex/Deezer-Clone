@@ -1,4 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
 import {
   buttonAction,
   buttonIcon,
@@ -9,13 +14,9 @@ import {
   listButtonsCenter,
   squareImg,
 } from "./CardImgLink.css";
-
-import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 interface CardImgLinkProps {
   imgSrc: string;
   linkSrc: string;
-  alt: string;
   shape?: "square" | "circle";
   tracklist: string;
 }
@@ -23,7 +24,6 @@ interface CardImgLinkProps {
 const CardImgLink = ({
   imgSrc,
   linkSrc,
-  alt,
   shape = "square",
   tracklist,
 }: CardImgLinkProps) => {
@@ -32,7 +32,7 @@ const CardImgLink = ({
     useContext(MusicContext) as MusicContextType;
   const shapeClass = shape === "square" ? squareImg : circleImg;
   const tracklistQuery = tracklist.replace("https://api.deezer.com", "");
-  
+
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       navigate(linkSrc);

@@ -1,6 +1,6 @@
-import { container } from "@/app/App.css";
 import ChannelGenreCards from "@/components/main-page/explore/channels/channels-categories/ChannelCategoriesCards";
 import ChannelsGrid from "@/components/main-page/explore/channels/ChannelsGrid";
+import { container } from "@/app/App.css";
 
 const ArtistDetailsPage = () => {
   return (

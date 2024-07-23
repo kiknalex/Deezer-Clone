@@ -1,14 +1,17 @@
 import { useState, useContext } from "react";
 
-import { playerLayout, playerPosition } from "./Player.css";
-import { sprinkles } from "@/styles/sprinkles.css";
-
 import TrackPlaybackControls from "./TrackPlaybackControls/TrackPlaybackControls";
 import AudioControls from "./AudioControls/AudioControls";
 import PlaybackInfo from "./TrackPlaybackControls/PlaybackInfo/PlaybackInfo";
 import TrackControls from "./TrackPlaybackControls/TrackControls/TrackControls";
 import TrackInfo from "./TrackInfo/TrackInfo";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
+
+import { playerLayout, playerPosition } from "./Player.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 const Player = () => {
   const [audioReady, setAudioReady] = useState(false);

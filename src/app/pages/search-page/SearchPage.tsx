@@ -1,4 +1,3 @@
-import { container } from "@/app/App.css";
 import ChannelsGrid from "@/components/main-page/explore/channels/ChannelsGrid";
 import ChannelGenreCards from "@/components/main-page/explore/channels/channels-categories/ChannelCategoriesCards";
 import {
@@ -6,10 +5,11 @@ import {
   ArtistCard,
 } from "@/components/main-page/music-card/MusicCard";
 import Carousel from "@/components/util-components/carousel/Carousel";
-import { sprinkles } from "@/styles/sprinkles.css";
-import { Album, Artist } from "@/types/deezerApiTypes";
 import { SearchLoaderData } from "@/utils/loaders";
 import { useLoaderData, useParams } from "react-router-dom";
+import { Album, Artist } from "@/types/deezerApiTypes";
+import { container } from "@/app/App.css";
+import { sprinkles } from "@/styles/sprinkles.css";
 
 const SearchPage = () => {
   const params = useParams();

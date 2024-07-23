@@ -1,7 +1,7 @@
+import { ReactElement } from "react";
 import { container } from "@/app/App.css";
 import { gridLayout } from "./ChannelsGrid.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { ReactElement } from "react";
 
 interface ChannelsGridProps {
   category: string;

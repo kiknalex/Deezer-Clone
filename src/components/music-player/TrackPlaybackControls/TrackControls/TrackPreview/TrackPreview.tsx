@@ -1,9 +1,9 @@
-import { linkHover } from "./TrackPreview.css";
-import { sprinkles } from "@/styles/sprinkles.css";
 import { TrackData } from "@/types/deezerApiTypes";
-import { imageSize, previewWidth } from "./TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { Link } from "react-router-dom";
+import { linkHover } from "./TrackPreview.css";
+import { sprinkles } from "@/styles/sprinkles.css";
+import { imageSize, previewWidth } from "./TrackPreview.css";
 
 const TrackPreview = ({ track }: { track: TrackData | null }) => {
   if (!track) {

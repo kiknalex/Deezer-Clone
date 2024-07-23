@@ -1,7 +1,7 @@
 import { ReactNode, useState, useRef, useEffect } from "react";
+import HoverTooltip from "@/components/util-components/Buttons/HoverTooltip/HoverTooltip";
 import { commonButton } from "./ButtonHoverableWithTooltip.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import HoverTooltip from "@/components/util-components/Buttons/HoverTooltip/HoverTooltip";
 import { tooltipVisible } from "@/components/util-components/Buttons/HoverTooltip/HoverTooltip.css";
 
 interface ButtonProps {
@@ -73,7 +73,13 @@ export const ButtonHoverableWithTooltip = ({
   };
 
   return (
-    <div className={sprinkles({ position: "relative", display: "flex", justifyContent: "center" })}>
+    <div
+      className={sprinkles({
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+      })}
+    >
       <HoverTooltip
         tooltipInteractive={tooltipInteractive}
         onMouseEnter={handleTooltipMouseEnter}

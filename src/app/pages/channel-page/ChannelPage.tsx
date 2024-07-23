@@ -7,9 +7,9 @@ import {
   ArtistCard,
   AlbumCard,
 } from "@/components/main-page/music-card/MusicCard";
-import { container } from "@/app/App.css";
 import { Artist, Playlist, Release } from "@/types/deezerApiTypes";
 import { channelLoaderData } from "@/utils/loaders";
+import { container } from "@/app/App.css";
 
 const ChannelPage = () => {
   const { data } = useLoaderData() as channelLoaderData;

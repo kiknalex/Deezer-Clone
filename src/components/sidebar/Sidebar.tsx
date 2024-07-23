@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import SubscribeCard from "./SubscribeCard/SubscribeCard";
 import {
   deezerHeartLogo,
   deezerTextLogo,
@@ -10,7 +11,6 @@ import {
 import { smallScreenHide } from "@/app/App.css";
 import { vars } from "@/app/theme.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import SubscribeCard from "./SubscribeCard/SubscribeCard";
 
 const Sidebar = () => {
   return (

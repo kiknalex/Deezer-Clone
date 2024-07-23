@@ -1,4 +1,7 @@
 import { useCallback, useContext, useState } from "react";
+import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import { formatTime } from "@/utils/helpers";
 import {
   activeTrack,
   sliderTrack,
@@ -6,9 +9,6 @@ import {
   hoverTimeDiv,
 } from "./PlaybackInfo.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import useSubscribeBrowserEvent from "@/hooks/useSubscribeBrowserEvent";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
-import { formatTime } from "@/utils/helpers";
 
 const PlaybackInfo = () => {
   const [playedTime, setPlayedTime] = useState(0);

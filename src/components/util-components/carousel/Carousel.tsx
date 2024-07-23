@@ -1,4 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
+import { debounce } from "@/utils/helpers";
 import {
   carouselInner,
   carouselList,
@@ -6,7 +7,6 @@ import {
   controlButton,
 } from "./Carousel.css";
 import { sprinkles } from "@/styles/sprinkles.css";
-import { debounce } from "@/utils/helpers";
 
 interface CarouselProps {
   slides: ReactElement[];

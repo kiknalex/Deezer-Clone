@@ -1,4 +1,3 @@
-import { container } from "@/app/App.css";
 import {
   AlbumCard,
   ArtistCard,
@@ -10,6 +9,7 @@ import { Album, Artist, Playlist, Release } from "@/types/deezerApiTypes";
 import { homeLoaderData } from "@/utils/loaders";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
+import { container } from "@/app/App.css";
 
 const HomePage = () => {
   const data = useLoaderData() as homeLoaderData;

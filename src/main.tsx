@@ -22,6 +22,7 @@ import HomePage from "./app/pages/home-page/HomePage.tsx";
 import SearchPage from "./app/pages/search-page/SearchPage.tsx";
 import MusicDetailsPage from "./app/pages/music-details-page/MusicDetailsPage.tsx";
 import ArtistDetailsPage from "./app/pages/artist-details-page/ArtistDetailsPage.tsx";
+import ErrorPage from "./app/pages/error-page/ErrorPage.tsx";
 
 window.DZ.init({
   channelUrl: "http://localhost:5173/",
@@ -30,6 +31,7 @@ window.DZ.init({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route loader={firstVisitLoader} element={<App />}>
+      <Route path="*" element={<ErrorPage />}></Route>
       <Route path="" loader={homeLoader} element={<HomePage />}></Route>
       <Route
         path="channels/explore"
@@ -54,6 +56,7 @@ const router = createBrowserRouter(
         path=":type/:id"
         element={<MusicDetailsPage />}
         loader={MusicDetailsLoader}
+        errorElement={<ErrorPage />}
       ></Route>
     </Route>
   )

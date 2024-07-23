@@ -1,4 +1,4 @@
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import { buttonAction, buttonList } from "./ActionPanel.css";
 import { useContext } from "react";
 import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";

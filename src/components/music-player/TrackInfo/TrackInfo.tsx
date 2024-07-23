@@ -3,7 +3,7 @@ import { sprinkles } from "@/styles/sprinkles.css";
 import { linkHover } from "../TrackPlaybackControls/TrackControls/TrackPreview/TrackPreview.css";
 import Marquee from "@/components/util-components/marquee/Marquee";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import { Link } from "react-router-dom";
 
 const TrackInfo = () => {

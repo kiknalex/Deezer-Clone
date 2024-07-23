@@ -8,7 +8,7 @@ import AudioControls from "./AudioControls/AudioControls";
 import PlaybackInfo from "./TrackPlaybackControls/PlaybackInfo/PlaybackInfo";
 import TrackControls from "./TrackPlaybackControls/TrackControls/TrackControls";
 import TrackInfo from "./TrackInfo/TrackInfo";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 
 const Player = () => {
   const [audioReady, setAudioReady] = useState(false);

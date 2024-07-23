@@ -13,19 +13,17 @@ import {
 } from "./MusicDetailsPage.css";
 import { sprinkles } from "@/styles/sprinkles.css";
 import { secondsToHours } from "@/utils/helpers";
-import ActionPanel from "@/components/main-page/music-details/action-panel/ActionPanel";
+import ActionPanel from "@/components/main-page/music-details/ActionPanel/ActionPanel";
 import TrackList from "@/components/main-page/music-details/TrackList/TrackList";
 import { MusicDetails } from "@/utils/loaders";
 
 const MusicDetailsPage = () => {
   const { musicDetails } = useLoaderData() as { musicDetails: MusicDetails };
-  console.log("rerender");
   return (
     <Suspense fallback={<LoaderSpin />}>
       <Await resolve={musicDetails}>
         {(musicData) => (
           <>
-          {console.log("123")}
             <section className={`${container} ${headingContainer}`}>
               <div className={mainImageContainer}>
                 <img

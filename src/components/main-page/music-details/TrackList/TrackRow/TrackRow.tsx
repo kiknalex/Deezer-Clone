@@ -17,7 +17,7 @@ import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPl
 import { Link } from "react-router-dom";
 import { formatTime, unixToDateString } from "@/utils/helpers";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/app/App";
+import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
 import { Artist, Track } from "@/types/deezerApiTypes";
 
 interface TrackRowProps {

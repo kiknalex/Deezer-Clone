@@ -29,11 +29,7 @@ window.DZ.init({
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path=""
-      loader={firstVisitLoader}
-      element={<App />}
-    >
+    <Route loader={firstVisitLoader} element={<App />}>
       <Route path="" loader={homeLoader} element={<HomePage />}></Route>
       <Route
         path="channels/explore"
@@ -54,7 +50,11 @@ const router = createBrowserRouter(
         loader={searchLoader}
       ></Route>
       <Route path="artist/:id" element={<ArtistDetailsPage />}></Route>
-      <Route path=":type/:id" element={<MusicDetailsPage />} loader={MusicDetailsLoader}></Route>
+      <Route
+        path=":type/:id"
+        element={<MusicDetailsPage />}
+        loader={MusicDetailsLoader}
+      ></Route>
     </Route>
   )
 );

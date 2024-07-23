@@ -27,8 +27,7 @@ const Search = () => {
   }, 500);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    console.log(inputValue);
-    if(e.target.value !== "") debouncedNavigate(e.target.value);
+    if (e.target.value !== "") debouncedNavigate(e.target.value);
   };
   return (
     <search className={sprinkles({ marginRight: "size-auto", height: "100" })}>

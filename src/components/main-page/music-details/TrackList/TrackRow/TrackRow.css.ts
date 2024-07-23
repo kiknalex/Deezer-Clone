@@ -14,9 +14,9 @@ export const trackContainer = style({
   fontSize: fontSize["font-size-2"],
 });
 
-export const colorPurple = style({
+export const trackRowActive = style({
   color: vars.colorsVars.buttonImportant,
-})
+});
 
 globalStyle(`${trackContainer}>:not(:first-child)`, {
   marginLeft: "16px",
@@ -34,13 +34,12 @@ export const imgButtonContainer = style({
 });
 
 export const buttonImage = style({
-  position: "absolute",
   width: "40px",
   height: "auto",
 });
 export const buttonHidden = style({
   visibility: "hidden",
-})
+});
 export const buttonPlay = style({
   position: "absolute",
   selectors: {
@@ -89,9 +88,9 @@ export const addedDate = style({
 export const durationInfo = style({
   width: "40px",
   color: colors["--stone-7"],
-})
+});
 
 export const durationSpan = style({
   fontSize: fontSize["font-size-4"],
   color: colors["--stone-6"],
-})
+});

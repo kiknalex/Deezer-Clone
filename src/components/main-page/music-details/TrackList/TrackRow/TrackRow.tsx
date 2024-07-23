@@ -12,12 +12,16 @@ import {
   trackContainer,
   trackInfo,
   trackNameButton,
+  trackRowActive,
 } from "./TrackRow.css";
 import ButtonPlay from "@/components/util-components/Buttons/ButtonPlay/ButtonPlay";
 import { Link } from "react-router-dom";
 import { formatTime, unixToDateString } from "@/utils/helpers";
 import { useContext } from "react";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
 import { Artist, Track } from "@/types/deezerApiTypes";
 
 interface TrackRowProps {
@@ -44,8 +48,9 @@ const TrackRow = ({
   const { isPlaying, currentTrack } = useContext(
     MusicContext
   ) as MusicContextType;
+  const currentRowPlaying = currentTrack?.id === track.id;
   return (
-    <div className={trackContainer}>
+    <div className={`${trackContainer} ${currentRowPlaying && trackRowActive}`}>
       <div className={trackInfo}>
         <div className={sprinkles({ display: "flex", alignItems: "center" })}>
           <div className={imgButtonContainer}>
@@ -57,7 +62,7 @@ const TrackRow = ({
               }
               width="50"
               height="50"
-              alt=""
+              alt={track.title || track.album?.title}
               loading="lazy"
             />
             <ButtonPlay
@@ -68,7 +73,10 @@ const TrackRow = ({
               isPlaying={isPlaying && track.id === currentTrack?.id}
             />
           </div>
-          <button className={trackNameButton}>
+          <button
+            onClick={() => handlePlayClick(track.id, index)}
+            className={trackNameButton}
+          >
             {index + 1}. {track.title}
           </button>
         </div>

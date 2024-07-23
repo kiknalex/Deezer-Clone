@@ -1,7 +1,7 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { mainLayout } from "./Mainpage.css";
 import { RefObject, createContext, useRef, useState } from "react";
-import { TrackData, Track } from "@/types/deezerApiTypes"; // Assuming Track type is defined
+import { TrackData, Track } from "@/types/deezerApiTypes";
 import Player from "@/components/music-player/Player";
 import { useLoaderData } from "react-router-dom";
 import { getTrackData, getTracklistData } from "@/utils/fetchers";

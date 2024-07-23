@@ -13,7 +13,10 @@ import {
   trackInfo,
 } from "./TrackList.css";
 import { useContext, useMemo } from "react";
-import { MusicContext, MusicContextType } from "@/components/main-page/Mainpage";
+import {
+  MusicContext,
+  MusicContextType,
+} from "@/components/main-page/Mainpage";
 import { getTrackData } from "@/utils/fetchers";
 import VirtualizedRow from "@/components/util-components/list-virtualized/VirtualizedRow";
 
@@ -22,8 +25,13 @@ interface TrackListProps {
 }
 
 const TrackList = ({ musicData }: TrackListProps) => {
-  const { currentTracklist, handleTrackChange, handleTracklistChange } =
-    useContext(MusicContext) as MusicContextType;
+  const {
+    currentTrack,
+    currentTracklist,
+    togglePlay,
+    handleTrackChange,
+    handleTracklistChange,
+  } = useContext(MusicContext) as MusicContextType;
   const tracks = useMemo(
     () => musicData.tracks!.data.filter((track) => track.preview),
     [musicData]
@@ -44,9 +52,12 @@ const TrackList = ({ musicData }: TrackListProps) => {
       handleTracklistChange(tracklistQuery, index);
       return;
     }
+    const newTrack = tracks.find((track) => track.id === id)!;
 
-    const newTrack = tracks.find((track) => track.id === id);
-    if (!newTrack) return;
+    if (newTrack.id === currentTrack?.id) {
+      togglePlay();
+      return;
+    }
 
     const newTrackIndex = tracks.indexOf(newTrack);
     try {
@@ -94,7 +105,11 @@ const TrackList = ({ musicData }: TrackListProps) => {
         {tracks.map(
           (track, index: number) =>
             track.preview && (
-              <VirtualizedRow initiallyOnScreen={index < 25} key={track.id} placeholder={trackRowSkeleton}>
+              <VirtualizedRow
+                initiallyOnScreen={index < 15}
+                key={track.id}
+                placeholder={trackRowSkeleton}
+              >
                 <TrackRow
                   track={track}
                   index={index}

@@ -12,8 +12,11 @@ export const trackContainer = style({
     backgroundColor: vars.colorsVars.buttonCommonHover,
   },
   fontSize: fontSize["font-size-2"],
-
 });
+
+export const colorPurple = style({
+  color: vars.colorsVars.buttonImportant,
+})
 
 globalStyle(`${trackContainer}>:not(:first-child)`, {
   marginLeft: "16px",

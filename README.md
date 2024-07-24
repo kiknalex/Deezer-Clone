@@ -65,7 +65,7 @@ All fetching is done through react-router [loaders](https://reactrouter.com/en/m
 - <TrackList/\> component is optimized for large arrays of tracks, through custom written [Virtualized List](https://www.patterns.dev/vanilla/virtual-lists/).
 - Custom written <Carousel /\> component that accepts any amount of children.
 
-#### How is music player track data retrieve is handled:
+#### How music player track data retrieve is handled:
 
 Initially, the music data was fetched as an array of tracks, where each track object contained an audio link and most of the necessary information for display. However, for unknown reasons, more recent track arrays began to lack critical properties, such as the album object, any images, and even the artist information. This inconsistency led to the decision to refactor the fetching process to retrieve the current track that is about to play, ensuring all required information is available.
 
